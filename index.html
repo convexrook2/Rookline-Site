@@ -238,6 +238,25 @@
       background: rgba(7, 19, 33, 0.64);
     }
 
+    .btn-muted {
+      border-color: rgba(50, 92, 136, 0.65);
+      color: #d6e4f7;
+      background: rgba(8, 26, 44, 0.82);
+    }
+
+    .btn.is-disabled {
+      opacity: 0.58;
+      filter: grayscale(0.12);
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    .download-note {
+      margin: 0.65rem 0 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
     .pill {
       display: inline-flex;
       align-items: center;
@@ -615,8 +634,10 @@
         <p>Production installer with strict SHA-256 verification before launch.</p>
         <div class="button-row">
           <a class="btn btn-primary" id="release-download" href="https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.9/Rookline-Setup.exe">Download Installer</a>
+          <a class="btn btn-muted is-disabled" id="release-download-core" href="#" aria-disabled="true">Download Without RookForce</a>
           <a class="btn btn-ghost" href="#captures">See App Screens</a>
         </div>
+        <p class="download-note" id="release-download-note">Need telemetry and setup only? Use the no-RookForce package when available.</p>
       </section>
 
       <section class="trust-card">
@@ -808,6 +829,8 @@
           var titleEl = document.getElementById("release-version");
           var valueEl = document.getElementById("release-version-value");
           var downloadEl = document.getElementById("release-download");
+          var coreDownloadEl = document.getElementById("release-download-core");
+          var downloadNoteEl = document.getElementById("release-download-note");
           var shaEl = document.getElementById("release-sha");
           var manifestEl = document.getElementById("release-manifest");
 
@@ -819,6 +842,24 @@
           }
           if (downloadEl) {
             downloadEl.href = release.installerUrl;
+          }
+          if (coreDownloadEl) {
+            var coreUrl = typeof release.coreInstallerUrl === "string" ? release.coreInstallerUrl.trim() : "";
+            if (coreUrl) {
+              coreDownloadEl.href = coreUrl;
+              coreDownloadEl.classList.remove("is-disabled");
+              coreDownloadEl.setAttribute("aria-disabled", "false");
+              if (downloadNoteEl) {
+                downloadNoteEl.textContent = "Need telemetry and setup only? Download the package without the RookForce workspace.";
+              }
+            } else {
+              coreDownloadEl.href = "#";
+              coreDownloadEl.classList.add("is-disabled");
+              coreDownloadEl.setAttribute("aria-disabled", "true");
+              if (downloadNoteEl) {
+                downloadNoteEl.textContent = "Need telemetry and setup only? Core-only download will appear here as soon as it is published.";
+              }
+            }
           }
           if (shaEl) {
             shaEl.textContent = String(release.sha256).toUpperCase();
