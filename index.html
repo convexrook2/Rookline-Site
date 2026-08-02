@@ -331,6 +331,7 @@
       position: relative;
       background: #08192b;
       padding: 0.45rem;
+      cursor: zoom-in;
     }
 
     .cap img {
@@ -353,6 +354,98 @@
       border-radius: 8px;
       font-size: 0.78rem;
       padding: 0.28rem 0.5rem;
+    }
+
+    .cap .zoom-hint {
+      position: absolute;
+      right: 0.65rem;
+      bottom: 0.6rem;
+      background: rgba(6, 16, 28, 0.84);
+      border: 1px solid rgba(44, 83, 125, 0.8);
+      color: #dce9ff;
+      border-radius: 8px;
+      font-size: 0.76rem;
+      padding: 0.28rem 0.52rem;
+      font-weight: 700;
+    }
+
+    .zoom-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 120;
+      background: rgba(2, 8, 16, 0.9);
+      padding: 1rem;
+    }
+
+    .zoom-modal.is-open {
+      display: flex;
+    }
+
+    .zoom-panel {
+      width: min(96vw, 1800px);
+      max-height: 92vh;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #071423;
+      padding: 0.65rem;
+      display: grid;
+      gap: 0.6rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .zoom-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .zoom-title {
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .zoom-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .zoom-btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: rgba(8, 22, 38, 0.78);
+      color: #e7f0ff;
+      border-radius: 9px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.6rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .zoom-btn:hover {
+      border-color: var(--line-strong);
+      background: rgba(10, 31, 52, 0.9);
+    }
+
+    .zoom-image-wrap {
+      border-radius: 10px;
+      overflow: auto;
+      background: #030a13;
+      max-height: 80vh;
+    }
+
+    .zoom-image-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     .verify-panel {
@@ -479,6 +572,15 @@
         grid-template-columns: 1fr;
         gap: 0.2rem;
       }
+
+      .zoom-panel {
+        width: 100%;
+        max-height: 95vh;
+      }
+
+      .zoom-image-wrap {
+        max-height: 84vh;
+      }
     }
   </style>
 </head>
@@ -557,29 +659,35 @@
       <h2>Real app captures</h2>
       <p class="intro">These are live captures from the project workflow, not mockups.</p>
       <div class="capture-grid">
-        <figure class="cap">
+        <figure class="cap" data-zoom-src="assets/cap-session-analyzed.png" data-zoom-title="Session analysis">
           <img src="assets/cap-session-analyzed.png" alt="Session analysis view" />
           <figcaption class="label">Session analysis</figcaption>
+          <figcaption class="zoom-hint">Tap to zoom</figcaption>
         </figure>
-        <figure class="cap">
+        <figure class="cap" data-zoom-src="assets/cap-setup.png" data-zoom-title="Setup mode">
           <img src="assets/cap-setup.png" alt="Setup mode" />
           <figcaption class="label">Setup mode</figcaption>
+          <figcaption class="zoom-hint">Tap to zoom</figcaption>
         </figure>
-        <figure class="cap">
+        <figure class="cap" data-zoom-src="assets/cap-ai.png" data-zoom-title="AI coaching view">
           <img src="assets/cap-ai.png" alt="AI mode" />
           <figcaption class="label">AI coaching view</figcaption>
+          <figcaption class="zoom-hint">Tap to zoom</figcaption>
         </figure>
-        <figure class="cap">
+        <figure class="cap" data-zoom-src="assets/cap-rookforce.png" data-zoom-title="RookForce tab integration">
           <img src="assets/cap-rookforce.png" alt="RookForce tab" />
           <figcaption class="label">RookForce tab integration</figcaption>
+          <figcaption class="zoom-hint">Tap to zoom</figcaption>
         </figure>
-        <figure class="cap">
+        <figure class="cap" data-zoom-src="assets/cap-overview.png" data-zoom-title="Overview dashboard">
           <img src="assets/cap-overview.png" alt="Rookline overview" />
           <figcaption class="label">Overview dashboard</figcaption>
+          <figcaption class="zoom-hint">Tap to zoom</figcaption>
         </figure>
-        <figure class="cap">
+        <figure class="cap" data-zoom-src="assets/cap-settings.png" data-zoom-title="App settings">
           <img src="assets/cap-settings.png" alt="Settings panel" />
           <figcaption class="label">App settings</figcaption>
+          <figcaption class="zoom-hint">Tap to zoom</figcaption>
         </figure>
       </div>
     </section>
@@ -628,6 +736,61 @@
   </main>
   <script>
     (function () {
+      var zoomModal = document.createElement("div");
+      zoomModal.className = "zoom-modal";
+      zoomModal.setAttribute("aria-hidden", "true");
+      zoomModal.innerHTML = [
+        '<div class="zoom-panel" role="dialog" aria-modal="true" aria-label="Screenshot zoom">',
+        '  <div class="zoom-toolbar">',
+        '    <div class="zoom-title" id="zoom-title">Screenshot</div>',
+        '    <div class="zoom-actions">',
+        '      <a class="zoom-btn" id="zoom-open" href="#" target="_blank" rel="noopener noreferrer">Open Full Resolution</a>',
+        '      <button class="zoom-btn" id="zoom-close" type="button">Close</button>',
+        '    </div>',
+        '  </div>',
+        '  <div class="zoom-image-wrap"><img id="zoom-image" alt="Zoomed screenshot" /></div>',
+        '</div>'
+      ].join("");
+      document.body.appendChild(zoomModal);
+
+      var zoomImage = document.getElementById("zoom-image");
+      var zoomOpen = document.getElementById("zoom-open");
+      var zoomClose = document.getElementById("zoom-close");
+      var zoomTitle = document.getElementById("zoom-title");
+
+      function closeZoom() {
+        zoomModal.classList.remove("is-open");
+        zoomModal.setAttribute("aria-hidden", "true");
+      }
+
+      function openZoom(src, title) {
+        zoomImage.src = src;
+        zoomOpen.href = src;
+        zoomTitle.textContent = title || "Screenshot";
+        zoomModal.classList.add("is-open");
+        zoomModal.setAttribute("aria-hidden", "false");
+      }
+
+      document.querySelectorAll(".cap[data-zoom-src]").forEach(function (cap) {
+        var src = cap.getAttribute("data-zoom-src");
+        var title = cap.getAttribute("data-zoom-title") || "Screenshot";
+        cap.addEventListener("click", function () {
+          openZoom(src, title);
+        });
+      });
+
+      zoomClose.addEventListener("click", closeZoom);
+      zoomModal.addEventListener("click", function (event) {
+        if (event.target === zoomModal) {
+          closeZoom();
+        }
+      });
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closeZoom();
+        }
+      });
+
       var releaseUrl = "assets/release.json";
       fetch(releaseUrl + "?v=" + Date.now(), { cache: "no-store" })
         .then(function (response) {
