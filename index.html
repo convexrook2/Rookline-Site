@@ -3,59 +3,58 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rookline | Telemetry, Analysis, Setup</title>
-  <meta name="description" content="Rookline is a Windows app for LMU telemetry review, lap analysis, setup support, and optional AI coaching." />
+  <title>Rookline | Telemetry, Setup, Coaching</title>
+  <meta name="description" content="Rookline turns race sessions into clear next actions with telemetry analysis, setup guidance, and integrated wheelbase workflow." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #07111d;
-      --bg-soft: #0d1f33;
-      --surface: rgba(8, 22, 38, 0.78);
-      --surface-strong: #0d2741;
-      --line: #24415f;
-      --text: #e6f0ff;
-      --muted: #acc0da;
-      --accent: #f97316;
-      --accent-2: #fb923c;
-      --ok: #22c55e;
-      --hero-h: 36rem;
+      --bg: #060f1a;
+      --bg-2: #0c1d31;
+      --panel: rgba(9, 25, 43, 0.84);
+      --panel-2: rgba(10, 31, 52, 0.94);
+      --line: #23405f;
+      --line-strong: #2c537d;
+      --text: #e7f0ff;
+      --muted: #a8bbd6;
+      --accent: #ff7a1a;
+      --accent-2: #ffab5c;
+      --ok: #32d17f;
       --radius: 18px;
+      --shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
     }
 
     * { box-sizing: border-box; }
-
     html, body { margin: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
       font-family: "Manrope", "Segoe UI", Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(52rem 26rem at 100% -10%, rgba(249, 115, 22, 0.22), transparent 60%),
-        radial-gradient(54rem 28rem at -10% 110%, rgba(59, 130, 246, 0.22), transparent 60%),
-        linear-gradient(160deg, var(--bg), var(--bg-soft));
+        radial-gradient(70rem 34rem at -10% -20%, rgba(255, 122, 26, 0.18), transparent 62%),
+        radial-gradient(64rem 30rem at 110% 110%, rgba(75, 137, 235, 0.22), transparent 58%),
+        linear-gradient(160deg, var(--bg), var(--bg-2));
       line-height: 1.45;
     }
 
     .wrap {
-      width: min(1160px, 94vw);
+      width: min(1240px, 94vw);
       margin: 0 auto;
     }
 
-    .topnav {
+    .topbar {
       position: sticky;
       top: 0;
-      z-index: 20;
-      backdrop-filter: blur(9px);
-      background: rgba(6, 16, 28, 0.74);
-      border-bottom: 1px solid rgba(36, 65, 95, 0.75);
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(5, 14, 25, 0.78);
+      border-bottom: 1px solid rgba(35, 64, 95, 0.75);
     }
 
-    .topnav-inner {
-      min-height: 62px;
+    .topbar-inner {
+      min-height: 66px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -63,118 +62,150 @@
     }
 
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.7rem;
       font-weight: 800;
+      font-size: 1.08rem;
       letter-spacing: 0.01em;
     }
 
-    .brand-dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.2);
+    .brand img {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      object-fit: cover;
+      box-shadow: 0 0 0 1px rgba(44, 83, 125, 0.8);
     }
 
-    .nav-links {
+    .nav {
       display: flex;
       align-items: center;
-      gap: 0.9rem;
+      gap: 0.4rem;
       flex-wrap: wrap;
     }
 
-    .nav-links a {
-      color: var(--muted);
+    .nav a {
       text-decoration: none;
+      color: var(--muted);
       font-size: 0.95rem;
+      padding: 0.3rem 0.55rem;
       border: 1px solid transparent;
-      padding: 0.25rem 0.5rem;
-      border-radius: 7px;
+      border-radius: 8px;
     }
 
-    .nav-links a:hover {
+    .nav a:hover {
       color: var(--text);
       border-color: var(--line);
-      background: rgba(10, 21, 36, 0.62);
+      background: rgba(10, 24, 40, 0.66);
     }
 
-    header.hero {
-      position: relative;
-      min-height: var(--hero-h);
+    .hero {
+      padding-top: 1.3rem;
       display: grid;
-      align-items: center;
-      overflow: hidden;
-      margin-top: 0.4rem;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 1.15rem;
+      align-items: stretch;
     }
 
-    .hero-art {
-      position: absolute;
-      inset: 2.2rem 0 0;
-      background-image: linear-gradient(140deg, rgba(8, 20, 36, 0.88), rgba(12, 31, 50, 0.55)), url("assets/hero-track.svg");
+    .hero-panel {
+      border: 1px solid var(--line-strong);
+      border-radius: 24px;
+      background:
+        linear-gradient(130deg, rgba(6, 17, 31, 0.9), rgba(13, 36, 58, 0.72)),
+        url("assets/cap-overview.png");
       background-size: cover;
       background-position: center;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.34);
-      animation: rise 640ms ease-out both;
+      box-shadow: var(--shadow);
+      min-height: 460px;
+      position: relative;
+      overflow: hidden;
     }
 
     .hero-copy {
-      position: relative;
-      z-index: 2;
-      width: min(660px, 88vw);
-      padding: 2.4rem;
-      margin-left: 2rem;
-      background: linear-gradient(120deg, rgba(5, 14, 26, 0.9), rgba(9, 24, 40, 0.7));
-      border: 1px solid var(--line);
+      position: absolute;
+      left: 1.25rem;
+      bottom: 1.25rem;
+      width: min(640px, calc(100% - 2.5rem));
+      border: 1px solid rgba(44, 83, 125, 0.8);
       border-radius: var(--radius);
-      backdrop-filter: blur(5px);
-      animation: rise 760ms ease-out both;
+      padding: 1.2rem;
+      background: linear-gradient(110deg, rgba(4, 12, 22, 0.9), rgba(10, 28, 46, 0.7));
+      backdrop-filter: blur(7px);
+      animation: rise 700ms ease both;
     }
 
     .eyebrow {
       margin: 0;
-      color: var(--muted);
-      font-size: 0.76rem;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 700;
     }
 
     h1 {
       margin: 0.5rem 0 0.7rem;
       font-family: "Rajdhani", "Segoe UI", Arial, sans-serif;
-      font-size: clamp(2.4rem, 5vw, 4.6rem);
+      font-size: clamp(2.4rem, 4.9vw, 4.8rem);
+      line-height: 0.92;
       letter-spacing: 0.01em;
-      line-height: 0.95;
     }
 
     .lead {
-      margin: 0 0 1.2rem;
+      margin: 0;
       color: var(--muted);
-      font-size: clamp(1rem, 1.7vw, 1.13rem);
-      max-width: 56ch;
+      max-width: 58ch;
+      font-size: clamp(1rem, 1.4vw, 1.1rem);
     }
 
-    .hero-actions {
+    .hero-side {
+      display: grid;
+      gap: 1rem;
+      grid-template-rows: auto auto 1fr;
+    }
+
+    .download-card,
+    .trust-card,
+    .logo-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 1rem;
+      animation: rise 820ms ease both;
+    }
+
+    .download-card h2 {
+      margin: 0 0 0.4rem;
+      font-family: "Rajdhani", "Segoe UI", Arial, sans-serif;
+      font-size: 2rem;
+      line-height: 0.95;
+    }
+
+    .download-card p {
+      margin: 0 0 0.9rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .button-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: 1.2rem;
+      gap: 0.6rem;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.15rem;
+      justify-content: center;
+      gap: 0.42rem;
+      border-radius: 11px;
       text-decoration: none;
       font-weight: 800;
-      border-radius: 12px;
+      padding: 0.72rem 1rem;
       border: 1px solid transparent;
-      transition: transform 120ms ease, filter 120ms ease, box-shadow 120ms ease;
-      will-change: transform;
+      transition: transform 120ms ease, filter 120ms ease;
     }
 
     .btn:hover {
@@ -183,36 +214,67 @@
     }
 
     .btn-primary {
-      color: #2b1202;
-      background: linear-gradient(95deg, var(--accent), var(--accent-2));
-      box-shadow: 0 10px 25px rgba(249, 115, 22, 0.32);
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: #2b1404;
+      box-shadow: 0 10px 22px rgba(255, 122, 26, 0.28);
     }
 
     .btn-ghost {
-      color: var(--text);
       border-color: var(--line);
-      background: rgba(8, 18, 32, 0.58);
+      color: var(--text);
+      background: rgba(7, 19, 33, 0.64);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.3rem 0.62rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-right: 0.35rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .pill::before {
+      content: "";
+      width: 0.48rem;
+      height: 0.48rem;
+      border-radius: 999px;
+      background: var(--ok);
+    }
+
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.7rem;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .logo-grid img {
+      max-width: 100%;
+      max-height: 40px;
+      object-fit: contain;
+      filter: saturate(1.08);
     }
 
     .section {
-      padding: 2.8rem 0;
-    }
-
-    .section.section-soft {
       padding: 3rem 0;
-      background: linear-gradient(180deg, rgba(9, 20, 34, 0.55), rgba(9, 20, 34, 0));
     }
 
-    h2 {
-      margin: 0 0 0.8rem;
+    .section h2 {
+      margin: 0 0 0.7rem;
       font-family: "Rajdhani", "Segoe UI", Arial, sans-serif;
-      font-size: clamp(1.8rem, 3.4vw, 2.9rem);
+      font-size: clamp(1.8rem, 3vw, 3rem);
       line-height: 1;
     }
 
-    .sub {
-      color: var(--muted);
+    .section .intro {
       margin: 0;
+      color: var(--muted);
       max-width: 72ch;
     }
 
@@ -220,134 +282,85 @@
       margin-top: 1.2rem;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .card {
-      padding: 1rem;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: var(--surface);
-      animation: rise 560ms ease both;
-    }
-
-    .card h3 {
-      margin: 0 0 0.4rem;
-      font-size: 1.08rem;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .triplet {
-      margin-top: 1.2rem;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 0.9rem;
     }
 
-    .step {
-      background: rgba(9, 22, 38, 0.62);
+    .feature {
       border: 1px solid var(--line);
       border-radius: 14px;
+      background: rgba(9, 25, 43, 0.72);
       padding: 1rem;
     }
 
-    .step-num {
-      width: 1.9rem;
-      height: 1.9rem;
-      border-radius: 999px;
-      display: inline-grid;
-      place-items: center;
-      margin-bottom: 0.45rem;
-      font-family: "Rajdhani", "Segoe UI", Arial, sans-serif;
-      font-size: 1rem;
-      color: #321502;
-      background: linear-gradient(95deg, var(--accent), var(--accent-2));
-      font-weight: 700;
-    }
-
-    .step h3 {
-      margin: 0 0 0.35rem;
+    .feature h3 {
+      margin: 0 0 0.4rem;
       font-size: 1.05rem;
     }
 
-    .step p {
+    .feature p {
       margin: 0;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .media-grid {
-      margin-top: 1.2rem;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .shot {
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      overflow: hidden;
-      background: rgba(8, 19, 33, 0.7);
-    }
-
-    .shot img {
-      display: block;
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-    }
-
-    .shot figcaption {
-      padding: 0.8rem;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .faq {
-      margin-top: 1.2rem;
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    details {
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 0.8rem 0.9rem;
-      background: rgba(8, 22, 38, 0.65);
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    details p {
-      margin: 0.65rem 0 0;
       color: var(--muted);
       font-size: 0.94rem;
     }
 
-    .integrity {
-      margin-top: 1.4rem;
+    .capture-grid {
+      margin-top: 1.2rem;
+      display: grid;
+      grid-template-columns: 1.45fr 1fr 1fr;
+      gap: 0.85rem;
+      grid-auto-rows: 190px;
+    }
+
+    .cap {
       border: 1px solid var(--line);
       border-radius: 14px;
-      background: var(--surface-strong);
+      overflow: hidden;
+      position: relative;
+      background: #08192b;
+    }
+
+    .cap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cap.tall {
+      grid-row: span 2;
+    }
+
+    .cap.wide {
+      grid-column: span 2;
+    }
+
+    .cap .label {
+      position: absolute;
+      left: 0.65rem;
+      bottom: 0.6rem;
+      background: rgba(6, 16, 28, 0.84);
+      border: 1px solid rgba(44, 83, 125, 0.8);
+      color: #dce9ff;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      padding: 0.28rem 0.5rem;
+    }
+
+    .verify-panel {
+      margin-top: 1.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-2);
       padding: 1rem;
     }
 
     .kv {
       display: grid;
       grid-template-columns: 180px 1fr;
-      gap: 0.6rem;
-      padding: 0.4rem 0;
-      border-bottom: 1px solid rgba(36, 65, 95, 0.6);
-      font-size: 0.95rem;
+      gap: 0.55rem;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid rgba(36, 64, 95, 0.58);
+      font-size: 0.94rem;
     }
 
     .kv:last-child { border-bottom: none; }
@@ -358,60 +371,110 @@
     }
 
     code {
-      color: #ffe2ca;
-      background: rgba(249, 115, 22, 0.14);
-      border: 1px solid rgba(249, 115, 22, 0.35);
-      padding: 0.13rem 0.32rem;
+      color: #ffdcbf;
+      background: rgba(255, 122, 26, 0.13);
+      border: 1px solid rgba(255, 122, 26, 0.35);
       border-radius: 6px;
+      padding: 0.1rem 0.3rem;
       word-break: break-all;
     }
 
-    footer {
-      margin-top: 2rem;
-      border-top: 1px solid var(--line);
-      padding: 1rem 0 2rem;
+    .faq {
+      margin-top: 1rem;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(8, 21, 37, 0.7);
+      padding: 0.8rem;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    details p {
+      margin: 0.6rem 0 0;
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.94rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      margin-top: 2rem;
+      padding: 1rem 0 2.2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.9rem;
+      gap: 0.8rem;
       flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.9rem;
     }
 
     footer a {
-      color: #c8d9f2;
+      color: #d5e4fc;
       text-decoration: none;
-      border-bottom: 1px dashed rgba(200, 217, 242, 0.45);
+      border-bottom: 1px dashed rgba(213, 228, 252, 0.45);
     }
 
     @keyframes rise {
-      from { opacity: 0; transform: translateY(16px); }
+      from { opacity: 0; transform: translateY(15px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 920px) {
-      .topnav-inner {
-        padding: 0.4rem 0;
-      }
-
-      .nav-links {
-        gap: 0.45rem;
-      }
-
-      .hero-copy {
-        margin: 1rem;
-        width: auto;
-        padding: 1.2rem;
-      }
-
-      .feature-grid,
-      .media-grid,
-      .triplet {
+    @media (max-width: 1080px) {
+      .hero {
         grid-template-columns: 1fr;
       }
 
-      .shot img { height: 220px; }
+      .hero-panel {
+        min-height: 520px;
+      }
+
+      .capture-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cap.wide {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .topbar-inner {
+        padding: 0.4rem 0;
+      }
+
+      .nav {
+        gap: 0.25rem;
+      }
+
+      .hero-panel {
+        min-height: 460px;
+      }
+
+      .hero-copy {
+        left: 0.8rem;
+        right: 0.8rem;
+        width: auto;
+      }
+
+      .feature-grid,
+      .capture-grid,
+      .logo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cap.tall,
+      .cap.wide {
+        grid-row: auto;
+        grid-column: auto;
+      }
 
       .kv {
         grid-template-columns: 1fr;
@@ -421,116 +484,107 @@
   </style>
 </head>
 <body>
-  <nav class="topnav" aria-label="Primary">
-    <div class="wrap topnav-inner">
-      <div class="brand"><span class="brand-dot" aria-hidden="true"></span>Rookline</div>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#workflow">Workflow</a>
-        <a href="#screens">Screens</a>
-        <a href="#verify">Integrity</a>
+  <nav class="topbar" aria-label="Primary">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <img src="assets/logo-rookforce.png" alt="Rookline logo" />
+        <span>Rookline</span>
+      </div>
+      <div class="nav">
+        <a href="#features">Features</a>
+        <a href="#captures">App Captures</a>
+        <a href="#integrity">Integrity</a>
         <a href="#faq">FAQ</a>
       </div>
     </div>
   </nav>
 
-  <header class="hero wrap" id="top">
-    <div class="hero-art" aria-hidden="true"></div>
-    <div class="hero-copy">
-      <p class="eyebrow">Official Rookline Release</p>
-      <h1>Telemetry that helps you drive faster</h1>
-      <p class="lead">
-        Rookline is a Windows desktop app for LMU telemetry review, lap analysis, setup support, and optional AI coaching.
-        Understand what changed, why lap time moved, and what to adjust next.
-      </p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="https://drive.usercontent.google.com/download?id=1cAdNOtAvdnIdXx1DguWHDgL3Tp6ScUWM&export=download">Download Rookline Setup</a>
-        <a class="btn btn-ghost" href="#about">Explore features</a>
+  <header class="wrap hero" id="top">
+    <section class="hero-panel">
+      <div class="hero-copy">
+        <p class="eyebrow">Official Windows Release</p>
+        <h1>From telemetry noise to race-ready decisions</h1>
+        <p class="lead">Rookline combines telemetry review, setup guidance, and race workflow context so each stint gives you clear evidence for what to change next.</p>
       </div>
-    </div>
+    </section>
+
+    <aside class="hero-side">
+      <section class="download-card">
+        <h2>Download Rookline v0.6.9</h2>
+        <p>Production installer with strict SHA-256 verification before launch.</p>
+        <div class="button-row">
+          <a class="btn btn-primary" href="https://drive.usercontent.google.com/download?id=1cAdNOtAvdnIdXx1DguWHDgL3Tp6ScUWM&export=download">Download Installer</a>
+          <a class="btn btn-ghost" href="#captures">See App Screens</a>
+        </div>
+      </section>
+
+      <section class="trust-card">
+        <span class="pill">Windows x64</span>
+        <span class="pill">SHA-256 enforced</span>
+        <span class="pill">Public release channel</span>
+      </section>
+
+      <section class="logo-card">
+        <div class="logo-grid">
+          <img src="assets/logo-lmu.svg" alt="Le Mans Ultimate" />
+          <img src="assets/logo-ace-evo.svg" alt="Assetto Corsa Evo" />
+          <img src="assets/logo-rookforce.png" alt="RookForce" />
+        </div>
+      </section>
+    </aside>
   </header>
 
   <main class="wrap">
-    <section class="section" id="about">
-      <h2>Built for real sessions, not gimmicks</h2>
-      <p class="sub">
-        Rookline keeps telemetry, setup context, and race workflow in one place so you can move from data to decisions quickly.
-      </p>
+    <section class="section" id="features">
+      <h2>Built for competitive sessions, not guesswork</h2>
+      <p class="intro">Use one focused workflow to analyze pace, validate setup changes, and keep support tooling close when it matters most.</p>
       <div class="feature-grid">
-        <article class="card">
-          <h3>Session analysis</h3>
-          <p>Inspect laps, sectors, and comparative deltas to identify repeatable pace instead of one-off hero laps.</p>
+        <article class="feature">
+          <h3>Telemetry and lap deltas</h3>
+          <p>Compare laps and sectors quickly to pinpoint where time appears or disappears across a full run.</p>
         </article>
-        <article class="card">
-          <h3>Setup support</h3>
-          <p>Use evidence-backed setup context and guardrails tuned for the current car and track conditions.</p>
+        <article class="feature">
+          <h3>Setup iteration support</h3>
+          <p>Translate session evidence into practical setup moves, then validate whether those changes hold over multiple laps.</p>
         </article>
-        <article class="card">
-          <h3>RookForce workspace</h3>
-          <p>Manage wheelbase and profile workflows in the integrated RookForce area without leaving the app.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section section-soft" id="workflow">
-      <h2>How it fits your race weekend</h2>
-      <p class="sub">Go from first laps to setup decisions with a repeatable process that keeps evidence tied to each change.</p>
-      <div class="triplet">
-        <article class="step">
-          <div class="step-num">1</div>
-          <h3>Capture and compare</h3>
-          <p>Review laps and sectors to isolate where time appears or disappears rather than guessing from feel alone.</p>
-        </article>
-        <article class="step">
-          <div class="step-num">2</div>
-          <h3>Diagnose the why</h3>
-          <p>Use telemetry context and setup history to connect behavior changes to specific, testable adjustments.</p>
-        </article>
-        <article class="step">
-          <div class="step-num">3</div>
-          <h3>Apply and validate</h3>
-          <p>Run the next stint with clear targets, then confirm whether the adjustment improved consistency and pace.</p>
+        <article class="feature">
+          <h3>Integrated RookForce workspace</h3>
+          <p>Keep wheelbase and profile workflows connected inside the broader Rookline environment.</p>
         </article>
       </div>
     </section>
 
-    <section class="section" id="screens">
-      <h2>Visualize your workflow</h2>
-      <p class="sub">Swap these placeholders with your own screenshots any time in <code>site/assets</code>.</p>
-      <div class="media-grid">
-        <figure class="shot">
-          <img src="assets/screenshot-telemetry.svg" alt="Telemetry overview placeholder" />
-          <figcaption>Telemetry dashboard and comparative lap view.</figcaption>
+    <section class="section" id="captures">
+      <h2>Real app captures</h2>
+      <p class="intro">These are live captures from the project workflow, not mockups.</p>
+      <div class="capture-grid">
+        <figure class="cap tall">
+          <img src="assets/cap-session-analyzed.png" alt="Session analysis view" />
+          <figcaption class="label">Session analysis</figcaption>
         </figure>
-        <figure class="shot">
-          <img src="assets/screenshot-workspace.svg" alt="Workspace placeholder" />
-          <figcaption>RookForce workspace with connected tools and profile flow.</figcaption>
+        <figure class="cap">
+          <img src="assets/cap-setup.png" alt="Setup mode" />
+          <figcaption class="label">Setup mode</figcaption>
+        </figure>
+        <figure class="cap">
+          <img src="assets/cap-ai.png" alt="AI mode" />
+          <figcaption class="label">AI coaching view</figcaption>
+        </figure>
+        <figure class="cap wide">
+          <img src="assets/cap-rookforce.png" alt="RookForce tab" />
+          <figcaption class="label">RookForce tab integration</figcaption>
+        </figure>
+        <figure class="cap">
+          <img src="assets/cap-settings.png" alt="Settings panel" />
+          <figcaption class="label">App settings</figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="section" id="faq">
-      <h2>Frequently asked questions</h2>
-      <div class="faq">
-        <details>
-          <summary>Does Rookline run fully on Windows?</summary>
-          <p>Yes. Rookline is a Windows desktop application focused on telemetry review, analysis, and setup workflow support.</p>
-        </details>
-        <details>
-          <summary>Can I verify installer integrity?</summary>
-          <p>Yes. Rookline checks SHA-256 before installer launch and fails closed if the downloaded file does not match the expected hash.</p>
-        </details>
-        <details>
-          <summary>Can I customize this page later?</summary>
-          <p>Absolutely. Update text, screenshots, sections, and style directly in <code>site/index.html</code> and <code>site/assets</code>, then push to deploy.</p>
-        </details>
-      </div>
-    </section>
-
-    <section class="section" id="verify">
-      <h2>Release verification</h2>
-      <p class="sub">Installer launch is fail-closed unless SHA-256 matches expected release hash.</p>
-      <div class="integrity">
+    <section class="section" id="integrity">
+      <h2>Release integrity</h2>
+      <p class="intro">Installer execution is fail-closed unless downloaded binary hash matches the manifest expectation.</p>
+      <div class="verify-panel">
         <div class="kv">
           <div class="k">Version</div>
           <div>v0.6.9</div>
@@ -546,8 +600,26 @@
       </div>
     </section>
 
+    <section class="section" id="faq">
+      <h2>FAQ</h2>
+      <div class="faq">
+        <details>
+          <summary>Is this the official public installer?</summary>
+          <p>Yes. The Download Installer button points to the current public release channel.</p>
+        </details>
+        <details>
+          <summary>Can I verify what gets installed?</summary>
+          <p>Yes. Rookline validates SHA-256 before launch and blocks execution on mismatch.</p>
+        </details>
+        <details>
+          <summary>Will this page be updated each release?</summary>
+          <p>Yes. This public site can be updated independently while your main app repository remains private.</p>
+        </details>
+      </div>
+    </section>
+
     <footer>
-      <span>Rookline for Windows. Questions, release notes, and updates are maintained in the repository.</span>
+      <span>Rookline for Windows. Driver-focused telemetry, setup support, and workflow tooling.</span>
       <span><a href="https://github.com/convexrook2/LMU-Setup-Builder/blob/master/CHANGELOG.md">Read changelog</a></span>
     </footer>
   </main>
