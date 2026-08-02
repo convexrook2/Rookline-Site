@@ -82,7 +82,13 @@
       display: flex;
       align-items: center;
       gap: 0.4rem;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav::-webkit-scrollbar {
+      display: none;
     }
 
     .nav a {
@@ -263,6 +269,7 @@
 
     .section {
       padding: 3rem 0;
+      scroll-margin-top: 94px;
     }
 
     .section h2 {
@@ -306,7 +313,7 @@
     .capture-grid {
       margin-top: 1.2rem;
       display: grid;
-      grid-template-columns: 1.45fr 1fr 1fr;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
       gap: 0.85rem;
       grid-auto-rows: 190px;
     }
@@ -319,19 +326,29 @@
       background: #08192b;
     }
 
+    .cap-main {
+      grid-column: span 5;
+      grid-row: span 2;
+    }
+
+    .cap-half {
+      grid-column: span 3;
+    }
+
+    .cap-wide {
+      grid-column: span 7;
+    }
+
+    .cap-overview {
+      grid-column: span 4;
+    }
+
     .cap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-    }
-
-    .cap.tall {
-      grid-row: span 2;
-    }
-
-    .cap.wide {
-      grid-column: span 2;
+      filter: brightness(1.09) contrast(1.05);
     }
 
     .cap .label {
@@ -440,8 +457,12 @@
         grid-template-columns: 1fr 1fr;
       }
 
-      .cap.wide {
+      .cap-main,
+      .cap-half,
+      .cap-wide,
+      .cap-overview {
         grid-column: auto;
+        grid-row: auto;
       }
     }
 
@@ -470,8 +491,10 @@
         grid-template-columns: 1fr;
       }
 
-      .cap.tall,
-      .cap.wide {
+      .cap-main,
+      .cap-half,
+      .cap-wide,
+      .cap-overview {
         grid-row: auto;
         grid-column: auto;
       }
@@ -510,10 +533,10 @@
 
     <aside class="hero-side">
       <section class="download-card">
-        <h2>Download Rookline v0.6.9</h2>
+        <h2 id="release-version">Download Rookline v0.6.9</h2>
         <p>Production installer with strict SHA-256 verification before launch.</p>
         <div class="button-row">
-          <a class="btn btn-primary" href="https://drive.usercontent.google.com/download?id=1cAdNOtAvdnIdXx1DguWHDgL3Tp6ScUWM&export=download">Download Installer</a>
+          <a class="btn btn-primary" id="release-download" href="https://drive.usercontent.google.com/download?id=1cAdNOtAvdnIdXx1DguWHDgL3Tp6ScUWM&export=download">Download Installer</a>
           <a class="btn btn-ghost" href="#captures">See App Screens</a>
         </div>
       </section>
@@ -558,23 +581,27 @@
       <h2>Real app captures</h2>
       <p class="intro">These are live captures from the project workflow, not mockups.</p>
       <div class="capture-grid">
-        <figure class="cap tall">
+        <figure class="cap cap-main">
           <img src="assets/cap-session-analyzed.png" alt="Session analysis view" />
           <figcaption class="label">Session analysis</figcaption>
         </figure>
-        <figure class="cap">
+        <figure class="cap cap-half">
           <img src="assets/cap-setup.png" alt="Setup mode" />
           <figcaption class="label">Setup mode</figcaption>
         </figure>
-        <figure class="cap">
+        <figure class="cap cap-half">
           <img src="assets/cap-ai.png" alt="AI mode" />
           <figcaption class="label">AI coaching view</figcaption>
         </figure>
-        <figure class="cap wide">
+        <figure class="cap cap-wide">
           <img src="assets/cap-rookforce.png" alt="RookForce tab" />
           <figcaption class="label">RookForce tab integration</figcaption>
         </figure>
-        <figure class="cap">
+        <figure class="cap cap-overview">
+          <img src="assets/cap-overview.png" alt="Rookline overview" />
+          <figcaption class="label">Overview dashboard</figcaption>
+        </figure>
+        <figure class="cap cap-half">
           <img src="assets/cap-settings.png" alt="Settings panel" />
           <figcaption class="label">App settings</figcaption>
         </figure>
@@ -587,15 +614,15 @@
       <div class="verify-panel">
         <div class="kv">
           <div class="k">Version</div>
-          <div>v0.6.9</div>
+          <div id="release-version-value">v0.6.9</div>
         </div>
         <div class="kv">
           <div class="k">SHA-256</div>
-          <div><code>6E5656B5D14010154632153B072A54474D91FC0B3050C629482A9ECC865867BC</code></div>
+          <div><code id="release-sha">6E5656B5D14010154632153B072A54474D91FC0B3050C629482A9ECC865867BC</code></div>
         </div>
         <div class="kv">
           <div class="k">Manifest URL</div>
-          <div><a href="https://drive.usercontent.google.com/download?id=1eH8ciMAfwpV0Dy3bHkE-_FqbfAeRg4sn&export=download">Open update manifest</a></div>
+          <div><a id="release-manifest" href="https://drive.usercontent.google.com/download?id=1eH8ciMAfwpV0Dy3bHkE-_FqbfAeRg4sn&export=download">Open update manifest</a></div>
         </div>
       </div>
     </section>
@@ -623,5 +650,48 @@
       <span><a href="https://github.com/convexrook2/LMU-Setup-Builder/blob/master/CHANGELOG.md">Read changelog</a></span>
     </footer>
   </main>
+  <script>
+    (function () {
+      var releaseUrl = "assets/release.json";
+      fetch(releaseUrl + "?v=" + Date.now(), { cache: "no-store" })
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error("Release metadata unavailable");
+          }
+          return response.json();
+        })
+        .then(function (release) {
+          if (!release || !release.version || !release.installerUrl || !release.sha256) {
+            return;
+          }
+
+          var releaseText = "v" + String(release.version).replace(/^v/i, "");
+          var titleEl = document.getElementById("release-version");
+          var valueEl = document.getElementById("release-version-value");
+          var downloadEl = document.getElementById("release-download");
+          var shaEl = document.getElementById("release-sha");
+          var manifestEl = document.getElementById("release-manifest");
+
+          if (titleEl) {
+            titleEl.textContent = "Download Rookline " + releaseText;
+          }
+          if (valueEl) {
+            valueEl.textContent = releaseText;
+          }
+          if (downloadEl) {
+            downloadEl.href = release.installerUrl;
+          }
+          if (shaEl) {
+            shaEl.textContent = String(release.sha256).toUpperCase();
+          }
+          if (manifestEl && release.manifestUrl) {
+            manifestEl.href = release.manifestUrl;
+          }
+        })
+        .catch(function () {
+          // Keep static fallback values if metadata fetch fails.
+        });
+    })();
+  </script>
 </body>
 </html>
