@@ -757,61 +757,6 @@
   </main>
   <script>
     (function () {
-      var zoomModal = document.createElement("div");
-      zoomModal.className = "zoom-modal";
-      zoomModal.setAttribute("aria-hidden", "true");
-      zoomModal.innerHTML = [
-        '<div class="zoom-panel" role="dialog" aria-modal="true" aria-label="Screenshot zoom">',
-        '  <div class="zoom-toolbar">',
-        '    <div class="zoom-title" id="zoom-title">Screenshot</div>',
-        '    <div class="zoom-actions">',
-        '      <a class="zoom-btn" id="zoom-open" href="#" target="_blank" rel="noopener noreferrer">Open Full Resolution</a>',
-        '      <button class="zoom-btn" id="zoom-close" type="button">Close</button>',
-        '    </div>',
-        '  </div>',
-        '  <div class="zoom-image-wrap"><img id="zoom-image" alt="Zoomed screenshot" /></div>',
-        '</div>'
-      ].join("");
-      document.body.appendChild(zoomModal);
-
-      var zoomImage = document.getElementById("zoom-image");
-      var zoomOpen = document.getElementById("zoom-open");
-      var zoomClose = document.getElementById("zoom-close");
-      var zoomTitle = document.getElementById("zoom-title");
-
-      function closeZoom() {
-        zoomModal.classList.remove("is-open");
-        zoomModal.setAttribute("aria-hidden", "true");
-      }
-
-      function openZoom(src, title) {
-        zoomImage.src = src;
-        zoomOpen.href = src;
-        zoomTitle.textContent = title || "Screenshot";
-        zoomModal.classList.add("is-open");
-        zoomModal.setAttribute("aria-hidden", "false");
-      }
-
-      document.querySelectorAll(".cap[data-zoom-src]").forEach(function (cap) {
-        var src = cap.getAttribute("data-zoom-src");
-        var title = cap.getAttribute("data-zoom-title") || "Screenshot";
-        cap.addEventListener("click", function () {
-          openZoom(src, title);
-        });
-      });
-
-      zoomClose.addEventListener("click", closeZoom);
-      zoomModal.addEventListener("click", function (event) {
-        if (event.target === zoomModal) {
-          closeZoom();
-        }
-      });
-      document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") {
-          closeZoom();
-        }
-      });
-
       var releaseUrl = "assets/release.json";
       fetch(releaseUrl + "?v=" + Date.now(), { cache: "no-store" })
         .then(function (response) {
@@ -871,6 +816,68 @@
         .catch(function () {
           // Keep static fallback values if metadata fetch fails.
         });
+
+      try {
+        var zoomModal = document.createElement("div");
+        zoomModal.className = "zoom-modal";
+        zoomModal.setAttribute("aria-hidden", "true");
+        zoomModal.innerHTML = [
+          '<div class="zoom-panel" role="dialog" aria-modal="true" aria-label="Screenshot zoom">',
+          '  <div class="zoom-toolbar">',
+          '    <div class="zoom-title" id="zoom-title">Screenshot</div>',
+          '    <div class="zoom-actions">',
+          '      <a class="zoom-btn" id="zoom-open" href="#" target="_blank" rel="noopener noreferrer">Open Full Resolution</a>',
+          '      <button class="zoom-btn" id="zoom-close" type="button">Close</button>',
+          '    </div>',
+          '  </div>',
+          '  <div class="zoom-image-wrap"><img id="zoom-image" alt="Zoomed screenshot" /></div>',
+          '</div>'
+        ].join("");
+        document.body.appendChild(zoomModal);
+
+        var zoomImage = document.getElementById("zoom-image");
+        var zoomOpen = document.getElementById("zoom-open");
+        var zoomClose = document.getElementById("zoom-close");
+        var zoomTitle = document.getElementById("zoom-title");
+        if (!zoomImage || !zoomOpen || !zoomClose || !zoomTitle) {
+          return;
+        }
+
+        function closeZoom() {
+          zoomModal.classList.remove("is-open");
+          zoomModal.setAttribute("aria-hidden", "true");
+        }
+
+        function openZoom(src, title) {
+          zoomImage.src = src;
+          zoomOpen.href = src;
+          zoomTitle.textContent = title || "Screenshot";
+          zoomModal.classList.add("is-open");
+          zoomModal.setAttribute("aria-hidden", "false");
+        }
+
+        document.querySelectorAll(".cap[data-zoom-src]").forEach(function (cap) {
+          var src = cap.getAttribute("data-zoom-src");
+          var title = cap.getAttribute("data-zoom-title") || "Screenshot";
+          cap.addEventListener("click", function () {
+            openZoom(src, title);
+          });
+        });
+
+        zoomClose.addEventListener("click", closeZoom);
+        zoomModal.addEventListener("click", function (event) {
+          if (event.target === zoomModal) {
+            closeZoom();
+          }
+        });
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") {
+            closeZoom();
+          }
+        });
+      } catch (error) {
+        // Do not block release metadata wiring if zoom UI fails.
+      }
     })();
   </script>
 </body>
