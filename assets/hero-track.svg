@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Stylized track and telemetry background">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#071423"/>
+      <stop offset="1" stop-color="#173958"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fb923c"/>
+      <stop offset="1" stop-color="#60a5fa"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <g fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="2">
+    <path d="M0 120h1600"/>
+    <path d="M0 280h1600"/>
+    <path d="M0 440h1600"/>
+    <path d="M0 600h1600"/>
+    <path d="M0 760h1600"/>
+    <path d="M120 0v900"/>
+    <path d="M400 0v900"/>
+    <path d="M680 0v900"/>
+    <path d="M960 0v900"/>
+    <path d="M1240 0v900"/>
+    <path d="M1520 0v900"/>
+  </g>
+  <path d="M120 630C290 690 560 650 670 520C760 415 700 290 800 230C940 145 1170 225 1310 160C1390 122 1450 76 1530 72" stroke="url(#line)" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <g fill="#fb923c">
+    <circle cx="240" cy="664" r="8"/>
+    <circle cx="510" cy="636" r="8"/>
+    <circle cx="734" cy="480" r="8"/>
+    <circle cx="885" cy="210" r="8"/>
+    <circle cx="1235" cy="190" r="8"/>
+  </g>
+</svg>
