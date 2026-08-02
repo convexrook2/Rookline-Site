@@ -1,8 +1,8 @@
 {
-  "version": "0.6.9",
-  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.9/Rookline-Setup.exe",
-  "coreInstallerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.9/Rookline-Setup-Core.exe",
+  "version": "0.6.10",
+  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.10/Rookline-Setup.exe",
+  "coreInstallerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.10/Rookline-Setup-Core.exe",
   "manifestUrl": null,
-  "sha256": "C2890201C36E73F26D15C59606F634077EB0DA7510CA1FFC6639772817AFD6A5",
-  "generatedUtc": "2026-08-02T22:09:00.0272711Z"
+  "sha256": "31793650E5D8224E6CCFD10CE890279FFE75C30BC561074CB8C477870EA3C732",
+  "generatedUtc": "2026-08-02T23:42:30.4835417Z"
 }
