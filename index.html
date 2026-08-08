@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rookline | Telemetry, Setup, Coaching</title>
   <meta name="description" content="Rookline turns race sessions into clear next actions with telemetry analysis, setup guidance, and integrated wheelbase workflow." />
+  <link rel="icon" href="assets/icon-rookline.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@500;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -104,11 +105,9 @@
     }
 
     .brand img {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      object-fit: cover;
-      box-shadow: 0 0 0 1px var(--line-strong);
+      display: block;
+      width: 156px;
+      height: auto;
     }
 
     .nav {
@@ -1248,7 +1247,6 @@
     <div class="wrap topbar-inner">
       <div class="brand">
         <img src="assets/logo-rookline.png" alt="Rookline logo" />
-        <span>Rookline</span>
       </div>
       <div class="nav">
         <a href="#features">Features</a>
@@ -1282,10 +1280,10 @@
 
     <aside class="hero-side">
       <section class="download-card">
-              <h2 id="release-version">Download Rookline v0.6.13</h2>
-        <p>Production installer with strict SHA-256 verification before launch.</p>
+              <h2 id="release-version">Download Rookline v0.6.15</h2>
+        <p>Windows installer with strict SHA-256 verification before launch.</p>
         <div class="button-row">
-                <a class="btn btn-primary" id="release-download" href="https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.13/Rookline-Setup.exe">Download Installer</a>
+                <a class="btn btn-primary" id="release-download" href="https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.15/Rookline-Setup.exe">Download Installer</a>
           <a class="btn btn-muted is-disabled" id="release-download-core" href="#" aria-disabled="true">Download Without RookForce</a>
           <a class="btn btn-ghost" href="#captures">See App Screens</a>
         </div>
@@ -1411,31 +1409,31 @@
       <div class="verify-panel">
         <div class="verify-layout">
           <div>
-            <h2>Download Rookline v0.6.13</h2>
-            <p class="intro">Production installer with strict hash verification before launch.</p>
+            <h2>Download Rookline v0.6.15</h2>
+            <p class="intro">Windows installer with strict hash verification before launch.</p>
             <div class="button-row">
-              <a class="btn btn-primary" href="https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.13/Rookline-Setup.exe">Download Installer</a>
-              <a class="btn btn-muted is-disabled" href="#" aria-disabled="true">Download Without RookForce</a>
+              <a class="btn btn-primary" id="release-download-secondary" href="https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.15/Rookline-Setup.exe">Download Installer</a>
+              <a class="btn btn-muted is-disabled" id="release-download-core-secondary" href="#" aria-disabled="true">Download Without RookForce</a>
             </div>
             <p class="download-note">Need telemetry and setup only? Use the no-RookForce package when available.</p>
             <div class="kv">
               <div class="k">Version</div>
-              <div id="release-version-value">v0.6.13</div>
+              <div id="release-version-value">v0.6.15</div>
             </div>
             <div class="kv">
               <div class="k">SHA-256</div>
-              <div><code id="release-sha">6E5656B5D14010154632153B072A54474D91FC0B3050C629482A9ECC865867BC</code></div>
+              <div><code id="release-sha">B56B1F93BE78BE920C2D9E9C0F818782B6902DD673B9BD7B5DE2FD31E03BA884</code></div>
             </div>
             <div class="kv">
               <div class="k">Manifest URL</div>
-              <div><a id="release-manifest" href="https://drive.usercontent.google.com/download?id=1eH8ciMAfwpV0Dy3bHkE-_FqbfAeRg4sn&export=download">Open update manifest</a></div>
+              <div><a id="release-manifest" href="https://convexrook2.github.io/Rookline-Site/assets/release.json">Open update manifest</a></div>
             </div>
           </div>
           <ul class="verify-trust">
             <li>Every installer build is hashed and pinned before publishing.</li>
             <li>Launch blocks automatically on a SHA-256 mismatch.</li>
             <li>Release metadata is published alongside the public changelog.</li>
-            <li>RookForce workspace ships signed into the same verified package.</li>
+            <li>The bundled RookForce workspace is covered by the same installer hash.</li>
           </ul>
         </div>
       </div>
@@ -1483,7 +1481,9 @@
           var titleEl = document.getElementById("release-version");
           var valueEl = document.getElementById("release-version-value");
           var downloadEl = document.getElementById("release-download");
+          var secondaryDownloadEl = document.getElementById("release-download-secondary");
           var coreDownloadEl = document.getElementById("release-download-core");
+          var secondaryCoreDownloadEl = document.getElementById("release-download-core-secondary");
           var downloadNoteEl = document.getElementById("release-download-note");
           var shaEl = document.getElementById("release-sha");
           var manifestEl = document.getElementById("release-manifest");
@@ -1497,19 +1497,26 @@
           if (downloadEl) {
             downloadEl.href = release.installerUrl;
           }
-          if (coreDownloadEl) {
+          if (secondaryDownloadEl) {
+            secondaryDownloadEl.href = release.installerUrl;
+          }
+          if (coreDownloadEl || secondaryCoreDownloadEl) {
             var coreUrl = typeof release.coreInstallerUrl === "string" ? release.coreInstallerUrl.trim() : "";
             if (coreUrl) {
-              coreDownloadEl.href = coreUrl;
-              coreDownloadEl.classList.remove("is-disabled");
-              coreDownloadEl.setAttribute("aria-disabled", "false");
+              [coreDownloadEl, secondaryCoreDownloadEl].filter(Boolean).forEach(function (link) {
+                link.href = coreUrl;
+                link.classList.remove("is-disabled");
+                link.setAttribute("aria-disabled", "false");
+              });
               if (downloadNoteEl) {
                 downloadNoteEl.textContent = "Need telemetry and setup only? Download the package without the RookForce workspace.";
               }
             } else {
-              coreDownloadEl.href = "#";
-              coreDownloadEl.classList.add("is-disabled");
-              coreDownloadEl.setAttribute("aria-disabled", "true");
+              [coreDownloadEl, secondaryCoreDownloadEl].filter(Boolean).forEach(function (link) {
+                link.href = "#";
+                link.classList.add("is-disabled");
+                link.setAttribute("aria-disabled", "true");
+              });
               if (downloadNoteEl) {
                 downloadNoteEl.textContent = "Need telemetry and setup only? Core-only download will appear here as soon as it is published.";
               }

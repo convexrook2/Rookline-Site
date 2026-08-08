@@ -1,8 +1,12 @@
 {
-  "version": "0.6.13",
-  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.13/Rookline-Setup.exe",
-  "coreInstallerUrl": null,
-  "manifestUrl": null,
-  "sha256": "1FEE99CB7824EE6CAED6E6C8BF0F923D6859348A4A4CA8D29C487D684C67DA63",
-  "generatedUtc": "2026-08-03T16:33:45.3663710Z"
+  "version": "0.6.15",
+  "latestVersion": "0.6.15",
+  "releaseNotes": "Rookline 0.6.15 adds the new Rookline application identity, restores notification-area background behavior, retains measured Laguna Seca and Daytona sector references, and includes the latest session-engineer reliability improvements.\n\nThe Windows installers are not Authenticode-signed. Rookline verifies the published combined installer with the SHA-256 value in the HTTPS release manifest before updater launch.",
+  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.15/Rookline-Setup.exe",
+  "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.15/Rookline-Setup.exe",
+  "downloadPageUrl": "https://convexrook2.github.io/Rookline-Site/",
+  "coreInstallerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.15/Rookline-Setup-Core.exe",
+  "manifestUrl": "https://convexrook2.github.io/Rookline-Site/assets/release.json",
+  "sha256": "B56B1F93BE78BE920C2D9E9C0F818782B6902DD673B9BD7B5DE2FD31E03BA884",
+  "generatedUtc": "2026-08-08T05:12:29.1871029Z"
 }
