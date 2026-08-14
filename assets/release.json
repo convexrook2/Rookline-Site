@@ -1,7 +1,7 @@
 {
   "version": "0.6.17",
   "latestVersion": "0.6.17",
-  "releaseNotes": "Rookline 0.6.17 refreshes Drive, Engineer, Setup, support screens, and the integrated RookForce wheelbase workspace; improves LMU live telemetry and run recording; and keeps cars, seasons, tracks, loaded setups, copied setup files, and recorded sessions correctly matched.\n\nThe Windows installers are not Authenticode-signed. Rookline verifies the published combined installer with the SHA-256 value in the HTTPS release manifest before updater launch.",
+  "releaseNotes": "Rookline 0.6.17 strengthens automatic Setup Engineer review integrity, retained native-lap evidence, live telemetry handling, and Setup context.\n\nThe Windows installers are not Authenticode-signed. Rookline verifies the published combined installer with the SHA-256 value in the HTTPS release manifest before updater launch.",
   "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.17/Rookline-Setup.exe",
   "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.17/Rookline-Setup.exe",
   "downloadPageUrl": "https://convexrook2.github.io/Rookline-Site/",
