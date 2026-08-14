@@ -1,12 +1,12 @@
 {
-  "version": "0.6.16",
-  "latestVersion": "0.6.16",
-  "releaseNotes": "Rookline 0.6.16 refreshes Drive, Engineer, Setup, support screens, and the integrated RookForce wheelbase workspace; improves LMU live telemetry and run recording; and keeps cars, seasons, tracks, loaded setups, copied setup files, and recorded sessions correctly matched.\n\nThe Windows installers are not Authenticode-signed. Rookline verifies the published combined installer with the SHA-256 value in the HTTPS release manifest before updater launch.",
-  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.16/Rookline-Setup.exe",
-  "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.16/Rookline-Setup.exe",
+  "version": "0.6.17",
+  "latestVersion": "0.6.17",
+  "releaseNotes": "Rookline 0.6.17 refreshes Drive, Engineer, Setup, support screens, and the integrated RookForce wheelbase workspace; improves LMU live telemetry and run recording; and keeps cars, seasons, tracks, loaded setups, copied setup files, and recorded sessions correctly matched.\n\nThe Windows installers are not Authenticode-signed. Rookline verifies the published combined installer with the SHA-256 value in the HTTPS release manifest before updater launch.",
+  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.17/Rookline-Setup.exe",
+  "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.17/Rookline-Setup.exe",
   "downloadPageUrl": "https://convexrook2.github.io/Rookline-Site/",
-  "coreInstallerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.16/Rookline-Setup-Core.exe",
+  "coreInstallerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.17/Rookline-Setup-Core.exe",
   "manifestUrl": "https://convexrook2.github.io/Rookline-Site/assets/release.json",
-  "sha256": "3B71ED2F9342E61788E160844A3EA71057C7CDD3F15E0365488A640D1B2329DB",
-  "generatedUtc": "2026-08-11T04:12:23.3127348Z"
+  "sha256": "F716A51C894FD03F49EB26AB5E0F8153A733EA77218E8C50E3F564DE8F04657C",
+  "generatedUtc": "2026-08-14T20:44:08.0409100Z"
 }
