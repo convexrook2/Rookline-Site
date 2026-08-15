@@ -1,12 +1,12 @@
 {
-  "version": "0.6.17",
-  "latestVersion": "0.6.17",
-  "releaseNotes": "Rookline 0.6.17 strengthens automatic Setup Engineer review integrity, retained native-lap evidence, live telemetry handling, and Setup context.\n\nThe Windows installers are not Authenticode-signed. Rookline verifies the published combined installer with the SHA-256 value in the HTTPS release manifest before updater launch.",
-  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.17/Rookline-Setup.exe",
-  "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.17/Rookline-Setup.exe",
+  "version": "0.6.18",
+  "latestVersion": "0.6.18",
+  "releaseNotes": "Rookline 0.6.18 includes the driver-visible changes recorded in its changelog, including safer setup-review evidence, live telemetry handling, and retained session/setup context.\r\n\r\nThe Windows installers are not Authenticode-signed. Rookline verifies the published combined installer with the SHA-256 value in the HTTPS release manifest before updater launch.",
+  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.18/Rookline-Setup.exe",
+  "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.18/Rookline-Setup.exe",
   "downloadPageUrl": "https://convexrook2.github.io/Rookline-Site/",
-  "coreInstallerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.17/Rookline-Setup-Core.exe",
+  "coreInstallerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.18/Rookline-Setup-Core.exe",
   "manifestUrl": "https://convexrook2.github.io/Rookline-Site/assets/release.json",
-  "sha256": "F716A51C894FD03F49EB26AB5E0F8153A733EA77218E8C50E3F564DE8F04657C",
-  "generatedUtc": "2026-08-14T20:44:08.0409100Z"
+  "sha256": "A73433C4A3A13A3006B37DD7303F5B5AF61CA578B26D8E2FF43932614B1D74B5",
+  "generatedUtc": "2026-08-15T01:56:23.8606671Z"
 }

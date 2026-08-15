@@ -1,1482 +1,410 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rookline | Telemetry, Setup, Coaching</title>
-  <meta name="description" content="Rookline turns race sessions into clear next actions with telemetry analysis, setup guidance, and integrated wheelbase workflow." />
+  <meta name="description" content="Rookline is a Windows workspace for reviewing driving evidence, choosing the next priority, and recording setup controls." />
   <link rel="icon" href="assets/icon-rookline.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@500;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <title>Rookline — driving evidence, made useful</title>
   <style>
+    @font-face {
+      font-family: "Inter";
+      src: url("assets/InterVariable.woff2") format("woff2");
+      font-display: swap;
+      font-style: normal;
+      font-weight: 100 900;
+    }
+    @font-face {
+      font-family: "Inter Tight";
+      src: url("assets/InterTight-Variable.ttf") format("truetype");
+      font-display: swap;
+      font-style: normal;
+      font-weight: 100 900;
+    }
     :root {
-      --bg-0: #060607;
-      --bg-1: #121519;
-      --bg-2: #1b2129;
-      --panel: rgba(10, 12, 16, 0.84);
-      --panel-strong: rgba(13, 17, 23, 0.96);
-      --line: rgba(165, 177, 196, 0.26);
-      --line-strong: rgba(214, 228, 246, 0.34);
-      --text: #f3f5f7;
-      --muted: #b7c1ce;
-      --accent: #ff4d2e;
-      --accent-2: #ff8748;
-      --secondary: #68d5ff;
-      --ok: #5af0ad;
-      --radius: 18px;
-      --radius-xl: 28px;
-      --shadow: 0 34px 72px rgba(0, 0, 0, 0.45);
+      color-scheme: light;
+      --paper: #f2f0ea;
+      --paper-raised: #fbfaf6;
+      --ink: #152022;
+      --muted: #536062;
+      --line: #d3d1c9;
+      --night: #071114;
+      --night-line: #2a3d42;
+      --night-ink: #eef4f1;
+      --night-muted: #afbebc;
+      --signal: #00d7e5;
+      --signal-ink: #053b43;
+      --max: 1280px;
+      --tight: "Inter Tight", "Arial Narrow", Arial, sans-serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     * { box-sizing: border-box; }
-    html, body { margin: 0; }
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 110px;
-    }
-
+    html { scroll-behavior: smooth; }
     body {
-      font-family: "Sora", "Segoe UI", Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(80rem 42rem at -12% -20%, rgba(255, 77, 46, 0.26), transparent 60%),
-        radial-gradient(60rem 32rem at 104% 104%, rgba(104, 213, 255, 0.16), transparent 58%),
-        linear-gradient(168deg, var(--bg-0), var(--bg-1) 44%, var(--bg-2));
-      line-height: 1.45;
-      overflow-x: hidden;
+      margin: 0;
+      min-width: 320px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.5;
     }
-
-    body::before,
-    body::after {
-      content: "";
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    :focus-visible { outline: 3px solid var(--signal); outline-offset: 4px; }
+    .skip-link {
       position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    body::before {
-      background: repeating-linear-gradient(
-        120deg,
-        rgba(255, 255, 255, 0.015) 0,
-        rgba(255, 255, 255, 0.015) 1px,
-        transparent 1px,
-        transparent 22px
-      );
-      opacity: 0.45;
-    }
-
-    body::after {
-      background: radial-gradient(circle at 20% 12%, rgba(255, 94, 58, 0.16), transparent 44%);
-    }
-
-    .wrap {
-      width: min(1240px, 94vw);
-      margin: 0 auto;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(14px);
-      background: rgba(4, 10, 20, 0.72);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .topbar-inner {
-      min-height: 66px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: nowrap;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.7rem;
+      z-index: 20;
+      top: .75rem;
+      left: .75rem;
+      transform: translateY(-160%);
+      padding: .7rem .9rem;
+      background: var(--signal);
+      color: var(--signal-ink);
       font-weight: 800;
-      font-size: 1.02rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .brand img {
-      display: block;
-      width: 156px;
-      height: auto;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      scrollbar-width: none;
-      min-width: 0;
-    }
-
-    .nav::-webkit-scrollbar {
-      display: none;
-    }
-
-    .nav a {
       text-decoration: none;
-      color: var(--muted);
-      font-size: 0.84rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 0.36rem 0.62rem;
-      border: 1px solid transparent;
-      border-radius: 8px;
-      white-space: nowrap;
-      flex: 0 0 auto;
     }
-
-    .nav a:hover {
-      color: var(--text);
-      border-color: var(--line-strong);
-      background: rgba(18, 36, 61, 0.58);
-    }
-
-    .hero {
-      padding-top: 1.6rem;
-      display: grid;
-      grid-template-columns: 1.14fr 0.86fr;
-      gap: 1.24rem;
-      align-items: stretch;
-    }
-
-    .hero-panel {
-      border: 1px solid var(--line-strong);
-      border-radius: var(--radius-xl);
-      background: linear-gradient(128deg, rgba(6, 10, 16, 0.88), rgba(17, 23, 31, 0.82));
-      box-shadow: var(--shadow);
-      min-height: 520px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      filter: saturate(1.18) contrast(1.06) brightness(0.8);
-      transform: scale(1.035);
-    }
-
-    .hero-panel::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(6, 10, 16, 0.2) 10%, rgba(8, 11, 15, 0.92) 88%),
-        linear-gradient(102deg, rgba(255, 77, 46, 0.16), transparent 38%),
-        radial-gradient(circle at 82% 14%, rgba(104, 213, 255, 0.16), transparent 31%);
-      pointer-events: none;
-    }
-
-    .hero-pulse {
-      position: absolute;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      pointer-events: none;
-      animation: pulse 4.8s ease-in-out infinite;
-      z-index: 1;
-    }
-
-    .hero-pulse-a {
-      width: 220px;
-      height: 220px;
-      right: 3%;
-      top: 7%;
-      border-color: rgba(255, 77, 46, 0.4);
-    }
-
-    .hero-pulse-b {
-      width: 140px;
-      height: 140px;
-      right: 18%;
-      top: 17%;
-      border-color: rgba(104, 213, 255, 0.4);
-      animation-delay: -2.1s;
-    }
-
-    .hero-meta {
-      position: absolute;
-      right: 1rem;
-      bottom: 1rem;
-      z-index: 2;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.42rem;
-      justify-content: flex-end;
-      max-width: 52%;
-    }
-
-    .hero-meta span {
-      border: 1px solid var(--line-strong);
-      background: rgba(7, 16, 30, 0.86);
-      border-radius: 999px;
-      color: #deecff;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 0.28rem 0.52rem;
-      font-weight: 700;
-    }
-
-    .hero-copy {
-      position: absolute;
-      left: 1.25rem;
-      bottom: 1.25rem;
-      z-index: 2;
-      width: min(640px, calc(100% - 2.5rem));
-      border: 1px solid var(--line-strong);
-      border-radius: var(--radius);
-      padding: 1.28rem;
-      background: linear-gradient(110deg, rgba(8, 10, 16, 0.88), rgba(16, 22, 31, 0.72));
-      backdrop-filter: blur(9px);
-      animation: rise 700ms ease both;
-    }
-
-    .hero-trackline {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #ff4d2e 0%, #ff8748 46%, #68d5ff 100%);
-      z-index: 3;
-      opacity: 0.95;
-    }
+    .skip-link:focus { transform: translateY(0); }
 
     .eyebrow {
-      margin: 0;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--muted);
-      font-size: 0.72rem;
-      font-weight: 700;
-    }
-
-    h1 {
-      margin: 0.56rem 0 0.72rem;
-      font-family: "Antonio", "Segoe UI", Arial, sans-serif;
-      font-size: clamp(2.6rem, 5.1vw, 5.2rem);
-      line-height: 0.9;
-      letter-spacing: 0.02em;
+      margin: 0 0 .75rem;
+      color: var(--signal);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .16em;
       text-transform: uppercase;
     }
-
-    .lead {
-      margin: 0;
-      color: var(--muted);
-      max-width: 54ch;
-      font-size: clamp(0.98rem, 1.2vw, 1.06rem);
-    }
-
-    .hero-side {
-      display: grid;
-      gap: 1rem;
-      grid-template-rows: auto auto 1fr;
-    }
-
-    .download-card,
-    .trust-card,
-    .logo-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: linear-gradient(165deg, rgba(17, 20, 25, 0.9), rgba(11, 13, 17, 0.86));
-      box-shadow: var(--shadow);
-      padding: 1.05rem;
-      animation: rise 820ms ease both;
-    }
-
-    .download-card {
-      border-top: 2px solid var(--accent);
-    }
-
-    .download-card h2 {
-      margin: 0 0 0.4rem;
-      font-family: "Antonio", "Segoe UI", Arial, sans-serif;
-      font-size: 2.1rem;
-      line-height: 0.96;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-    }
-
-    .download-card p {
-      margin: 0 0 0.9rem;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.42rem;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      padding: 0.74rem 1.04rem;
-      border: 1px solid transparent;
-      transition: transform 120ms ease, filter 120ms ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.03);
-    }
-
-    .btn-primary {
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      color: #1a0603;
-      box-shadow: 0 14px 26px rgba(255, 77, 46, 0.32);
-    }
-
-    .btn-ghost {
-      border-color: var(--line-strong);
-      color: var(--text);
-      background: rgba(20, 24, 30, 0.72);
-    }
-
-    .btn-muted {
-      border-color: rgba(183, 193, 206, 0.4);
-      color: #e6eaef;
-      background: rgba(17, 20, 25, 0.9);
-    }
-
-    .btn.is-disabled {
-      opacity: 0.58;
-      filter: grayscale(0.12);
-      pointer-events: none;
-      cursor: not-allowed;
-    }
-
-    .download-note {
-      margin: 0.65rem 0 0;
-      color: var(--muted);
-      font-size: 0.86rem;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 0.3rem 0.62rem;
-      color: var(--muted);
-      font-size: 0.8rem;
-      margin-right: 0.35rem;
-      margin-bottom: 0.35rem;
-    }
-
-    .pill::before {
-      content: "";
-      width: 0.48rem;
-      height: 0.48rem;
-      border-radius: 999px;
-      background: linear-gradient(120deg, var(--ok), var(--secondary));
-    }
-
-    .logo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.7rem;
-      align-items: center;
-      justify-items: center;
-    }
-
-    .logo-grid img {
-      max-width: 100%;
-      max-height: 40px;
-      object-fit: contain;
-      filter: saturate(1.08);
-    }
-
-    .section {
-      padding: 3.4rem 0;
-      scroll-margin-top: 118px;
-      animation: rise 900ms ease both;
-    }
-
-    .section h2 {
-      margin: 0 0 0.7rem;
-      font-family: "Antonio", "Segoe UI", Arial, sans-serif;
-      font-size: clamp(2rem, 3.4vw, 3.4rem);
-      line-height: 0.95;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-    }
-
-    .section .intro {
-      margin: 0;
-      color: var(--muted);
-      max-width: 72ch;
-    }
-
-    .feature-grid {
-      margin-top: 1.2rem;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.9rem;
-    }
-
-    .feature {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background:
-        linear-gradient(168deg, rgba(8, 22, 39, 0.88), rgba(12, 32, 55, 0.7));
-      padding: 1.08rem;
-      transition: transform 160ms ease, border-color 160ms ease;
-    }
-
-    .feature:hover {
-      transform: translateY(-2px);
-      border-color: var(--line-strong);
-    }
-
-    .feature h3 {
-      margin: 0 0 0.4rem;
-      font-size: 1.05rem;
-    }
-
-    .feature p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .story-band {
-      margin-top: 1.2rem;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.9rem;
-    }
-
-    .story-card {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 1rem;
-      background:
-        linear-gradient(156deg, rgba(8, 22, 37, 0.9), rgba(12, 34, 57, 0.68));
-      box-shadow: var(--shadow);
-    }
-
-    .story-kicker {
-      margin: 0 0 0.5rem;
-      font-family: "Antonio", "Segoe UI", Arial, sans-serif;
-      font-size: 1.2rem;
-      letter-spacing: 0.08em;
-      color: var(--accent-2);
-    }
-
-    .story-card h3 {
-      margin: 0 0 0.4rem;
-      font-size: 1.05rem;
-    }
-
-    .story-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .capture-grid {
-      margin-top: 1.2rem;
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: 1rem;
-      align-items: start;
-      grid-auto-flow: dense;
-      position: relative;
-      padding: 0.8rem;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background:
-        linear-gradient(165deg, rgba(15, 18, 23, 0.7), rgba(10, 12, 16, 0.5));
-    }
-
-    .capture-grid::before {
-      content: "";
-      position: absolute;
-      left: 0.9rem;
-      right: 0.9rem;
-      top: 0.46rem;
-      height: 0.28rem;
-      border-radius: 999px;
-      background: repeating-linear-gradient(
-        90deg,
-        rgba(255, 77, 46, 0.9) 0,
-        rgba(255, 77, 46, 0.9) 14px,
-        rgba(104, 213, 255, 0.9) 14px,
-        rgba(104, 213, 255, 0.9) 28px
-      );
-      opacity: 0.75;
-      pointer-events: none;
-    }
-
-    .cap {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      overflow: hidden;
-      position: relative;
-      background: linear-gradient(165deg, rgba(18, 21, 26, 0.94), rgba(11, 13, 17, 0.86));
-      padding: 0.52rem;
-      cursor: zoom-in;
-      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-      box-shadow: 0 22px 36px rgba(0, 0, 0, 0.32);
-      isolation: isolate;
-    }
-
-    .cap:hover {
-      transform: translateY(-3px);
-      border-color: var(--line-strong);
-      box-shadow: 0 28px 44px rgba(0, 0, 0, 0.4);
-    }
-
-    .cap::before {
-      content: "";
-      position: absolute;
-      left: 0.55rem;
-      right: 0.55rem;
-      top: 0.55rem;
-      height: 1.1rem;
-      border-radius: 8px 8px 0 0;
-      background: linear-gradient(90deg, rgba(255, 77, 46, 0.3), rgba(104, 213, 255, 0.24));
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .cap img {
-      width: 100%;
-      aspect-ratio: 1600 / 820;
-      height: auto;
-      object-fit: cover;
-      object-position: center center;
-      display: block;
-      filter: brightness(1.1) contrast(1.06);
-      border-radius: 12px;
-      margin-top: 0.9rem;
-      border: 1px solid var(--line);
-    }
-
-    .cap .label {
-      position: absolute;
-      left: 0.78rem;
-      bottom: 0.72rem;
-      background: rgba(9, 11, 14, 0.86);
-      border: 1px solid rgba(255, 77, 46, 0.55);
-      color: #ffe4da;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 0.28rem 0.58rem;
-      font-weight: 700;
-      z-index: 2;
-    }
-
-    .cap .zoom-hint {
-      position: absolute;
-      right: 0.78rem;
-      bottom: 0.72rem;
-      background: rgba(9, 11, 14, 0.86);
-      border: 1px solid rgba(104, 213, 255, 0.5);
-      color: #dff5ff;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 0.28rem 0.58rem;
-      font-weight: 700;
-      z-index: 2;
-    }
-
-    .cap-hero {
-      grid-column: span 8;
-    }
-
-    .cap-half {
-      grid-column: span 4;
-    }
-
-    .cap-third {
-      grid-column: span 4;
-    }
-
-    .cap-wide {
-      grid-column: span 8;
-    }
-
-    .cap-tight img {
-      aspect-ratio: 16 / 8;
-      object-position: center 8%;
-    }
-
-    .cap-ui img {
-      aspect-ratio: 16 / 9;
-      object-position: center 12%;
-    }
-
-    .cap-setup img {
-      aspect-ratio: 21 / 7;
-      object-position: center 2%;
-    }
-
-    .zoom-modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 120;
-      background: rgba(2, 8, 16, 0.9);
-      padding: 1rem;
-    }
-
-    .zoom-modal.is-open {
-      display: flex;
-    }
-
-    .zoom-panel {
-      width: min(96vw, 1800px);
-      max-height: 92vh;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: #071423;
-      padding: 0.65rem;
-      display: grid;
-      gap: 0.6rem;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
-    }
-
-    .zoom-toolbar {
+    .site-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .zoom-title {
-      font-size: 0.95rem;
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    .zoom-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .zoom-btn {
-      appearance: none;
-      border: 1px solid var(--line);
-      background: rgba(8, 22, 38, 0.78);
-      color: #e7f0ff;
-      border-radius: 9px;
-      font-weight: 700;
-      font-size: 0.85rem;
-      padding: 0.35rem 0.6rem;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .zoom-btn:hover {
-      border-color: var(--line-strong);
-      background: rgba(10, 31, 52, 0.9);
-    }
-
-    .zoom-image-wrap {
-      border-radius: 10px;
-      overflow: auto;
-      background: #030a13;
-      max-height: 80vh;
-    }
-
-    .zoom-image-wrap img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .verify-panel {
-      margin-top: 1.2rem;
-      border: 1px solid var(--line);
-      border-top: 2px solid var(--secondary);
-      border-radius: 14px;
-      background: var(--panel-strong);
-      padding: 1rem;
-    }
-
-    .kv {
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 0.55rem;
-      padding: 0.45rem 0;
+      width: min(var(--max), calc(100% - 3rem));
+      min-height: 5.25rem;
+      margin: 0 auto;
       border-bottom: 1px solid var(--line);
-      font-size: 0.94rem;
     }
+    .brand { display: inline-flex; align-items: center; text-decoration: none; }
+    .brand img { display: block; width: auto; height: 1.72rem; }
+    .header-nav { display: flex; align-items: center; gap: 1.15rem; font-size: .84rem; font-weight: 700; }
+    .header-nav a { text-decoration: none; }
+    .header-nav a:hover { text-decoration: underline; text-underline-offset: .25em; }
+    .header-download { padding: .52rem .78rem; border: 1px solid var(--ink); border-radius: 999px; }
 
-    .kv:last-child { border-bottom: none; }
-
-    .k {
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    code {
-      color: #ffcdbe;
-      background: rgba(255, 77, 46, 0.14);
-      border: 1px solid rgba(255, 77, 46, 0.38);
-      border-radius: 6px;
-      padding: 0.1rem 0.3rem;
-      word-break: break-all;
-    }
-
-    .faq {
-      margin-top: 1rem;
+    .page-shell { overflow: clip; }
+    .intro {
       display: grid;
-      gap: 0.7rem;
+      grid-template-columns: minmax(0, 1.05fr) minmax(20rem, .95fr);
+      gap: clamp(2rem, 7vw, 8rem);
+      align-items: end;
+      width: min(var(--max), calc(100% - 3rem));
+      padding: clamp(4rem, 10vw, 9.5rem) 0 clamp(3.75rem, 8vw, 7.5rem);
+      margin: 0 auto;
     }
-
-    details {
-      border: 1px solid var(--line);
-      border-left: 2px solid var(--accent);
-      border-radius: 12px;
-      background: rgba(15, 18, 23, 0.8);
-      padding: 0.8rem;
-      transition: border-color 160ms ease;
-    }
-
-    details[open] {
-      border-left-color: var(--secondary);
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: 700;
-      font-family: "Antonio", "Segoe UI", Arial, sans-serif;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      font-size: 1.02rem;
-    }
-
-    details p {
-      margin: 0.6rem 0 0;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    footer {
-      position: relative;
-      border-top: 1px solid var(--line);
-      margin-top: 2rem;
-      padding: 1.2rem 0 2.2rem;
-      display: flex;
+    h1, h2, h3 { margin: 0; font-family: var(--tight); line-height: .96; letter-spacing: -.06em; }
+    h1 { max-width: 9ch; font-size: clamp(3.5rem, 8vw, 8.2rem); font-weight: 500; }
+    h1 em { font-style: normal; color: #32575c; }
+    .intro-copy { max-width: 31rem; }
+    .intro-copy p { margin: 0; font-size: clamp(1.08rem, 1.7vw, 1.35rem); color: var(--muted); }
+    .actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.65rem; }
+    .button {
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 0.86rem;
-      letter-spacing: 0.01em;
-    }
-
-    footer::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: -1px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 46%, var(--secondary) 100%);
-    }
-
-    footer a {
-      color: #f4d9d0;
+      justify-content: center;
+      min-height: 2.85rem;
+      padding: .65rem 1rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-size: .88rem;
+      font-weight: 800;
       text-decoration: none;
-      border-bottom: 1px dashed rgba(255, 135, 72, 0.5);
     }
+    .button-primary { background: var(--ink); color: var(--paper-raised); }
+    .button-primary:hover { background: #28454a; }
+    .button-secondary { border-color: var(--ink); color: var(--ink); }
+    .button-secondary:hover { background: #e6e4dc; }
+    .is-disabled { cursor: not-allowed; opacity: .52; pointer-events: none; }
 
-    .flow-wrap {
-      width: min(1380px, 96vw);
-    }
-
-    .chapter {
-      min-height: 92vh;
-      display: grid;
-      grid-template-columns: minmax(280px, 430px) 1fr;
-      gap: clamp(1rem, 3vw, 2rem);
-      align-items: center;
-      padding: clamp(1.6rem, 2.6vw, 2.4rem) 0;
+    .proof-line {
+      width: min(var(--max), calc(100% - 3rem));
+      margin: 0 auto;
       border-top: 1px solid var(--line);
-    }
-
-    .chapter-lead {
-      border-top: 0;
-      padding-top: 1.1rem;
-    }
-
-    .chapter-copy {
-      align-self: start;
-      position: sticky;
-      top: 96px;
-    }
-
-    .chapter-index {
-      margin: 0 0 0.45rem;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      color: var(--secondary);
+      padding: 1rem 0 1.5rem;
+      color: var(--muted);
+      font-size: .77rem;
       font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
     }
 
-    .chapter-copy h2 {
-      margin: 0 0 0.6rem;
-    }
-
-    .chapter-media {
-      min-height: min(72vh, 720px);
-      border-radius: 18px;
-      border: 1px solid var(--line-strong);
-      box-shadow: var(--shadow);
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .chapter-media::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(8, 10, 14, 0.12), rgba(8, 10, 14, 0.7)),
-        radial-gradient(circle at 80% 12%, rgba(255, 77, 46, 0.22), transparent 28%);
-      pointer-events: none;
-    }
-
-    .chapter-media-overview {
-      background-image:
-        linear-gradient(134deg, rgba(8, 21, 38, 0.68), rgba(12, 30, 52, 0.6)),
-        url("assets/cap-overview.png");
-    }
-
-    .chapter-video-stack {
+    .stage { background: var(--night); color: var(--night-ink); }
+    .stage-inner { width: min(1600px, 100%); margin: 0 auto; padding: clamp(3.5rem, 8vw, 8rem) clamp(1rem, 4vw, 5rem); }
+    .stage-heading {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-      align-self: start;
+      grid-template-columns: minmax(0, 1fr) minmax(17rem, .65fr);
+      gap: 2rem;
+      margin: 0 auto clamp(2rem, 4vw, 4rem);
+      max-width: var(--max);
     }
-
-    .run-card {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      overflow: hidden;
-      position: relative;
-      min-height: 340px;
-      background: linear-gradient(180deg, rgba(15, 19, 27, 0.78), rgba(11, 14, 20, 0.92));
-      box-shadow: var(--shadow);
-    }
-
-    .run-card video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: saturate(1.14) contrast(1.08) brightness(0.86);
+    .stage h2 { max-width: 10ch; font-size: clamp(2.7rem, 6vw, 6.3rem); font-weight: 500; }
+    .stage-heading p { align-self: end; max-width: 30rem; margin: 0; color: var(--night-muted); font-size: 1.05rem; }
+    .product-shot { display: grid; gap: .7rem; max-width: 100%; margin: 0; }
+    .shot-button {
       display: block;
-    }
-
-    .run-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(9, 12, 16, 0.08), rgba(9, 12, 16, 0.74) 76%),
-        linear-gradient(90deg, rgba(255, 77, 46, 0.12), transparent 46%);
-      pointer-events: none;
-    }
-
-    .run-label {
-      position: absolute;
-      left: 0.75rem;
-      bottom: 0.72rem;
-      z-index: 2;
-      font-family: "Antonio", "Segoe UI", Arial, sans-serif;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-size: 1rem;
-      background: rgba(9, 12, 16, 0.82);
-      border: 1px solid rgba(201, 216, 235, 0.38);
-      border-radius: 999px;
-      padding: 0.34rem 0.62rem;
-    }
-
-    .flow-tags {
-      margin-top: 0.9rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-    }
-
-    .flow-tags span {
-      border: 1px solid rgba(255, 135, 72, 0.5);
-      border-radius: 999px;
-      padding: 0.24rem 0.56rem;
-      text-transform: uppercase;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      color: #ffe4d6;
-      background: rgba(21, 15, 13, 0.66);
-    }
-
-    .chapter-feature-grid {
-      display: grid;
-      gap: 0.9rem;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .flow-card {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 1rem;
-      background: linear-gradient(164deg, rgba(18, 21, 26, 0.92), rgba(11, 13, 17, 0.7));
-      box-shadow: 0 20px 32px rgba(0, 0, 0, 0.28);
-      transition: border-color 160ms ease, transform 160ms ease;
-    }
-
-    .flow-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .flow-card h3 {
-      margin: 0 0 0.45rem;
-    }
-
-    .flow-card p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .capture-ribbon {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background:
-        linear-gradient(165deg, rgba(16, 19, 24, 0.76), rgba(10, 12, 16, 0.5));
-      padding: 1rem;
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: 0.95rem;
-      position: relative;
-    }
-
-    .rail-card {
-      min-height: auto;
-      grid-column: span 4;
-    }
-
-    .rail-card:nth-child(1) { grid-column: span 8; }
-    .rail-card:nth-child(2) { grid-column: span 4; }
-    .rail-card:nth-child(3) { grid-column: span 4; }
-    .rail-card:nth-child(4) { grid-column: span 4; }
-    .rail-card:nth-child(5) { grid-column: span 4; }
-    .rail-card:nth-child(6) { grid-column: span 8; }
-
-    .rail-card img {
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-      object-position: var(--focus, center center);
-      transform: scale(1.14);
-    }
-
-    .rail-card:nth-child(2) img {
-      aspect-ratio: 8 / 9;
-    }
-
-    #captures,
-    .chapter-compact {
-      grid-template-columns: 1fr;
-      min-height: auto;
-    }
-
-    #captures .chapter-copy,
-    .chapter-compact .chapter-copy {
-      position: static;
-      max-width: 780px;
-    }
-
-    .chapter-feature-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .flow-card {
-      position: relative;
-      padding: 1.4rem 1.2rem 1.2rem;
-      min-height: 220px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      width: 100%;
+      padding: 0;
       overflow: hidden;
+      border: 1px solid var(--night-line);
+      background: #030809;
+      color: inherit;
+      cursor: zoom-in;
+      text-align: left;
     }
+    .shot-button img { display: block; width: 100%; height: auto; }
+    .product-shot figcaption { display: flex; justify-content: space-between; gap: 1rem; color: var(--night-muted); font-size: .78rem; }
+    .product-shot figcaption strong { color: var(--night-ink); }
+    .product-shot figcaption span:last-child { color: var(--signal); white-space: nowrap; }
+    .product-shot.on-paper figcaption { color: var(--muted); }
+    .product-shot.on-paper figcaption strong { color: var(--ink); }
+    .product-shot.on-paper figcaption span:last-child { color: var(--signal-ink); }
 
-    .flow-card-index {
-      position: absolute;
-      top: 0.9rem;
-      right: 1.1rem;
-      font-family: "Antonio", "Segoe UI", Arial, sans-serif;
-      font-size: 2.6rem;
-      line-height: 1;
-      color: rgba(255, 255, 255, 0.08);
-      letter-spacing: 0.02em;
+    .editorial { width: min(var(--max), calc(100% - 3rem)); margin: 0 auto; padding: clamp(4rem, 9vw, 9rem) 0; }
+    .editorial-top { display: grid; grid-template-columns: minmax(0, .82fr) minmax(20rem, 1.18fr); gap: clamp(2rem, 8vw, 8rem); padding-bottom: clamp(3rem, 7vw, 7rem); }
+    .editorial h2 { font-size: clamp(2.6rem, 5.4vw, 5.6rem); font-weight: 500; }
+    .editorial-lede { max-width: 38rem; margin: .25rem 0 0; color: var(--muted); font-size: clamp(1.05rem, 1.7vw, 1.32rem); }
+    .sequence { border-top: 1px solid var(--line); }
+    .sequence-item { display: grid; grid-template-columns: 5.5rem minmax(0, .8fr) minmax(0, 1.2fr); gap: 1.5rem; padding: 1.55rem 0; border-bottom: 1px solid var(--line); }
+    .sequence-number { color: #45666b; font-size: .78rem; font-weight: 800; letter-spacing: .12em; }
+    .sequence h3 { font-size: clamp(1.65rem, 2.8vw, 2.8rem); font-weight: 600; }
+    .sequence p { max-width: 35rem; margin: 0; color: var(--muted); }
+
+    .split-stage { display: grid; grid-template-columns: minmax(0, .77fr) minmax(0, 1.23fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: start; }
+    .split-stage .copy { position: sticky; top: 2rem; }
+    .split-stage h2 { max-width: 9ch; font-size: clamp(2.8rem, 5.7vw, 6rem); font-weight: 500; }
+    .split-stage .copy p:last-child { max-width: 26rem; color: var(--night-muted); }
+    .download-section { background: var(--paper-raised); }
+    .download-inner { width: min(var(--max), calc(100% - 3rem)); margin: 0 auto; padding: clamp(4rem, 9vw, 8rem) 0; }
+    .download-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(20rem, .85fr); gap: clamp(2rem, 9vw, 8rem); align-items: start; }
+    .download-grid h2 { max-width: 9ch; font-size: clamp(2.8rem, 5.8vw, 6rem); font-weight: 500; }
+    .download-card { padding: 1.35rem 0 0; border-top: 2px solid var(--ink); }
+    .download-card p { max-width: 34rem; margin: 0; color: var(--muted); }
+    .download-note { margin-top: .95rem !important; font-size: .86rem; }
+    footer { display: flex; justify-content: space-between; gap: 1.5rem; width: min(var(--max), calc(100% - 3rem)); padding: 1.5rem 0 2.5rem; margin: 0 auto; border-top: 1px solid var(--line); color: var(--muted); font-size: .78rem; }
+    footer a { color: inherit; text-underline-offset: .2em; }
+
+    dialog { width: min(96vw, 1800px); max-width: none; max-height: 96vh; padding: 0; border: 1px solid #4c686e; background: var(--night); color: var(--night-ink); box-shadow: 0 2rem 8rem rgb(0 0 0 / .65); }
+    dialog::backdrop { background: rgb(2 9 11 / .86); }
+    .dialog-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .75rem 1rem; border-bottom: 1px solid var(--night-line); }
+    .dialog-title { margin: 0; font-size: .86rem; font-weight: 800; }
+    .dialog-actions { display: flex; align-items: center; gap: .6rem; }
+    .dialog-open, .dialog-close { padding: .45rem .7rem; border: 1px solid var(--night-line); background: transparent; color: inherit; cursor: pointer; font-size: .78rem; font-weight: 800; text-decoration: none; }
+    .dialog-open:hover, .dialog-close:hover { border-color: var(--signal); color: var(--signal); }
+    .dialog-image { display: block; width: 100%; max-height: calc(96vh - 4.1rem); object-fit: contain; }
+
+    @media (max-width: 760px) {
+      .site-header, .intro, .proof-line, .editorial, .download-inner, .quiet-note, footer { width: min(100% - 2rem, var(--max)); }
+      .site-header { min-height: 4.5rem; }
+      .header-nav a:not(.header-download) { display: none; }
+      .intro, .stage-heading, .editorial-top, .download-grid, .split-stage { grid-template-columns: 1fr; }
+      .intro { gap: 2rem; padding-top: 4rem; }
+      .stage-inner { padding-inline: 1rem; }
+      .split-stage .copy { position: static; }
+      .sequence-item { grid-template-columns: 3.2rem 1fr; gap: .75rem; }
+      .sequence-item p { grid-column: 2; }
+      .product-shot figcaption { align-items: flex-start; flex-direction: column; gap: .25rem; }
+      footer { align-items: flex-start; flex-direction: column; }
     }
-
-    .flow-card h3 {
-      position: relative;
-      z-index: 1;
-    }
-
-    .flow-card p {
-      position: relative;
-      z-index: 1;
-    }
-
-    .verify-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
-      gap: 1.4rem;
-      align-items: start;
-    }
-
-    .verify-trust {
-      display: grid;
-      gap: 0.7rem;
-      align-content: start;
-    }
-
-    .verify-trust li {
-      list-style: none;
-      display: flex;
-      gap: 0.6rem;
-      align-items: flex-start;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .verify-trust li::before {
-      content: "";
-      flex: 0 0 auto;
-      width: 0.6rem;
-      height: 0.6rem;
-      margin-top: 0.35rem;
-      border-radius: 999px;
-      background: linear-gradient(120deg, var(--accent), var(--accent-2));
-    }
-
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(0.94); opacity: 0.4; }
-      50% { transform: scale(1.02); opacity: 0.78; }
-      100% { transform: scale(0.94); opacity: 0.4; }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 620ms ease, transform 620ms ease;
-      transition-delay: 0ms;
-    }
-
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .reveal-stagger-1 { transition-delay: 60ms; }
-    .reveal-stagger-2 { transition-delay: 120ms; }
-    .reveal-stagger-3 { transition-delay: 180ms; }
-
-    @media (max-width: 1080px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-panel {
-        min-height: 510px;
-      }
-
-      .capture-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .chapter {
-        grid-template-columns: 1fr;
-        min-height: auto;
-        padding: 2rem 0;
-      }
-
-      .chapter-copy {
-        position: static;
-      }
-
-      .chapter-feature-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .chapter-video-stack {
-        grid-template-columns: 1fr;
-      }
-
-      .capture-ribbon {
-        grid-template-columns: 1fr;
-      }
-
-      .verify-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .rail-card,
-      .rail-card:nth-child(1),
-      .rail-card:nth-child(2),
-      .rail-card:nth-child(3),
-      .rail-card:nth-child(4),
-      .rail-card:nth-child(5),
-      .rail-card:nth-child(6) { grid-column: span 1; }
-    }
-
-    @media (max-width: 860px) {
-      .topbar-inner {
-        padding: 0.38rem 0.04rem 0.48rem;
-        min-height: 0;
-        align-items: flex-start;
-        justify-content: flex-start;
-        flex-direction: column;
-        gap: 0.36rem;
-      }
-
-      .nav {
-        gap: 0.28rem;
-        width: 100%;
-        padding-bottom: 0.08rem;
-        flex-wrap: wrap;
-        overflow-x: visible;
-      }
-
-      .nav a {
-        padding: 0.34rem 0.52rem;
-        font-size: 0.8rem;
-      }
-
-      .hero-panel {
-        min-height: 470px;
-      }
-
-      .hero-copy {
-        left: 0.8rem;
-        right: 0.8rem;
-        width: auto;
-      }
-
-      .feature-grid,
-      .capture-grid,
-      .logo-grid,
-      .story-band {
-        grid-template-columns: 1fr;
-      }
-
-      .cap-hero,
-      .cap-half,
-      .cap-third,
-      .cap-wide {
-        grid-column: span 1;
-      }
-
-      .hero-meta {
-        max-width: calc(100% - 1.4rem);
-      }
-
-      .kv {
-        grid-template-columns: 1fr;
-        gap: 0.2rem;
-      }
-
-      .zoom-panel {
-        width: 100%;
-        max-height: 95vh;
-      }
-
-      .zoom-image-wrap {
-        max-height: 84vh;
-      }
-
-      .hero-pulse-a,
-      .hero-pulse-b {
-        display: none;
-      }
-    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   </style>
 </head>
 <body>
-  <nav class="topbar" aria-label="Primary">
-    <div class="wrap topbar-inner">
-      <div class="brand">
-        <img src="assets/logo-rookline.png" alt="Rookline logo" />
-      </div>
-      <div class="nav">
-        <a href="#features">Features</a>
-        <a href="#flow">Flow</a>
-        <a href="#captures">App Captures</a>
-        <a href="#integrity">Integrity</a>
-        <a href="#faq">FAQ</a>
-      </div>
-    </div>
-  </nav>
-
-  <header class="wrap hero" id="top">
-    <section class="hero-panel">
-      <div class="hero-trackline" aria-hidden="true"></div>
-      <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-        <source src="assets/lmu-idle.mp4" type="video/mp4" />
-      </video>
-      <div class="hero-copy">
-        <p class="eyebrow">Race Day Command Surface</p>
-        <h1>Drive the session like a race engineer</h1>
-        <p class="lead">Rookline channels LMU and AC Evo race context into one decisive workflow: find the loss, pick the change, and validate the gain before lights out.</p>
-      </div>
-      <div class="hero-pulse hero-pulse-a" aria-hidden="true"></div>
-      <div class="hero-pulse hero-pulse-b" aria-hidden="true"></div>
-      <div class="hero-meta" aria-hidden="true">
-        <span>Telemetry</span>
-        <span>Setup</span>
-        <span>Workflow</span>
-      </div>
-    </section>
-
-    <aside class="hero-side">
-      <section class="download-card">
-              <h2 id="release-version">Download Rookline v0.6.17</h2>
-        <p>Windows installer with strict SHA-256 verification before launch.</p>
-        <div class="button-row">
-                <a class="btn btn-primary" id="release-download" href="https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.17/Rookline-Setup.exe">Download Installer</a>
-          <a class="btn btn-muted is-disabled" id="release-download-core" href="#" aria-disabled="true">Download Without RookForce</a>
-          <a class="btn btn-ghost" href="#captures">See App Screens</a>
-        </div>
-        <p class="download-note" id="release-download-note">Need telemetry and setup only? Use the no-RookForce package when available.</p>
-      </section>
-
-      <section class="trust-card">
-        <span class="pill">Windows x64</span>
-        <span class="pill">SHA-256 enforced</span>
-        <span class="pill">Public release channel</span>
-      </section>
-
-      <section class="logo-card">
-        <div class="logo-grid">
-          <img src="assets/logo-lmu.svg" alt="Le Mans Ultimate" />
-          <img src="assets/logo-ace-evo.svg" alt="Assetto Corsa Evo" />
-          <img src="assets/logo-rookforce.png" alt="RookForce" />
-        </div>
-      </section>
-    </aside>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Rookline home"><img src="assets/logo-rookline.png" alt="Rookline" /></a>
+    <nav class="header-nav" aria-label="Site navigation">
+      <a href="#tour">Product tour</a>
+      <a href="#download">Release details</a>
+      <a class="header-download" href="#download">Download</a>
+    </nav>
   </header>
 
-  <main class="wrap flow-wrap">
-    <section class="chapter chapter-lead reveal" id="flow">
-      <div class="chapter-copy">
-        <p class="chapter-index">Flow / 01</p>
-        <h2>Two simulations. One performance language.</h2>
-        <p class="intro">Live motorsport atmosphere from your own media pipeline. LMU cadence and AC Evo rhythm sit directly inside the page instead of static mockups.</p>
+  <main id="main" class="page-shell" tabindex="-1">
+    <section id="top" class="intro" aria-labelledby="intro-title">
+      <div>
+        <p class="eyebrow" style="color:#32575c;">Rookline for Windows</p>
+        <h1 id="intro-title">Turn a drive into the <em>next useful decision.</em></h1>
       </div>
-      <div class="chapter-video-stack" aria-label="Race environment videos">
-        <figure class="run-card">
-          <video autoplay muted loop playsinline preload="metadata">
-            <source src="assets/lmu-idle.mp4" type="video/mp4" />
-          </video>
-          <figcaption class="run-label">Le Mans Ultimate</figcaption>
-        </figure>
-        <figure class="run-card">
-          <video autoplay muted loop playsinline preload="metadata">
-            <source src="assets/ace-evo-idle.mp4" type="video/mp4" />
-          </video>
-          <figcaption class="run-label">Assetto Corsa Evo</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section class="chapter chapter-compact reveal" id="features">
-      <div class="chapter-copy">
-        <p class="chapter-index">Flow / 02</p>
-        <h2>Built for race weekends, not dashboard tourism</h2>
-        <p class="intro">Telemetry, setup iteration, and wheelbase workflows are staged as a performance loop you can run under pressure.</p>
-        <div class="flow-tags">
-          <span>Telemetry</span>
-          <span>Setup delta</span>
-          <span>Pace validation</span>
-          <span>RookForce</span>
+      <div class="intro-copy">
+        <p>Rookline brings session evidence, engineering priorities, and recorded setup controls into one calm place—so the next run starts with a reason.</p>
+        <div class="actions">
+          <a class="button button-primary" id="release-download" href="https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.18/Rookline-Setup.exe">Download Rookline</a>
+          <a class="button button-secondary" href="#tour">View the product tour</a>
         </div>
       </div>
-      <div class="chapter-feature-grid">
-        <article class="flow-card reveal reveal-stagger-1">
-          <span class="flow-card-index">01</span>
-          <h3>Read the signal</h3>
-          <p>Lap deltas, sector pace, and corner behavior stay in one visual frame.</p>
-        </article>
-        <article class="flow-card reveal reveal-stagger-2">
-          <span class="flow-card-index">02</span>
-          <h3>Apply one change</h3>
-          <p>Turn evidence into targeted setup moves instead of broad guesswork.</p>
-        </article>
-        <article class="flow-card reveal reveal-stagger-3">
-          <span class="flow-card-index">03</span>
-          <h3>Validate under load</h3>
-          <p>Confirm gains over multiple laps before treating them as race-ready.</p>
-        </article>
-      </div>
     </section>
 
-    <section class="chapter reveal" id="captures">
-      <div class="chapter-copy">
-        <p class="chapter-index">Flow / 03</p>
-        <h2>App captures with race-surface energy</h2>
-        <p class="intro">A curated capture wall with deliberate composition. Click any frame to inspect full detail.</p>
-      </div>
-      <div class="capture-ribbon" aria-label="Rookline capture reel">
-        <figure class="cap rail-card" data-zoom-src="assets/cap-session-analyzed.png" data-zoom-title="Session analysis" style="--focus:50% 45%">
-          <img src="assets/cap-session-analyzed.png" alt="Session analysis view" />
-          <figcaption class="label">Session analysis</figcaption>
-          <figcaption class="zoom-hint">Tap to zoom</figcaption>
-        </figure>
-        <figure class="cap rail-card" data-zoom-src="assets/cap-rookforce.png" data-zoom-title="RookForce tab integration" style="--focus:50% 0%">
-          <img src="assets/cap-rookforce.png" alt="RookForce tab" />
-          <figcaption class="label">RookForce tab integration</figcaption>
-          <figcaption class="zoom-hint">Tap to zoom</figcaption>
-        </figure>
-        <figure class="cap rail-card" data-zoom-src="assets/cap-ai.png" data-zoom-title="AI coaching view" style="--focus:54% 22%">
-          <img src="assets/cap-ai.png" alt="AI mode" />
-          <figcaption class="label">AI coaching view</figcaption>
-          <figcaption class="zoom-hint">Tap to zoom</figcaption>
-        </figure>
-        <figure class="cap rail-card" data-zoom-src="assets/cap-setup.png" data-zoom-title="Setup mode" style="--focus:50% 16%">
-          <img src="assets/cap-setup.png" alt="Setup mode" />
-          <figcaption class="label">Setup mode</figcaption>
-          <figcaption class="zoom-hint">Tap to zoom</figcaption>
-        </figure>
-        <figure class="cap rail-card" data-zoom-src="assets/cap-overview.png" data-zoom-title="Overview dashboard" style="--focus:50% 38%">
-          <img src="assets/cap-overview.png" alt="Rookline overview" />
-          <figcaption class="label">Overview dashboard</figcaption>
-          <figcaption class="zoom-hint">Tap to zoom</figcaption>
-        </figure>
-        <figure class="cap rail-card" data-zoom-src="assets/cap-settings.png" data-zoom-title="App settings" style="--focus:52% 18%">
-          <img src="assets/cap-settings.png" alt="Settings panel" />
-          <figcaption class="label">App settings</figcaption>
-          <figcaption class="zoom-hint">Tap to zoom</figcaption>
-        </figure>
-      </div>
-    </section>
+    <div class="proof-line">Windows desktop application · session analysis · setup support · optional AI assistance</div>
 
-    <section class="chapter chapter-compact reveal" id="integrity">
-      <div class="chapter-copy">
-        <p class="chapter-index">Flow / 04</p>
-        <h2>Trusted release channel</h2>
-        <p class="intro">Versioned binaries, SHA verification, and published metadata keep updates deterministic and fail-closed.</p>
-      </div>
-      <div class="verify-panel">
-        <div class="verify-layout">
+    <section id="tour" class="stage" aria-labelledby="drive-title">
+      <div class="stage-inner">
+        <div class="stage-heading">
           <div>
-            <h2>Download Rookline v0.6.17</h2>
-            <p class="intro">Windows installer with strict hash verification before launch.</p>
-            <div class="button-row">
-              <a class="btn btn-primary" id="release-download-secondary" href="https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.17/Rookline-Setup.exe">Download Installer</a>
-              <a class="btn btn-muted is-disabled" id="release-download-core-secondary" href="#" aria-disabled="true">Download Without RookForce</a>
-            </div>
-            <p class="download-note">Need telemetry and setup only? Use the no-RookForce package when available.</p>
-            <div class="kv">
-              <div class="k">Version</div>
-              <div id="release-version-value">v0.6.17</div>
-            </div>
-            <div class="kv">
-              <div class="k">SHA-256</div>
-              <div><code id="release-sha">F716A51C894FD03F49EB26AB5E0F8153A733EA77218E8C50E3F564DE8F04657C</code></div>
-            </div>
-            <div class="kv">
-              <div class="k">Manifest URL</div>
-              <div><a id="release-manifest" href="https://convexrook2.github.io/Rookline-Site/assets/release.json">Open update manifest</a></div>
-            </div>
+            <p class="eyebrow">01 — Drive evidence</p>
+            <h2 id="drive-title">Start with the lap, not the noise.</h2>
           </div>
-          <ul class="verify-trust">
-            <li>Every installer build is hashed and pinned before publishing.</li>
-            <li>Launch blocks automatically on a SHA-256 mismatch.</li>
-            <li>Release metadata is published alongside the public changelog.</li>
-            <li>The bundled RookForce workspace is covered by the same installer hash.</li>
-          </ul>
+          <p>Choose a recorded session and Rookline keeps its review anchored to the laps, sectors, conditions, and moments that were actually captured.</p>
+        </div>
+        <figure class="product-shot">
+          <button class="shot-button" type="button" data-zoom-src="assets/app-drive-session-intelligence.png" data-zoom-title="Drive — session intelligence" aria-label="Open Drive session intelligence screenshot">
+            <img src="assets/app-drive-session-intelligence.png" alt="Rookline Drive workspace showing an analyzed Le Mans race session, lap summary, time loss, and next-run focus." width="2560" height="843" decoding="async" fetchpriority="high" />
+          </button>
+          <figcaption><span><strong>Drive / Session intelligence</strong> — the evidence that frames the next decision.</span><span>Open full view ↗</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="editorial" aria-labelledby="decision-title">
+      <div class="editorial-top">
+        <div>
+          <p class="eyebrow" style="color:#32575c;">From review to action</p>
+          <h2 id="decision-title">A smaller, clearer engineering conversation.</h2>
+        </div>
+        <p class="editorial-lede">The product does not ask the driver to interpret a wall of numbers. It makes the next priority inspectable, keeps the supporting evidence close, and leaves control with the driver.</p>
+      </div>
+      <div class="sequence">
+        <article class="sequence-item">
+          <span class="sequence-number">01 / REVIEW</span>
+          <h3>Find the pattern.</h3>
+          <p>Use the completed session to see where time was gained, lost, or repeated before deciding what is worth changing.</p>
+        </article>
+        <article class="sequence-item">
+          <span class="sequence-number">02 / PRIORITISE</span>
+          <h3>Carry one reason forward.</h3>
+          <p>Engineer turns the review into a focused next-run brief. It is advice backed by the selected run, not an automatic change.</p>
+        </article>
+        <article class="sequence-item">
+          <span class="sequence-number">03 / RECORD</span>
+          <h3>Keep setup work legible.</h3>
+          <p>Setup shows recorded controls and their context so a driver can inspect what changed without losing the run that motivated it.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="stage" aria-labelledby="engineer-title">
+      <div class="stage-inner split-stage">
+        <div class="copy">
+          <p class="eyebrow">02 — Engineer priorities</p>
+          <h2 id="engineer-title">One next run, made inspectable.</h2>
+          <p>Rookline carries the selected session into an engineering brief. The driver can review the context, compare the trace, and decide whether the recommendation belongs in the next run.</p>
+        </div>
+        <figure class="product-shot">
+          <button class="shot-button" type="button" data-zoom-src="assets/app-engineer-priorities.png" data-zoom-title="Engineer — next-run priorities" aria-label="Open Engineer next-run priorities screenshot">
+            <img src="assets/app-engineer-priorities.png" alt="Rookline Engineer workspace showing the next-run brief and evidence-backed driving priorities for the selected session." width="2560" height="1185" loading="lazy" decoding="async" />
+          </button>
+          <figcaption><span><strong>Engineer / Next-run brief</strong> — review the priority before taking it to the car.</span><span>Open full view ↗</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="editorial" aria-labelledby="detail-title">
+      <div class="editorial-top">
+        <div>
+          <p class="eyebrow" style="color:#32575c;">Evidence stays nearby</p>
+          <h2 id="detail-title">Detail without losing the thread.</h2>
+        </div>
+        <p class="editorial-lede">When more perspective helps, optional AI assistance can be read alongside the session evidence. It does not replace the driver’s judgment or apply a setup on their behalf.</p>
+      </div>
+      <figure class="product-shot on-paper" style="border-top:1px solid var(--line); padding-top:1rem;">
+        <button class="shot-button" type="button" data-zoom-src="assets/app-engineer-review.png" data-zoom-title="Engineer — specialist review" aria-label="Open Engineer specialist review screenshot">
+          <img src="assets/app-engineer-review.png" alt="Rookline Engineer workspace showing a specialist review alongside lap evidence and the next recommended driver focus." width="2560" height="1185" loading="lazy" decoding="async" />
+        </button>
+        <figcaption style="color:var(--muted);"><span><strong>Engineer / Specialist review</strong> — optional guidance alongside the selected session.</span><span>Open full view ↗</span></figcaption>
+      </figure>
+    </section>
+
+    <section class="stage" aria-labelledby="setup-title">
+      <div class="stage-inner split-stage">
+        <div class="copy">
+          <p class="eyebrow">03 — Setup controls</p>
+          <h2 id="setup-title">Recorded controls, clear context.</h2>
+          <p>Setup presents the currently available controls with the saved, live, and recorded context made visible. Changes remain a driver decision, with evidence available for review.</p>
+        </div>
+        <figure class="product-shot">
+          <button class="shot-button" type="button" data-zoom-src="assets/app-setup-recorded-controls.png" data-zoom-title="Setup — recorded controls" aria-label="Open Setup recorded controls screenshot">
+            <img src="assets/app-setup-recorded-controls.png" alt="Rookline Setup workspace showing recorded control values and the context for the current car, track, and saved setup." width="2560" height="1185" loading="lazy" decoding="async" />
+          </button>
+          <figcaption><span><strong>Setup / Recorded controls</strong> — inspect context before deciding on a change.</span><span>Open full view ↗</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="editorial" aria-labelledby="wheelbase-title">
+      <div class="editorial-top">
+        <div>
+          <p class="eyebrow" style="color:#32575c;">04 — RookForce workspace</p>
+          <h2 id="wheelbase-title">Asetek Forte Wheelbase support, inside the same workspace.</h2>
+        </div>
+        <p class="editorial-lede">Open RookForce from Rookline when you use a supported Asetek Forte Wheelbase. It remains an optional, isolated part of the product, so the rest of Rookline stays useful when wheelbase support is unavailable.</p>
+      </div>
+      <figure class="product-shot on-paper" style="border-top:1px solid var(--line); padding-top:1rem;">
+        <button class="shot-button" type="button" data-zoom-src="assets/app-rookforce-live.png" data-zoom-title="RookForce — wheelbase workspace" aria-label="Open RookForce wheelbase workspace screenshot">
+          <img src="assets/app-rookforce-live.png" alt="Rookline RookForce workspace showing connected Asetek Forte Wheelbase controls and profile context." width="1600" height="820" loading="lazy" decoding="async" />
+        </button>
+        <figcaption><span><strong>RookForce / Asetek Forte Wheelbase</strong> — available in the same Rookline shell when connected.</span><span>Open full view ↗</span></figcaption>
+      </figure>
+    </section>
+
+    <section id="download" class="download-section" aria-labelledby="download-title">
+      <div class="download-inner">
+        <div class="download-grid">
+          <div>
+            <p class="eyebrow" style="color:#32575c;">Current public release</p>
+            <h2 id="download-title">Get Rookline for Windows.</h2>
+          </div>
+          <div class="download-card">
+            <h3 id="release-version">Download Rookline v0.6.18</h3>
+            <p>Choose the published installer that fits the workspace you want to use.</p>
+            <div class="actions">
+              <a class="button button-primary" id="release-download-secondary" href="https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.18/Rookline-Setup.exe">Download installer</a>
+              <a id="release-download-core" href="#" aria-disabled="true" hidden>Core-only download</a>
+              <a id="release-download-core-secondary" href="#" aria-disabled="true" hidden>Core-only download</a>
+            </div>
+            <p class="download-note" id="release-download-note">Current Windows installer.</p>
+            <span hidden><span id="release-version-value">v0.6.18</span></span>
+            <span hidden><code id="release-sha">A73433C4A3A13A3006B37DD7303F5B5AF61CA578B26D8E2FF43932614B1D74B5</code></span>
+            <a id="release-manifest" href="https://convexrook2.github.io/Rookline-Site/assets/release.json" hidden aria-hidden="true">Release metadata</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section reveal" id="faq">
-      <h2>FAQ</h2>
-      <div class="faq">
-        <details>
-          <summary>Is this the official public installer?</summary>
-          <p>Yes. The Download Installer button points to the current public release channel.</p>
-        </details>
-        <details>
-          <summary>Can I verify what gets installed?</summary>
-          <p>Yes. Rookline validates SHA-256 before launch and blocks execution on mismatch.</p>
-        </details>
-        <details>
-          <summary>Will this page be updated each release?</summary>
-          <p>Yes. This public site can be updated independently while your main app repository remains private.</p>
-        </details>
-      </div>
-    </section>
-
-    <footer>
-      <span>Rookline for Windows. Driver-focused telemetry, setup support, and workflow tooling.</span>
-      <span><a href="https://github.com/convexrook2/LMU-Setup-Builder/blob/master/CHANGELOG.md">Read changelog</a></span>
-    </footer>
   </main>
+
+  <footer>
+    <span>Rookline™ for Windows</span>
+  </footer>
+
+  <dialog id="screenshot-dialog" aria-labelledby="screenshot-dialog-title">
+    <div class="dialog-bar">
+      <p class="dialog-title" id="screenshot-dialog-title">Screenshot</p>
+      <div class="dialog-actions">
+        <a class="dialog-open" id="screenshot-dialog-open" href="#" target="_blank" rel="noopener noreferrer">Open full resolution</a>
+        <button class="dialog-close" type="button" id="screenshot-dialog-close">Close</button>
+      </div>
+    </div>
+    <img class="dialog-image" id="screenshot-dialog-image" src="assets/app-drive-session-intelligence.png" alt="" />
+  </dialog>
+
   <script>
     (function () {
       var releaseUrl = "assets/release.json";
       fetch(releaseUrl + "?v=" + Date.now(), { cache: "no-store" })
         .then(function (response) {
-          if (!response.ok) {
-            throw new Error("Release metadata unavailable");
-          }
+          if (!response.ok) { throw new Error("Release metadata unavailable"); }
           return response.json();
         })
         .then(function (release) {
-          if (!release || !release.version || !release.installerUrl || !release.sha256) {
-            return;
-          }
-
+          if (!release || !release.version || !release.installerUrl || !release.sha256) { return; }
           var releaseText = "v" + String(release.version).replace(/^v/i, "");
           var titleEl = document.getElementById("release-version");
           var valueEl = document.getElementById("release-version-value");
@@ -1487,19 +415,10 @@
           var downloadNoteEl = document.getElementById("release-download-note");
           var shaEl = document.getElementById("release-sha");
           var manifestEl = document.getElementById("release-manifest");
-
-          if (titleEl) {
-            titleEl.textContent = "Download Rookline " + releaseText;
-          }
-          if (valueEl) {
-            valueEl.textContent = releaseText;
-          }
-          if (downloadEl) {
-            downloadEl.href = release.installerUrl;
-          }
-          if (secondaryDownloadEl) {
-            secondaryDownloadEl.href = release.installerUrl;
-          }
+          if (titleEl) { titleEl.textContent = "Download Rookline " + releaseText; }
+          if (valueEl) { valueEl.textContent = releaseText; }
+          if (downloadEl) { downloadEl.href = release.installerUrl; }
+          if (secondaryDownloadEl) { secondaryDownloadEl.href = release.installerUrl; }
           if (coreDownloadEl || secondaryCoreDownloadEl) {
             var coreUrl = typeof release.coreInstallerUrl === "string" ? release.coreInstallerUrl.trim() : "";
             if (coreUrl) {
@@ -1508,116 +427,60 @@
                 link.classList.remove("is-disabled");
                 link.setAttribute("aria-disabled", "false");
               });
-              if (downloadNoteEl) {
-                downloadNoteEl.textContent = "Need telemetry and setup only? Download the package without the RookForce workspace.";
-              }
+              if (downloadNoteEl) { downloadNoteEl.textContent = "Need telemetry and setup only? Download the package without the RookForce workspace."; }
             } else {
               [coreDownloadEl, secondaryCoreDownloadEl].filter(Boolean).forEach(function (link) {
                 link.href = "#";
                 link.classList.add("is-disabled");
                 link.setAttribute("aria-disabled", "true");
+                link.setAttribute("hidden", "");
               });
-              if (downloadNoteEl) {
-                downloadNoteEl.textContent = "Need telemetry and setup only? Core-only download will appear here as soon as it is published.";
-              }
+              if (downloadNoteEl) { downloadNoteEl.textContent = "Current Windows installer."; }
             }
           }
-          if (shaEl) {
-            shaEl.textContent = String(release.sha256).toUpperCase();
-          }
-          if (manifestEl && release.manifestUrl) {
-            manifestEl.href = release.manifestUrl;
-          }
+          if (shaEl) { shaEl.textContent = String(release.sha256).toUpperCase(); }
+          if (manifestEl && release.manifestUrl) { manifestEl.href = release.manifestUrl; }
         })
-        .catch(function () {
-          // Keep static fallback values if metadata fetch fails.
-        });
+        .catch(function () { /* Keep static fallback release values if metadata fetch fails. */ });
 
-      try {
-        var zoomModal = document.createElement("div");
-        zoomModal.className = "zoom-modal";
-        zoomModal.setAttribute("aria-hidden", "true");
-        zoomModal.innerHTML = [
-          '<div class="zoom-panel" role="dialog" aria-modal="true" aria-label="Screenshot zoom">',
-          '  <div class="zoom-toolbar">',
-          '    <div class="zoom-title" id="zoom-title">Screenshot</div>',
-          '    <div class="zoom-actions">',
-          '      <a class="zoom-btn" id="zoom-open" href="#" target="_blank" rel="noopener noreferrer">Open Full Resolution</a>',
-          '      <button class="zoom-btn" id="zoom-close" type="button">Close</button>',
-          '    </div>',
-          '  </div>',
-          '  <div class="zoom-image-wrap"><img id="zoom-image" alt="Zoomed screenshot" /></div>',
-          '</div>'
-        ].join("");
-        document.body.appendChild(zoomModal);
-
-        var zoomImage = document.getElementById("zoom-image");
-        var zoomOpen = document.getElementById("zoom-open");
-        var zoomClose = document.getElementById("zoom-close");
-        var zoomTitle = document.getElementById("zoom-title");
-        if (!zoomImage || !zoomOpen || !zoomClose || !zoomTitle) {
-          return;
-        }
-
-        function closeZoom() {
-          zoomModal.classList.remove("is-open");
-          zoomModal.setAttribute("aria-hidden", "true");
-        }
-
-        function openZoom(src, title) {
-          zoomImage.src = src;
-          zoomOpen.href = src;
-          zoomTitle.textContent = title || "Screenshot";
-          zoomModal.classList.add("is-open");
-          zoomModal.setAttribute("aria-hidden", "false");
-        }
-
-        document.querySelectorAll(".cap[data-zoom-src]").forEach(function (cap) {
-          var src = cap.getAttribute("data-zoom-src");
-          var title = cap.getAttribute("data-zoom-title") || "Screenshot";
-          cap.addEventListener("click", function () {
-            openZoom(src, title);
-          });
-        });
-
-        zoomClose.addEventListener("click", closeZoom);
-        zoomModal.addEventListener("click", function (event) {
-          if (event.target === zoomModal) {
-            closeZoom();
-          }
-        });
-        document.addEventListener("keydown", function (event) {
-          if (event.key === "Escape") {
-            closeZoom();
-          }
-        });
-      } catch (error) {
-        // Do not block release metadata wiring if zoom UI fails.
+      var dialog = document.getElementById("screenshot-dialog");
+      var dialogImage = document.getElementById("screenshot-dialog-image");
+      var dialogTitle = document.getElementById("screenshot-dialog-title");
+      var closeButton = document.getElementById("screenshot-dialog-close");
+      var openFullResolution = document.getElementById("screenshot-dialog-open");
+      var priorFocus = null;
+      function closeDialog() { if (dialog.open) { dialog.close(); } }
+      function dialogFocusables() {
+        return Array.prototype.slice.call(dialog.querySelectorAll("button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"));
       }
-
-      try {
-        var revealNodes = document.querySelectorAll('.reveal');
-        if ('IntersectionObserver' in window && revealNodes.length > 0) {
-          var observer = new IntersectionObserver(function (entries, io) {
-            entries.forEach(function (entry) {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                io.unobserve(entry.target);
-              }
-            });
-          }, { rootMargin: '0px 0px -10% 0px', threshold: 0.18 });
-
-          revealNodes.forEach(function (node) {
-            observer.observe(node);
-          });
-        } else {
-          revealNodes.forEach(function (node) {
-            node.classList.add('is-visible');
-          });
-        }
-      } catch (error) {
-        // Keep static rendering if reveal observer fails.
-      }
+      document.querySelectorAll("[data-zoom-src]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          priorFocus = button;
+          var source = button.getAttribute("data-zoom-src");
+          dialogImage.src = source;
+          dialogImage.alt = button.querySelector("img").alt;
+          openFullResolution.href = source;
+          dialogTitle.textContent = button.getAttribute("data-zoom-title") || "Screenshot";
+          dialog.showModal();
+          closeButton.focus();
+        });
+      });
+      closeButton.addEventListener("click", closeDialog);
+      dialog.addEventListener("cancel", function (event) { event.preventDefault(); closeDialog(); });
+      dialog.addEventListener("close", function () {
+        dialogImage.removeAttribute("src");
+        openFullResolution.href = "#";
+        if (priorFocus) { priorFocus.focus(); }
+      });
+      dialog.addEventListener("keydown", function (event) {
+        if (event.key !== "Tab") { return; }
+        var focusables = dialogFocusables();
+        if (focusables.length === 0) { event.preventDefault(); return; }
+        var first = focusables[0];
+        var last = focusables[focusables.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      });
     })();
   </script>
 </body>
