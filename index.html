@@ -194,28 +194,27 @@
     .feedback-section::before { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgb(0 215 229 / .08), transparent 38%), linear-gradient(rgb(255 255 255 / .035) 1px, transparent 1px); background-size: auto, 100% 3.5rem; content: ""; }
     .feedback-inner { width: min(var(--max), calc(100% - 3rem)); margin: 0 auto; padding: clamp(4rem, 9vw, 8rem) 0; }
     .feedback-inner > * { position: relative; }
-    .feedback-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(20rem, 1.1fr); gap: clamp(2rem, 9vw, 8rem); align-items: start; }
-    .feedback-grid h2 { max-width: 9ch; font-size: clamp(2.8rem, 5.8vw, 6rem); font-weight: 500; }
+    .feedback-grid { display: grid; max-width: 44rem; gap: 1.25rem; margin: 0 auto; }
+    .feedback-grid h2 { max-width: 11ch; font-size: clamp(2.8rem, 5.8vw, 5.25rem); font-weight: 500; }
     .feedback-copy { max-width: 34rem; color: var(--night-muted); font-size: 1.05rem; }
     .feedback-copy p:first-child { margin-top: 0; }
     .feedback-copy a { color: var(--night-ink); text-underline-offset: .2em; }
     .feedback-caution { margin: 1.25rem 0 0; padding: 1rem 1.05rem 1.05rem; border: 1px solid #456267; border-left: 3px solid var(--signal); background: rgb(13 28 32 / .88); }
     .feedback-caution h3 { margin: 0 0 .45rem; color: var(--night-ink); font-family: var(--sans); font-size: .86rem; font-weight: 800; letter-spacing: .02em; line-height: 1.3; }
     .feedback-caution p { margin: 0; font-size: .9rem; }
-    .feedback-form { display: grid; gap: 1.3rem; padding: 1.5rem; border: 1px solid #355258; border-top: 2px solid var(--signal); background: rgb(3 12 15 / .56); box-shadow: 0 1.5rem 4rem rgb(0 0 0 / .16); }
-    .feedback-ratings { display: grid; grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr)); gap: .75rem; margin: 0; padding: 0; border: 0; }
+    .feedback-form { display: grid; max-width: 44rem; gap: 1.3rem; padding: 1.25rem; margin: 2rem auto 0; border: 1px solid #355258; border-top: 2px solid var(--signal); background: rgb(3 12 15 / .68); box-shadow: 0 1.5rem 4rem rgb(0 0 0 / .16); }
+    .feedback-ratings { display: grid; grid-template-columns: 1fr; gap: .55rem; margin: 0; padding: 0; border: 0; }
     .feedback-ratings > legend { grid-column: 1 / -1; margin-bottom: .35rem; color: var(--night-ink); font-size: .88rem; font-weight: 800; }
-    .feedback-rating { min-width: 0; margin: 0; padding: .75rem; border: 1px solid #2d484e; background: rgb(13 28 32 / .7); }
-    .feedback-rating legend { padding: 0; color: var(--night-ink); font-size: .82rem; font-weight: 800; }
-    .rating-stars { display: flex; align-items: center; gap: .18rem; min-height: 2.85rem; margin-top: .35rem; }
+    .feedback-rating { min-width: 0; margin: 0; padding: 0; border: 0; }
+    .feedback-rating-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .9rem; padding: .7rem .8rem; border: 1px solid #2d484e; background: rgb(13 28 32 / .7); }
+    .feedback-rating-label { color: var(--night-ink); font-size: .82rem; font-weight: 800; }
+    .rating-stars { display: flex; align-items: center; gap: .18rem; min-width: 0; }
     .rating-choice { position: relative; display: inline-flex; }
     .rating-input { position: absolute; width: 1px; height: 1px; margin: -1px; clip: rect(0 0 0 0); clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
-    .rating-star, .rating-clear { display: inline-flex; width: 2.45rem; height: 2.45rem; align-items: center; justify-content: center; border: 1px solid #46646a; border-radius: .25rem; color: var(--night-muted); cursor: pointer; line-height: 1; }
+    .rating-star { display: inline-flex; width: 2.45rem; height: 2.45rem; align-items: center; justify-content: center; border: 1px solid #46646a; border-radius: .25rem; color: var(--night-muted); cursor: pointer; line-height: 1; }
     .rating-star { font-size: 1.12rem; }
-    .rating-clear { width: auto; padding: 0 .55rem; font-size: .72rem; font-weight: 800; }
     .rating-choice:hover .rating-star, .rating-choice:has(~ .rating-choice .rating-input:checked) .rating-star, .rating-input:checked + .rating-star { border-color: var(--signal); color: var(--signal); }
     .rating-input:checked + .rating-star { background: rgb(0 215 229 / .12); box-shadow: inset 0 0 0 1px var(--signal); }
-    .rating-input:checked + .rating-clear { border-color: #6d9499; color: var(--night-ink); }
     .rating-input:focus-visible + label { outline: 3px solid var(--signal); outline-offset: 2px; }
     .feedback-field { display: grid; gap: .4rem; }
     .feedback-field label { color: var(--night-ink); font-size: .82rem; font-weight: 800; }
@@ -248,7 +247,7 @@
       .site-header, .intro, .proof-line, .editorial, .download-inner, .quiet-note, footer { width: min(100% - 2rem, var(--max)); }
       .site-header { min-height: 4.5rem; }
       .header-nav a:not(.header-download) { display: none; }
-      .intro, .stage-heading, .editorial-top, .download-grid, .feedback-grid, .split-stage { grid-template-columns: 1fr; }
+      .intro, .stage-heading, .editorial-top, .download-grid, .split-stage { grid-template-columns: 1fr; }
       .intro { gap: 2rem; padding-top: 4rem; }
       .stage-inner { padding-inline: 1rem; }
       .split-stage .copy { position: static; }
@@ -256,10 +255,10 @@
       .sequence-item p { grid-column: 2; }
       .product-shot figcaption { align-items: flex-start; flex-direction: column; gap: .25rem; }
       .feedback-form { padding: 1.15rem; }
-      .feedback-ratings { grid-template-columns: 1fr; }
+      .feedback-rating-row { grid-template-columns: 1fr; gap: .55rem; }
       footer { align-items: flex-start; flex-direction: column; }
     }
-    @media (max-width: 430px) { .feedback-ratings { grid-template-columns: 1fr; } }
+    @media (max-width: 430px) { .rating-star { width: 2.25rem; height: 2.25rem; } }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   </style>
 </head>
@@ -422,58 +421,68 @@
           <fieldset class="feedback-ratings">
             <legend>Optional ratings</legend>
             <fieldset class="feedback-rating">
-              <legend>Overall</legend>
-              <div class="rating-stars">
-                <span class="rating-choice"><input class="rating-input" id="feedback-overall-0" name="overall" type="radio" value="0" checked /><label class="rating-clear" for="feedback-overall-0">Clear</label></span>
+              <legend class="visually-hidden">Overall rating</legend>
+              <div class="feedback-rating-row">
+                <span class="feedback-rating-label" aria-hidden="true">Overall</span>
+                <div class="rating-stars">
                 <span class="rating-choice"><input class="rating-input" id="feedback-overall-1" name="overall" type="radio" value="1" /><label class="rating-star" for="feedback-overall-1" title="1 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">1 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-overall-2" name="overall" type="radio" value="2" /><label class="rating-star" for="feedback-overall-2" title="2 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">2 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-overall-3" name="overall" type="radio" value="3" /><label class="rating-star" for="feedback-overall-3" title="3 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">3 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-overall-4" name="overall" type="radio" value="4" /><label class="rating-star" for="feedback-overall-4" title="4 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">4 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-overall-5" name="overall" type="radio" value="5" /><label class="rating-star" for="feedback-overall-5" title="5 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">5 out of 5</span></label></span>
+                </div>
               </div>
             </fieldset>
             <fieldset class="feedback-rating">
-              <legend>Interface</legend>
-              <div class="rating-stars">
-                <span class="rating-choice"><input class="rating-input" id="feedback-ui-0" name="ui" type="radio" value="0" checked /><label class="rating-clear" for="feedback-ui-0">Clear</label></span>
+              <legend class="visually-hidden">Interface rating</legend>
+              <div class="feedback-rating-row">
+                <span class="feedback-rating-label" aria-hidden="true">Interface</span>
+                <div class="rating-stars">
                 <span class="rating-choice"><input class="rating-input" id="feedback-ui-1" name="ui" type="radio" value="1" /><label class="rating-star" for="feedback-ui-1" title="1 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">1 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-ui-2" name="ui" type="radio" value="2" /><label class="rating-star" for="feedback-ui-2" title="2 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">2 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-ui-3" name="ui" type="radio" value="3" /><label class="rating-star" for="feedback-ui-3" title="3 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">3 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-ui-4" name="ui" type="radio" value="4" /><label class="rating-star" for="feedback-ui-4" title="4 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">4 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-ui-5" name="ui" type="radio" value="5" /><label class="rating-star" for="feedback-ui-5" title="5 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">5 out of 5</span></label></span>
+                </div>
               </div>
             </fieldset>
             <fieldset class="feedback-rating">
-              <legend>Optional AI assistance</legend>
-              <div class="rating-stars">
-                <span class="rating-choice"><input class="rating-input" id="feedback-ai-0" name="ai" type="radio" value="0" checked /><label class="rating-clear" for="feedback-ai-0">Clear</label></span>
+              <legend class="visually-hidden">Optional AI assistance rating</legend>
+              <div class="feedback-rating-row">
+                <span class="feedback-rating-label" aria-hidden="true">Optional AI assistance</span>
+                <div class="rating-stars">
                 <span class="rating-choice"><input class="rating-input" id="feedback-ai-1" name="ai" type="radio" value="1" /><label class="rating-star" for="feedback-ai-1" title="1 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">1 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-ai-2" name="ai" type="radio" value="2" /><label class="rating-star" for="feedback-ai-2" title="2 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">2 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-ai-3" name="ai" type="radio" value="3" /><label class="rating-star" for="feedback-ai-3" title="3 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">3 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-ai-4" name="ai" type="radio" value="4" /><label class="rating-star" for="feedback-ai-4" title="4 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">4 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-ai-5" name="ai" type="radio" value="5" /><label class="rating-star" for="feedback-ai-5" title="5 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">5 out of 5</span></label></span>
+                </div>
               </div>
             </fieldset>
             <fieldset class="feedback-rating">
-              <legend>Track maps</legend>
-              <div class="rating-stars">
-                <span class="rating-choice"><input class="rating-input" id="feedback-track-map-0" name="trackMap" type="radio" value="0" checked /><label class="rating-clear" for="feedback-track-map-0">Clear</label></span>
+              <legend class="visually-hidden">Track maps rating</legend>
+              <div class="feedback-rating-row">
+                <span class="feedback-rating-label" aria-hidden="true">Track maps</span>
+                <div class="rating-stars">
                 <span class="rating-choice"><input class="rating-input" id="feedback-track-map-1" name="trackMap" type="radio" value="1" /><label class="rating-star" for="feedback-track-map-1" title="1 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">1 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-track-map-2" name="trackMap" type="radio" value="2" /><label class="rating-star" for="feedback-track-map-2" title="2 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">2 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-track-map-3" name="trackMap" type="radio" value="3" /><label class="rating-star" for="feedback-track-map-3" title="3 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">3 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-track-map-4" name="trackMap" type="radio" value="4" /><label class="rating-star" for="feedback-track-map-4" title="4 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">4 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-track-map-5" name="trackMap" type="radio" value="5" /><label class="rating-star" for="feedback-track-map-5" title="5 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">5 out of 5</span></label></span>
+                </div>
               </div>
             </fieldset>
             <fieldset class="feedback-rating">
-              <legend>Performance</legend>
-              <div class="rating-stars">
-                <span class="rating-choice"><input class="rating-input" id="feedback-performance-0" name="performance" type="radio" value="0" checked /><label class="rating-clear" for="feedback-performance-0">Clear</label></span>
+              <legend class="visually-hidden">Performance rating</legend>
+              <div class="feedback-rating-row">
+                <span class="feedback-rating-label" aria-hidden="true">Performance</span>
+                <div class="rating-stars">
                 <span class="rating-choice"><input class="rating-input" id="feedback-performance-1" name="performance" type="radio" value="1" /><label class="rating-star" for="feedback-performance-1" title="1 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">1 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-performance-2" name="performance" type="radio" value="2" /><label class="rating-star" for="feedback-performance-2" title="2 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">2 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-performance-3" name="performance" type="radio" value="3" /><label class="rating-star" for="feedback-performance-3" title="3 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">3 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-performance-4" name="performance" type="radio" value="4" /><label class="rating-star" for="feedback-performance-4" title="4 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">4 out of 5</span></label></span>
                 <span class="rating-choice"><input class="rating-input" id="feedback-performance-5" name="performance" type="radio" value="5" /><label class="rating-star" for="feedback-performance-5" title="5 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">5 out of 5</span></label></span>
+                </div>
               </div>
             </fieldset>
           </fieldset>
@@ -582,6 +591,7 @@
       var feedbackTurnstileContainer = document.getElementById("feedback-turnstile");
       var feedbackTurnstileWidgetId = null;
       var feedbackTurnstileToken = "";
+      var feedbackPendingSubmissionId = "";
       var feedbackEndpoint = "https://rookline-feedback.flowcast-feedback-worker.workers.dev/api/v1/feedback";
       var feedbackSiteKey = "0x4AAAAAAEQbnZuEyWeAt-eR";
 
@@ -635,11 +645,12 @@
           setFeedbackStatus("Complete the spam-protection check before sending.", "error");
           return;
         }
-        var submissionId = feedbackSubmissionId();
+        var submissionId = feedbackPendingSubmissionId || feedbackSubmissionId();
         if (!submissionId) {
           setFeedbackStatus("This browser cannot create an anonymous submission identifier.", "error");
           return;
         }
+        feedbackPendingSubmissionId = submissionId;
         var versionElement = document.getElementById("release-version-value");
         var siteVersion = versionElement && versionElement.textContent ? versionElement.textContent.trim() : "v0.6.18";
         var payload = {
@@ -673,6 +684,7 @@
             if (!result || result.accepted !== true) throw new Error("Feedback was not accepted");
             feedbackForm.reset();
             feedbackTurnstileToken = "";
+            feedbackPendingSubmissionId = "";
             if (feedbackTurnstileWidgetId !== null && window.turnstile) window.turnstile.reset(feedbackTurnstileWidgetId);
             setFeedbackStatus("Thank you. Your anonymous feedback was received.", "success");
           })
