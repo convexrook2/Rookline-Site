@@ -1,7 +1,7 @@
 {
   "version": "0.6.18",
   "latestVersion": "0.6.18",
-  "releaseNotes": "Rookline 0.6.18 includes the driver-visible changes recorded in its changelog, including safer setup-review evidence, live telemetry handling, and retained session/setup context.\r\n\r\nThe Windows installers are not Authenticode-signed. Rookline verifies the published combined installer with the SHA-256 value in the HTTPS release manifest before updater launch.",
+  "releaseNotes": "Rookline 0.6.18 refreshes the public product experience with real Drive, Engineer, Setup, and RookForce evidence, and names Asetek Forte as the currently supported RookForce wheelbase.\n\nDesktop feedback no longer reads GitHub, CLI, or AI-provider credentials. Its separate feedback service remains unavailable until its privacy and owner-inbox setup is complete.\n\nThe Windows installers are not Authenticode-signed. Rookline verifies the published combined installer with the SHA-256 value in the HTTPS release manifest before updater launch.",
   "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.18/Rookline-Setup.exe",
   "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.18/Rookline-Setup.exe",
   "downloadPageUrl": "https://convexrook2.github.io/Rookline-Site/",
