@@ -1,12 +1,12 @@
 {
-  "version": "0.6.18",
-  "latestVersion": "0.6.18",
-  "releaseNotes": "Rookline 0.6.18 refreshes the public product experience with real Drive, Engineer, Setup, and RookForce evidence, and names Asetek Forte as the currently supported RookForce wheelbase.\n\nDesktop feedback no longer reads GitHub, CLI, or AI-provider credentials. Its separate feedback service remains unavailable until its privacy and owner-inbox setup is complete.\n\nThe Windows installers are not Authenticode-signed. Rookline verifies the published combined installer with the SHA-256 value in the HTTPS release manifest before updater launch.",
-  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.18/Rookline-Setup.exe",
-  "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.18/Rookline-Setup.exe",
+  "version": "0.6.19",
+  "latestVersion": "0.6.19",
+  "releaseNotes": "Rookline 0.6.19 adds protected public feedback. The desktop opens the Rookline feedback page rather than transmitting feedback itself; the page uses human verification before it sends an anonymous structured submission.\r\n\r\nAccepted feedback is published to the public Rookline Feedback GitHub tracker. It has no structured name or email field, direct email-like comment text is redacted before publication, and issues are deleted automatically after 30 days. Do not include sensitive or identifying information in free-text feedback.\r\n\r\nThe Windows installers are not Authenticode-signed. Rookline verifies the published combined installer with the SHA-256 value in the HTTPS release manifest before updater launch.",
+  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.19/Rookline-Setup.exe",
+  "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.19/Rookline-Setup.exe",
   "downloadPageUrl": "https://convexrook2.github.io/Rookline-Site/",
-  "coreInstallerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.18/Rookline-Setup-Core.exe",
+  "coreInstallerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.19/Rookline-Setup-Core.exe",
   "manifestUrl": "https://convexrook2.github.io/Rookline-Site/assets/release.json",
-  "sha256": "A73433C4A3A13A3006B37DD7303F5B5AF61CA578B26D8E2FF43932614B1D74B5",
-  "generatedUtc": "2026-08-15T01:56:23.8606671Z"
+  "sha256": "82632D6EFB3CEC4246AD2F6A649E9F60D7251746DA56B145F8FE2BD2D62F1926",
+  "generatedUtc": "2026-08-15T05:40:43.6114059Z"
 }
