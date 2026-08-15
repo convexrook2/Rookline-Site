@@ -53,6 +53,7 @@
     button, a { -webkit-tap-highlight-color: transparent; }
     button { font: inherit; }
     :focus-visible { outline: 3px solid var(--signal); outline-offset: 4px; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; clip: rect(0 0 0 0); clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
     .skip-link {
       position: fixed;
       z-index: 20;
@@ -189,6 +190,48 @@
     .download-card { padding: 1.35rem 0 0; border-top: 2px solid var(--ink); }
     .download-card p { max-width: 34rem; margin: 0; color: var(--muted); }
     .download-note { margin-top: .95rem !important; font-size: .86rem; }
+    .feedback-section { position: relative; overflow: clip; background: var(--night); color: var(--night-ink); color-scheme: dark; }
+    .feedback-section::before { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgb(0 215 229 / .08), transparent 38%), linear-gradient(rgb(255 255 255 / .035) 1px, transparent 1px); background-size: auto, 100% 3.5rem; content: ""; }
+    .feedback-inner { width: min(var(--max), calc(100% - 3rem)); margin: 0 auto; padding: clamp(4rem, 9vw, 8rem) 0; }
+    .feedback-inner > * { position: relative; }
+    .feedback-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(20rem, 1.1fr); gap: clamp(2rem, 9vw, 8rem); align-items: start; }
+    .feedback-grid h2 { max-width: 9ch; font-size: clamp(2.8rem, 5.8vw, 6rem); font-weight: 500; }
+    .feedback-copy { max-width: 34rem; color: var(--night-muted); font-size: 1.05rem; }
+    .feedback-copy p:first-child { margin-top: 0; }
+    .feedback-copy a { color: var(--night-ink); text-underline-offset: .2em; }
+    .feedback-caution { margin: 1.25rem 0 0; padding: 1rem 1.05rem 1.05rem; border: 1px solid #456267; border-left: 3px solid var(--signal); background: rgb(13 28 32 / .88); }
+    .feedback-caution h3 { margin: 0 0 .45rem; color: var(--night-ink); font-family: var(--sans); font-size: .86rem; font-weight: 800; letter-spacing: .02em; line-height: 1.3; }
+    .feedback-caution p { margin: 0; font-size: .9rem; }
+    .feedback-form { display: grid; gap: 1.3rem; padding: 1.5rem; border: 1px solid #355258; border-top: 2px solid var(--signal); background: rgb(3 12 15 / .56); box-shadow: 0 1.5rem 4rem rgb(0 0 0 / .16); }
+    .feedback-ratings { display: grid; grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr)); gap: .75rem; margin: 0; padding: 0; border: 0; }
+    .feedback-ratings > legend { grid-column: 1 / -1; margin-bottom: .35rem; color: var(--night-ink); font-size: .88rem; font-weight: 800; }
+    .feedback-rating { min-width: 0; margin: 0; padding: .75rem; border: 1px solid #2d484e; background: rgb(13 28 32 / .7); }
+    .feedback-rating legend { padding: 0; color: var(--night-ink); font-size: .82rem; font-weight: 800; }
+    .rating-stars { display: flex; align-items: center; gap: .18rem; min-height: 2.85rem; margin-top: .35rem; }
+    .rating-choice { position: relative; display: inline-flex; }
+    .rating-input { position: absolute; width: 1px; height: 1px; margin: -1px; clip: rect(0 0 0 0); clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
+    .rating-star, .rating-clear { display: inline-flex; width: 2.45rem; height: 2.45rem; align-items: center; justify-content: center; border: 1px solid #46646a; border-radius: .25rem; color: var(--night-muted); cursor: pointer; line-height: 1; }
+    .rating-star { font-size: 1.12rem; }
+    .rating-clear { width: auto; padding: 0 .55rem; font-size: .72rem; font-weight: 800; }
+    .rating-choice:hover .rating-star, .rating-choice:has(~ .rating-choice .rating-input:checked) .rating-star, .rating-input:checked + .rating-star { border-color: var(--signal); color: var(--signal); }
+    .rating-input:checked + .rating-star { background: rgb(0 215 229 / .12); box-shadow: inset 0 0 0 1px var(--signal); }
+    .rating-input:checked + .rating-clear { border-color: #6d9499; color: var(--night-ink); }
+    .rating-input:focus-visible + label { outline: 3px solid var(--signal); outline-offset: 2px; }
+    .feedback-field { display: grid; gap: .4rem; }
+    .feedback-field label { color: var(--night-ink); font-size: .82rem; font-weight: 800; }
+    .feedback-field select, .feedback-field textarea { width: 100%; border: 1px solid #4c686e; border-radius: .25rem; background: #0d1c20; color: var(--night-ink); font: inherit; }
+    .feedback-field select { min-height: 2.7rem; padding: .45rem .55rem; }
+    .feedback-field textarea { min-height: 9rem; padding: .7rem; resize: vertical; }
+    .feedback-field select:hover, .feedback-field textarea:hover { border-color: #6d9499; }
+    .feedback-field select:focus-visible, .feedback-field textarea:focus-visible { outline-offset: 2px; border-color: var(--signal); }
+    .feedback-help { margin: -.65rem 0 0; color: var(--night-muted); font-size: .79rem; }
+    .feedback-challenge { padding-top: .1rem; }
+    .feedback-submit { width: fit-content; border: 1px solid var(--signal); background: var(--signal); color: var(--signal-ink); cursor: pointer; }
+    .feedback-submit:hover { background: #67eff2; }
+    .feedback-submit:disabled { cursor: wait; opacity: .7; }
+    .feedback-status { min-height: 1.5em; margin: -.4rem 0 0; color: var(--night-muted); font-size: .88rem; }
+    .feedback-status[data-state="error"] { color: #ffb4a9; }
+    .feedback-status[data-state="success"] { color: #8cf1d4; }
     footer { display: flex; justify-content: space-between; gap: 1.5rem; width: min(var(--max), calc(100% - 3rem)); padding: 1.5rem 0 2.5rem; margin: 0 auto; border-top: 1px solid var(--line); color: var(--muted); font-size: .78rem; }
     footer a { color: inherit; text-underline-offset: .2em; }
 
@@ -205,15 +248,18 @@
       .site-header, .intro, .proof-line, .editorial, .download-inner, .quiet-note, footer { width: min(100% - 2rem, var(--max)); }
       .site-header { min-height: 4.5rem; }
       .header-nav a:not(.header-download) { display: none; }
-      .intro, .stage-heading, .editorial-top, .download-grid, .split-stage { grid-template-columns: 1fr; }
+      .intro, .stage-heading, .editorial-top, .download-grid, .feedback-grid, .split-stage { grid-template-columns: 1fr; }
       .intro { gap: 2rem; padding-top: 4rem; }
       .stage-inner { padding-inline: 1rem; }
       .split-stage .copy { position: static; }
       .sequence-item { grid-template-columns: 3.2rem 1fr; gap: .75rem; }
       .sequence-item p { grid-column: 2; }
       .product-shot figcaption { align-items: flex-start; flex-direction: column; gap: .25rem; }
+      .feedback-form { padding: 1.15rem; }
+      .feedback-ratings { grid-template-columns: 1fr; }
       footer { align-items: flex-start; flex-direction: column; }
     }
+    @media (max-width: 430px) { .feedback-ratings { grid-template-columns: 1fr; } }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   </style>
 </head>
@@ -223,6 +269,7 @@
     <a class="brand" href="#top" aria-label="Rookline home"><img src="assets/logo-rookline.png" alt="Rookline" /></a>
     <nav class="header-nav" aria-label="Site navigation">
       <a href="#tour">Product tour</a>
+      <a href="#feedback">Feedback</a>
       <a href="#download">Release details</a>
       <a class="header-download" href="#download">Download</a>
     </nav>
@@ -231,7 +278,7 @@
   <main id="main" class="page-shell" tabindex="-1">
     <section id="top" class="intro" aria-labelledby="intro-title">
       <div>
-        <p class="eyebrow" style="color:#32575c;">Rookline for Windows</p>
+        <p class="eyebrow" style="color:#32575c;">Rookline — it’s not the car.</p>
         <h1 id="intro-title">Turn a drive into the <em>next useful decision.</em></h1>
       </div>
       <div class="intro-copy">
@@ -354,22 +401,109 @@
       </figure>
     </section>
 
+    <section id="feedback" class="feedback-section" aria-labelledby="feedback-title">
+      <div class="feedback-inner">
+        <div class="feedback-grid">
+          <div>
+            <p class="eyebrow">Rookline feedback</p>
+            <h2 id="feedback-title">Tell us what would make the next run clearer.</h2>
+          </div>
+          <div class="feedback-copy">
+            <p>Feedback is anonymous. There are no name or email fields, and this form does not send driving telemetry, setup, vehicle, track, or wheelbase data.</p>
+            <aside class="feedback-caution" aria-labelledby="feedback-caution-title">
+              <h3 id="feedback-caution-title">Before you send</h3>
+              <p>Sending creates a public issue in the <a href="https://github.com/convexrook2/Rookline-Feedback/issues" target="_blank" rel="noopener noreferrer">Rookline Feedback tracker</a>. Direct email-like text is replaced before publication, but other identifying detail can still be public, copied, or indexed. Do not include sensitive information. Issues are deleted automatically after 30 days.</p>
+            </aside>
+            <p><a href="feedback-privacy.html">Read the feedback privacy notice</a>.</p>
+          </div>
+        </div>
+
+        <form id="feedback-form" class="feedback-form" novalidate>
+          <fieldset class="feedback-ratings">
+            <legend>Optional ratings</legend>
+            <fieldset class="feedback-rating">
+              <legend>Overall</legend>
+              <div class="rating-stars">
+                <span class="rating-choice"><input class="rating-input" id="feedback-overall-0" name="overall" type="radio" value="0" checked /><label class="rating-clear" for="feedback-overall-0">Clear</label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-overall-1" name="overall" type="radio" value="1" /><label class="rating-star" for="feedback-overall-1" title="1 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">1 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-overall-2" name="overall" type="radio" value="2" /><label class="rating-star" for="feedback-overall-2" title="2 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">2 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-overall-3" name="overall" type="radio" value="3" /><label class="rating-star" for="feedback-overall-3" title="3 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">3 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-overall-4" name="overall" type="radio" value="4" /><label class="rating-star" for="feedback-overall-4" title="4 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">4 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-overall-5" name="overall" type="radio" value="5" /><label class="rating-star" for="feedback-overall-5" title="5 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">5 out of 5</span></label></span>
+              </div>
+            </fieldset>
+            <fieldset class="feedback-rating">
+              <legend>Interface</legend>
+              <div class="rating-stars">
+                <span class="rating-choice"><input class="rating-input" id="feedback-ui-0" name="ui" type="radio" value="0" checked /><label class="rating-clear" for="feedback-ui-0">Clear</label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-ui-1" name="ui" type="radio" value="1" /><label class="rating-star" for="feedback-ui-1" title="1 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">1 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-ui-2" name="ui" type="radio" value="2" /><label class="rating-star" for="feedback-ui-2" title="2 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">2 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-ui-3" name="ui" type="radio" value="3" /><label class="rating-star" for="feedback-ui-3" title="3 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">3 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-ui-4" name="ui" type="radio" value="4" /><label class="rating-star" for="feedback-ui-4" title="4 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">4 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-ui-5" name="ui" type="radio" value="5" /><label class="rating-star" for="feedback-ui-5" title="5 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">5 out of 5</span></label></span>
+              </div>
+            </fieldset>
+            <fieldset class="feedback-rating">
+              <legend>Optional AI assistance</legend>
+              <div class="rating-stars">
+                <span class="rating-choice"><input class="rating-input" id="feedback-ai-0" name="ai" type="radio" value="0" checked /><label class="rating-clear" for="feedback-ai-0">Clear</label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-ai-1" name="ai" type="radio" value="1" /><label class="rating-star" for="feedback-ai-1" title="1 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">1 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-ai-2" name="ai" type="radio" value="2" /><label class="rating-star" for="feedback-ai-2" title="2 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">2 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-ai-3" name="ai" type="radio" value="3" /><label class="rating-star" for="feedback-ai-3" title="3 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">3 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-ai-4" name="ai" type="radio" value="4" /><label class="rating-star" for="feedback-ai-4" title="4 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">4 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-ai-5" name="ai" type="radio" value="5" /><label class="rating-star" for="feedback-ai-5" title="5 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">5 out of 5</span></label></span>
+              </div>
+            </fieldset>
+            <fieldset class="feedback-rating">
+              <legend>Track maps</legend>
+              <div class="rating-stars">
+                <span class="rating-choice"><input class="rating-input" id="feedback-track-map-0" name="trackMap" type="radio" value="0" checked /><label class="rating-clear" for="feedback-track-map-0">Clear</label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-track-map-1" name="trackMap" type="radio" value="1" /><label class="rating-star" for="feedback-track-map-1" title="1 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">1 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-track-map-2" name="trackMap" type="radio" value="2" /><label class="rating-star" for="feedback-track-map-2" title="2 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">2 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-track-map-3" name="trackMap" type="radio" value="3" /><label class="rating-star" for="feedback-track-map-3" title="3 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">3 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-track-map-4" name="trackMap" type="radio" value="4" /><label class="rating-star" for="feedback-track-map-4" title="4 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">4 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-track-map-5" name="trackMap" type="radio" value="5" /><label class="rating-star" for="feedback-track-map-5" title="5 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">5 out of 5</span></label></span>
+              </div>
+            </fieldset>
+            <fieldset class="feedback-rating">
+              <legend>Performance</legend>
+              <div class="rating-stars">
+                <span class="rating-choice"><input class="rating-input" id="feedback-performance-0" name="performance" type="radio" value="0" checked /><label class="rating-clear" for="feedback-performance-0">Clear</label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-performance-1" name="performance" type="radio" value="1" /><label class="rating-star" for="feedback-performance-1" title="1 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">1 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-performance-2" name="performance" type="radio" value="2" /><label class="rating-star" for="feedback-performance-2" title="2 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">2 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-performance-3" name="performance" type="radio" value="3" /><label class="rating-star" for="feedback-performance-3" title="3 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">3 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-performance-4" name="performance" type="radio" value="4" /><label class="rating-star" for="feedback-performance-4" title="4 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">4 out of 5</span></label></span>
+                <span class="rating-choice"><input class="rating-input" id="feedback-performance-5" name="performance" type="radio" value="5" /><label class="rating-star" for="feedback-performance-5" title="5 out of 5"><span aria-hidden="true">★</span><span class="visually-hidden">5 out of 5</span></label></span>
+              </div>
+            </fieldset>
+          </fieldset>
+          <div class="feedback-field">
+            <label for="feedback-comment">Comment</label>
+            <textarea id="feedback-comment" name="comment" maxlength="4000" aria-describedby="feedback-comment-help"></textarea>
+            <p class="feedback-help" id="feedback-comment-help">Add a comment or at least one rating. Sending creates a public GitHub issue; do not include identifying or sensitive information.</p>
+          </div>
+          <div class="feedback-challenge" id="feedback-turnstile" aria-label="Spam protection challenge"></div>
+          <button class="button feedback-submit" id="feedback-submit" type="submit">Send anonymous feedback</button>
+            <p class="feedback-status" id="feedback-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
     <section id="download" class="download-section" aria-labelledby="download-title">
       <div class="download-inner">
         <div class="download-grid">
           <div>
             <p class="eyebrow" style="color:#32575c;">Current public release</p>
-            <h2 id="download-title">Get Rookline for Windows.</h2>
+            <h2 id="download-title">Get Rookline. It’s not the car.</h2>
           </div>
           <div class="download-card">
             <h3 id="release-version">Download Rookline v0.6.18</h3>
             <p>Choose the published installer that fits the workspace you want to use.</p>
             <div class="actions">
               <a class="button button-primary" id="release-download-secondary" href="https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.18/Rookline-Setup.exe">Download installer</a>
-              <a id="release-download-core" href="#" aria-disabled="true" hidden>Core-only download</a>
-              <a id="release-download-core-secondary" href="#" aria-disabled="true" hidden>Core-only download</a>
             </div>
             <p class="download-note" id="release-download-note">Current Windows installer.</p>
+            <p class="download-note" id="release-core-download-row" hidden>Need telemetry and setup only? <a id="release-download-core" href="#" aria-disabled="true">Download the Core-only installer.</a></p>
             <span hidden><span id="release-version-value">v0.6.18</span></span>
             <span hidden><code id="release-sha">A73433C4A3A13A3006B37DD7303F5B5AF61CA578B26D8E2FF43932614B1D74B5</code></span>
             <a id="release-manifest" href="https://convexrook2.github.io/Rookline-Site/assets/release.json" hidden aria-hidden="true">Release metadata</a>
@@ -381,7 +515,8 @@
   </main>
 
   <footer>
-    <span>Rookline™ for Windows</span>
+    <span>Rookline™ — it’s not the car.</span>
+    <a href="feedback-privacy.html">Feedback privacy</a>
   </footer>
 
   <dialog id="screenshot-dialog" aria-labelledby="screenshot-dialog-title">
@@ -395,6 +530,7 @@
     <img class="dialog-image" id="screenshot-dialog-image" src="assets/app-drive-session-intelligence.png" alt="" />
   </dialog>
 
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
   <script>
     (function () {
       var releaseUrl = "assets/release.json";
@@ -411,7 +547,7 @@
           var downloadEl = document.getElementById("release-download");
           var secondaryDownloadEl = document.getElementById("release-download-secondary");
           var coreDownloadEl = document.getElementById("release-download-core");
-          var secondaryCoreDownloadEl = document.getElementById("release-download-core-secondary");
+          var coreDownloadRowEl = document.getElementById("release-core-download-row");
           var downloadNoteEl = document.getElementById("release-download-note");
           var shaEl = document.getElementById("release-sha");
           var manifestEl = document.getElementById("release-manifest");
@@ -419,22 +555,19 @@
           if (valueEl) { valueEl.textContent = releaseText; }
           if (downloadEl) { downloadEl.href = release.installerUrl; }
           if (secondaryDownloadEl) { secondaryDownloadEl.href = release.installerUrl; }
-          if (coreDownloadEl || secondaryCoreDownloadEl) {
+          if (coreDownloadEl) {
             var coreUrl = typeof release.coreInstallerUrl === "string" ? release.coreInstallerUrl.trim() : "";
             if (coreUrl) {
-              [coreDownloadEl, secondaryCoreDownloadEl].filter(Boolean).forEach(function (link) {
-                link.href = coreUrl;
-                link.classList.remove("is-disabled");
-                link.setAttribute("aria-disabled", "false");
-              });
-              if (downloadNoteEl) { downloadNoteEl.textContent = "Need telemetry and setup only? Download the package without the RookForce workspace."; }
+              coreDownloadEl.href = coreUrl;
+              coreDownloadEl.classList.remove("is-disabled");
+              coreDownloadEl.setAttribute("aria-disabled", "false");
+              if (coreDownloadRowEl) { coreDownloadRowEl.removeAttribute("hidden"); }
+              if (downloadNoteEl) { downloadNoteEl.textContent = "Current Windows installer with the RookForce workspace."; }
             } else {
-              [coreDownloadEl, secondaryCoreDownloadEl].filter(Boolean).forEach(function (link) {
-                link.href = "#";
-                link.classList.add("is-disabled");
-                link.setAttribute("aria-disabled", "true");
-                link.setAttribute("hidden", "");
-              });
+              coreDownloadEl.href = "#";
+              coreDownloadEl.classList.add("is-disabled");
+              coreDownloadEl.setAttribute("aria-disabled", "true");
+              if (coreDownloadRowEl) { coreDownloadRowEl.setAttribute("hidden", ""); }
               if (downloadNoteEl) { downloadNoteEl.textContent = "Current Windows installer."; }
             }
           }
@@ -442,6 +575,113 @@
           if (manifestEl && release.manifestUrl) { manifestEl.href = release.manifestUrl; }
         })
         .catch(function () { /* Keep static fallback release values if metadata fetch fails. */ });
+
+      var feedbackForm = document.getElementById("feedback-form");
+      var feedbackStatus = document.getElementById("feedback-status");
+      var feedbackSubmit = document.getElementById("feedback-submit");
+      var feedbackTurnstileContainer = document.getElementById("feedback-turnstile");
+      var feedbackTurnstileWidgetId = null;
+      var feedbackTurnstileToken = "";
+      var feedbackEndpoint = "https://rookline-feedback.flowcast-feedback-worker.workers.dev/api/v1/feedback";
+      var feedbackSiteKey = "0x4AAAAAAEQbnZuEyWeAt-eR";
+
+      function setFeedbackStatus(message, state) {
+        feedbackStatus.textContent = message;
+        feedbackStatus.setAttribute("data-state", state || "");
+      }
+
+      function renderFeedbackTurnstile() {
+        if (!window.turnstile) {
+          window.setTimeout(renderFeedbackTurnstile, 100);
+          return;
+        }
+        feedbackTurnstileWidgetId = window.turnstile.render(feedbackTurnstileContainer, {
+          sitekey: feedbackSiteKey,
+          action: "rookline_feedback",
+          callback: function (token) {
+            feedbackTurnstileToken = token;
+            setFeedbackStatus("", "");
+          },
+          "expired-callback": function () {
+            feedbackTurnstileToken = "";
+            setFeedbackStatus("The spam-protection check expired. Please complete it again.", "error");
+          },
+          "error-callback": function () {
+            feedbackTurnstileToken = "";
+            setFeedbackStatus("Spam protection is unavailable. Please try again later.", "error");
+          }
+        });
+      }
+
+      function feedbackSubmissionId() {
+        if (window.crypto && typeof window.crypto.randomUUID === "function") return window.crypto.randomUUID();
+        return null;
+      }
+
+      feedbackForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        var ratings = ["overall", "ui", "ai", "trackMap", "performance"];
+        var values = {};
+        ratings.forEach(function (name) {
+          values[name] = Number(feedbackForm.elements[name].value);
+        });
+        var comment = feedbackForm.elements.comment.value;
+        if (!ratings.some(function (name) { return values[name] > 0; }) && !comment.trim()) {
+          setFeedbackStatus("Add a comment or at least one rating before sending.", "error");
+          feedbackForm.elements.comment.focus();
+          return;
+        }
+        if (!feedbackTurnstileToken) {
+          setFeedbackStatus("Complete the spam-protection check before sending.", "error");
+          return;
+        }
+        var submissionId = feedbackSubmissionId();
+        if (!submissionId) {
+          setFeedbackStatus("This browser cannot create an anonymous submission identifier.", "error");
+          return;
+        }
+        var versionElement = document.getElementById("release-version-value");
+        var siteVersion = versionElement && versionElement.textContent ? versionElement.textContent.trim() : "v0.6.18";
+        var payload = {
+          schemaVersion: "rookline.feedback.v1",
+          submissionId: submissionId,
+          source: "site",
+          appVersion: "site-" + siteVersion.replace(/^v/i, ""),
+          overall: values.overall,
+          ui: values.ui,
+          ai: values.ai,
+          trackMap: values.trackMap,
+          performance: values.performance,
+          comment: comment,
+          privacyNoticeVersion: "rookline-feedback-v1",
+          turnstileToken: feedbackTurnstileToken
+        };
+        feedbackSubmit.disabled = true;
+        setFeedbackStatus("Sending anonymous feedback…", "");
+        fetch(feedbackEndpoint, {
+          method: "POST",
+          mode: "cors",
+          credentials: "omit",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(payload)
+        })
+          .then(function (response) {
+            if (response.status !== 202) throw new Error("Feedback was not accepted");
+            return response.json();
+          })
+          .then(function (result) {
+            if (!result || result.accepted !== true) throw new Error("Feedback was not accepted");
+            feedbackForm.reset();
+            feedbackTurnstileToken = "";
+            if (feedbackTurnstileWidgetId !== null && window.turnstile) window.turnstile.reset(feedbackTurnstileWidgetId);
+            setFeedbackStatus("Thank you. Your anonymous feedback was received.", "success");
+          })
+          .catch(function () {
+            setFeedbackStatus("Feedback could not be sent. Please try again later.", "error");
+          })
+          .finally(function () { feedbackSubmit.disabled = false; });
+      });
+      renderFeedbackTurnstile();
 
       var dialog = document.getElementById("screenshot-dialog");
       var dialogImage = document.getElementById("screenshot-dialog-image");
