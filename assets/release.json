@@ -1,12 +1,12 @@
-{
-  "version": "0.6.20",
-  "latestVersion": "0.6.20",
-  "releaseNotes": "Rookline 0.6.20 protects provider credentials with Windows DPAPI and keeps non-secret settings atomic. Startup migration removes plaintext only after protected storage is verified, and conflicts fail closed.\n\r\nThe runtime now clears inactive game and helper state by generation. Local WebView2 mutations, user-selected file paths, browser rendering, and both loopback hosts have tighter authorization, confinement, escaping, and Content Security Policy boundaries.\n\r\nThe Windows artifacts are Authenticode-signed with the owner-selected self-issued certificate. Other computers will not treat that certificate as publicly trusted unless it is installed there. Rookline verifies the published combined installer with the SHA-256 value in the HTTPS release manifest before updater launch.",
-  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.20/Rookline-Setup.exe",
-  "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.20/Rookline-Setup.exe",
-  "downloadPageUrl": "https://convexrook2.github.io/Rookline-Site/",
-  "coreInstallerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.20/Rookline-Setup-Core.exe",
-  "manifestUrl": "https://convexrook2.github.io/Rookline-Site/assets/release.json",
-  "sha256": "90C065C8F78163C2A39F299699DE0E920847AAB02829E75833E88FF4BA9340B5",
-  "generatedUtc": "2026-08-17T23:48:08.9658592Z"
+﻿{
+    "version":  "0.6.21",
+    "latestVersion":  "0.6.21",
+    "releaseNotes":  "Rookline 0.6.21 completes the LMU REST enrichment program, imports native Results XML as LMU writes it, and adds exact-build compatibility diagnostics across REST, shared memory, telemetry, Results, setups, options, discovery, and the managed helper.\r\n\r\nRookForce strengthens exact game, car, and profile currentness, persisted offline mappings, AC EVO recommendation tracking, and the same-process LMU Detected-to-Live handoff so a runtime promotion does not create an artificial reconnect delay. Optional Mistral AI support and live provider model selection are also included.\r\n\r\nThe Windows installers are not Authenticode-signed. Rookline verifies the published combined installer with the SHA-256 value in the HTTPS release manifest before updater launch.",
+    "installerUrl":  "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.21/Rookline-Setup.exe",
+    "downloadUrl":  "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.21/Rookline-Setup.exe",
+    "downloadPageUrl":  "https://convexrook2.github.io/Rookline-Site/",
+    "coreInstallerUrl":  "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.21/Rookline-Setup-Core.exe",
+    "manifestUrl":  "https://convexrook2.github.io/Rookline-Site/assets/release.json",
+    "sha256":  "4917675137A08479CEEAA06BE0242BD852DA8BB67E542247CE08F01BEC316197",
+    "generatedUtc":  "2026-08-24T03:59:16.6707290Z"
 }
