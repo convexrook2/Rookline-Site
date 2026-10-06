@@ -283,7 +283,7 @@
       <div class="intro-copy">
         <p>Rookline brings session evidence, engineering priorities, and recorded setup controls into one calm place—so the next run starts with a reason.</p>
         <div class="actions">
-          <a class="button button-primary" id="release-download" href="https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.21/Rookline-Setup.exe">Download Rookline</a>
+          <a class="button button-primary" id="release-download" href="https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.23/Rookline-Setup.exe">Download Rookline</a>
           <a class="button button-secondary" href="#tour">View the product tour</a>
         </div>
       </div>
@@ -387,16 +387,16 @@
     <section class="editorial" aria-labelledby="wheelbase-title">
       <div class="editorial-top">
         <div>
-          <p class="eyebrow" style="color:#32575c;">04 — RookForce workspace</p>
-          <h2 id="wheelbase-title">Asetek Forte Wheelbase support, inside the same workspace.</h2>
+          <p class="eyebrow" style="color:#32575c;">04 — Optional RookForce app</p>
+          <h2 id="wheelbase-title">Asetek Forte Wheelbase support in a separate app.</h2>
         </div>
-        <p class="editorial-lede">Open RookForce from Rookline when you use a supported Asetek Forte Wheelbase. It remains an optional, isolated part of the product, so the rest of Rookline stays useful when wheelbase support is unavailable.</p>
+        <p class="editorial-lede">RookForce is a separate optional application for supported Asetek Forte Wheelbase controls and profiles, with its own installation and interface. Rookline installs and runs independently.</p>
       </div>
       <figure class="product-shot on-paper" style="border-top:1px solid var(--line); padding-top:1rem;">
-        <button class="shot-button" type="button" data-zoom-src="assets/app-rookforce-live.png" data-zoom-title="RookForce — wheelbase workspace" aria-label="Open RookForce wheelbase workspace screenshot">
-          <img src="assets/app-rookforce-live.png" alt="Rookline RookForce workspace showing connected Asetek Forte Wheelbase controls and profile context." width="1600" height="820" loading="lazy" decoding="async" />
+        <button class="shot-button" type="button" data-zoom-src="assets/app-rookforce-live.png" data-zoom-title="Earlier RookForce workspace" aria-label="Open earlier RookForce workspace screenshot">
+          <img src="assets/app-rookforce-live.png" alt="Earlier RookForce workspace showing Asetek Forte Wheelbase controls and profile context before the separate application release." width="1600" height="820" loading="lazy" decoding="async" />
         </button>
-        <figcaption><span><strong>RookForce / Asetek Forte Wheelbase</strong> — available in the same Rookline shell when connected.</span><span>Open full view ↗</span></figcaption>
+        <figcaption><span><strong>RookForce / Asetek Forte Wheelbase</strong> — earlier workspace shown; RookForce now has its own application.</span><span>Open full view ↗</span></figcaption>
       </figure>
     </section>
 
@@ -506,15 +506,15 @@
             <h2 id="download-title">Get Rookline. It’s not the car.</h2>
           </div>
           <div class="download-card">
-            <h3 id="release-version">Download Rookline v0.6.21</h3>
-            <p>Choose the published installer that fits the workspace you want to use.</p>
+            <h3 id="release-version">Download Rookline v0.6.23</h3>
+            <p>The Windows x64 installer includes Rookline. RookForce is installed separately.</p>
             <div class="actions">
-              <a class="button button-primary" id="release-download-secondary" href="https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.21/Rookline-Setup.exe">Download installer</a>
+              <a class="button button-primary" id="release-download-secondary" href="https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.23/Rookline-Setup.exe">Download installer</a>
             </div>
-            <p class="download-note" id="release-download-note">Current Windows installer.</p>
+            <p class="download-note" id="release-download-note">Unsigned Windows installer. Rookline verifies its published SHA-256 before updater launch.</p>
             <p class="download-note" id="release-core-download-row" hidden>Need telemetry and setup only? <a id="release-download-core" href="#" aria-disabled="true">Download the Core-only installer.</a></p>
-            <span hidden><span id="release-version-value">v0.6.21</span></span>
-            <span hidden><code id="release-sha">4917675137A08479CEEAA06BE0242BD852DA8BB67E542247CE08F01BEC316197</code></span>
+            <span hidden><span id="release-version-value">v0.6.23</span></span>
+            <span hidden><code id="release-sha">CDD205EA943FAB3445A088FED9E1957D3F28FA770FB43D9FE2DEFAF7AEE7C7F7</code></span>
             <a id="release-manifest" href="https://convexrook2.github.io/Rookline-Site/assets/release.json" hidden aria-hidden="true">Release metadata</a>
           </div>
         </div>
@@ -571,13 +571,13 @@
               coreDownloadEl.classList.remove("is-disabled");
               coreDownloadEl.setAttribute("aria-disabled", "false");
               if (coreDownloadRowEl) { coreDownloadRowEl.removeAttribute("hidden"); }
-              if (downloadNoteEl) { downloadNoteEl.textContent = "Current Windows installer with the RookForce workspace."; }
+              if (downloadNoteEl) { downloadNoteEl.textContent = "Unsigned Windows installer. Rookline verifies its published SHA-256 before updater launch."; }
             } else {
               coreDownloadEl.href = "#";
               coreDownloadEl.classList.add("is-disabled");
               coreDownloadEl.setAttribute("aria-disabled", "true");
               if (coreDownloadRowEl) { coreDownloadRowEl.setAttribute("hidden", ""); }
-              if (downloadNoteEl) { downloadNoteEl.textContent = "Current Windows installer."; }
+              if (downloadNoteEl) { downloadNoteEl.textContent = "Unsigned Windows installer. Rookline verifies its published SHA-256 before updater launch."; }
             }
           }
           if (shaEl) { shaEl.textContent = String(release.sha256).toUpperCase(); }
@@ -652,7 +652,7 @@
         }
         feedbackPendingSubmissionId = submissionId;
         var versionElement = document.getElementById("release-version-value");
-        var siteVersion = versionElement && versionElement.textContent ? versionElement.textContent.trim() : "v0.6.21";
+        var siteVersion = versionElement && versionElement.textContent ? versionElement.textContent.trim() : "v0.6.23";
         var payload = {
           schemaVersion: "rookline.feedback.v1",
           submissionId: submissionId,

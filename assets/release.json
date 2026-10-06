@@ -1,12 +1,12 @@
 ﻿{
-    "version":  "0.6.21",
-    "latestVersion":  "0.6.21",
-    "releaseNotes":  "Rookline 0.6.21 completes the LMU REST enrichment program, imports native Results XML as LMU writes it, and adds exact-build compatibility diagnostics across REST, shared memory, telemetry, Results, setups, options, discovery, and the managed helper.\r\n\r\nRookForce strengthens exact game, car, and profile currentness, persisted offline mappings, AC EVO recommendation tracking, and the same-process LMU Detected-to-Live handoff so a runtime promotion does not create an artificial reconnect delay. Optional Mistral AI support and live provider model selection are also included.\r\n\r\nThe Windows installers are not Authenticode-signed. Rookline verifies the published combined installer with the SHA-256 value in the HTTPS release manifest before updater launch.",
-    "installerUrl":  "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.21/Rookline-Setup.exe",
-    "downloadUrl":  "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.21/Rookline-Setup.exe",
-    "downloadPageUrl":  "https://convexrook2.github.io/Rookline-Site/",
-    "coreInstallerUrl":  "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.21/Rookline-Setup-Core.exe",
-    "manifestUrl":  "https://convexrook2.github.io/Rookline-Site/assets/release.json",
-    "sha256":  "4917675137A08479CEEAA06BE0242BD852DA8BB67E542247CE08F01BEC316197",
-    "generatedUtc":  "2026-08-24T03:59:16.6707290Z"
+  "version": "0.6.23",
+  "latestVersion": "0.6.23",
+  "releaseNotes": "Rookline 0.6.23 adds configurable Mixed, class and Top 8 Each Drive tower views, readable timing headings, completed-lap colours, sector and finish states, controller bindings, prominent sourced penalties and matching mixed-tyre dots. Optional manufacturer work is batched and Drive tyre requests omit unused setup reads.\n\nRookline installs and runs independently. RookForce is a separate optional application with its own installation and interface.\n\nThe Windows installer is not Authenticode-signed. Rookline verifies its published SHA-256 and version through this HTTPS manifest before updater launch. No new installed-upgrade, native game-performance or hardware validation is claimed.",
+  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.23/Rookline-Setup.exe",
+  "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.23/Rookline-Setup.exe",
+  "downloadPageUrl": "https://convexrook2.github.io/Rookline-Site/",
+  "coreInstallerUrl": null,
+  "manifestUrl": "https://convexrook2.github.io/Rookline-Site/assets/release.json",
+  "sha256": "CDD205EA943FAB3445A088FED9E1957D3F28FA770FB43D9FE2DEFAF7AEE7C7F7",
+  "generatedUtc": "2026-10-06T21:11:21Z"
 }
