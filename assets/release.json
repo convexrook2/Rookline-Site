@@ -1,12 +1,12 @@
 ﻿{
-  "version": "0.6.24",
-  "latestVersion": "0.6.24",
-  "releaseNotes": "Rookline 0.6.24 improves fitted tyre recovery, translucent used-tyre rings, flat/detached/full-wear pulses, damage indicators and separate oil/engine warnings. A witnessed engine failure is retained across cooling and matching-context Rookline restarts until an observed Garage return. Fuel-only classes hide NRG; repeated HUD updates avoid unnecessary DOM changes, historical scans are deferred, and mechanical-failure mode is read once per event. Compound calibration and remaining native startup checks continue.\n\nRookline installs and runs independently. RookForce is a separate optional application with its own installation and interface.\n\nThe Windows installer is not Authenticode-signed. Rookline verifies its published SHA-256 and version through this HTTPS manifest before updater launch. No new installed-upgrade, native game-performance or hardware validation is claimed.",
-  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.24/Rookline-Setup.exe",
-  "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.24/Rookline-Setup.exe",
+  "version": "0.6.25",
+  "latestVersion": "0.6.25",
+  "releaseNotes": "Garage virtual-energy and temperature readings remain available through repeated live updates. The run-recorded notification appears once after a confirmed Garage return; recordings and session selection are preserved. Shift-light glow is softer.\n\nRookline installs and runs independently. RookForce is a separate optional application with its own installation and interface.\n\nThe Windows x64 installer is not Authenticode-signed. Rookline verifies its published SHA-256 and file version through this HTTPS manifest before updater launch.",
+  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.25/Rookline-Setup.exe",
+  "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.25/Rookline-Setup.exe",
   "downloadPageUrl": "https://convexrook2.github.io/Rookline-Site/",
   "coreInstallerUrl": null,
   "manifestUrl": "https://convexrook2.github.io/Rookline-Site/assets/release.json",
-  "sha256": "911A597F1DFE12B0F8EC42C77E42102624F82D64A503353732F6C5CF67065AEC",
-  "generatedUtc": "2026-10-11T07:49:45Z"
+  "sha256": "8CF67A9022669A3F002A191F9F76CA00D61BE25A8625E656B410AC31BBBD2105",
+  "generatedUtc": "2026-10-19T01:04:28Z"
 }
