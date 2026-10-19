@@ -1,12 +1,12 @@
 ﻿{
-  "version": "0.6.25",
-  "latestVersion": "0.6.25",
-  "releaseNotes": "Garage virtual-energy and temperature readings remain available through repeated live updates. The run-recorded notification appears once after a confirmed Garage return; recordings and session selection are preserved. Shift-light glow is softer.\n\nRookline installs and runs independently. RookForce is a separate optional application with its own installation and interface.\n\nThe Windows x64 installer is not Authenticode-signed. Rookline verifies its published SHA-256 and file version through this HTTPS manifest before updater launch.",
-  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.25/Rookline-Setup.exe",
-  "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.25/Rookline-Setup.exe",
+  "version": "0.6.26",
+  "latestVersion": "0.6.26",
+  "releaseNotes": "Fixes Rookline failing to open after installation when packaged web files are used. Existing recording, Garage and LMU lifecycle behavior is unchanged.\n\nThe Windows x64 installer is not Authenticode-signed. Rookline verifies its published SHA-256 and file version through this HTTPS manifest before updater launch.",
+  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.26/Rookline-Setup.exe",
+  "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.26/Rookline-Setup.exe",
   "downloadPageUrl": "https://convexrook2.github.io/Rookline-Site/",
   "coreInstallerUrl": null,
   "manifestUrl": "https://convexrook2.github.io/Rookline-Site/assets/release.json",
-  "sha256": "8CF67A9022669A3F002A191F9F76CA00D61BE25A8625E656B410AC31BBBD2105",
-  "generatedUtc": "2026-10-19T01:04:28Z"
+  "sha256": "DD85D0785E9C94083939964304B15E01950AC7C17DDE5E12A6375DCE47709359",
+  "generatedUtc": "2026-10-19T02:47:18Z"
 }
