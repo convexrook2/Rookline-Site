@@ -1,12 +1,12 @@
-﻿{
-  "version": "0.6.26",
-  "latestVersion": "0.6.26",
-  "releaseNotes": "Fixes Rookline failing to open after installation when packaged web files are used. Existing recording, Garage and LMU lifecycle behavior is unchanged.\n\nThe Windows x64 installer is not Authenticode-signed. Rookline verifies its published SHA-256 and file version through this HTTPS manifest before updater launch.",
-  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.26/Rookline-Setup.exe",
-  "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.26/Rookline-Setup.exe",
+{
+  "version": "0.6.27",
+  "latestVersion": "0.6.27",
+  "releaseNotes": "Rookline 0.6.27 installs independently for telemetry, session analysis, setup support, and optional AI coaching. RookForce is a separate optional application with its own installation, interface, and lifetime. Rookline remains usable when RookForce is absent or unavailable.\r\n\r\nThe Windows installers are not Authenticode-signed. Rookline verifies the published Rookline installer with the SHA-256 value in the HTTPS release manifest before updater launch.",
+  "installerUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.27/Rookline-Setup.exe",
+  "downloadUrl": "https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.27/Rookline-Setup.exe",
   "downloadPageUrl": "https://convexrook2.github.io/Rookline-Site/",
   "coreInstallerUrl": null,
   "manifestUrl": "https://convexrook2.github.io/Rookline-Site/assets/release.json",
-  "sha256": "DD85D0785E9C94083939964304B15E01950AC7C17DDE5E12A6375DCE47709359",
-  "generatedUtc": "2026-10-19T02:47:18Z"
+  "sha256": "DF934C820566589D74614E2CC8257B3FE0C85AE6454D0918D15EC4E665B0F8EB",
+  "generatedUtc": "2026-10-25T00:00:30.2376540Z"
 }
