@@ -14,4 +14,3 @@ Local Drive modifications: precipitation contrast was adjusted on October 30,
 distinguish LMU drizzle, light rain, rain and heavy rain. Cloud/lightning shapes,
 the original sky-code mapping and the upstream attribution are retained. These
 local changes are not represented as an upstream Meteocons release.
-

@@ -35,7 +35,7 @@
     <path d="M73.3 165.0 H80.9 L82.0 166.1 V182.5 L80.9 183.6 H73.3 L72.2 182.5 V166.1 Z" />
   </g>
 
-  
+
   <g id="hud-vehicle-inset-fl" class="hud-part" data-hud-part="vehicle-inset-fl" data-label="Front left inset bar" fill="var(--part-color, #427fc3)" data-default-colour="#427fc3" style="--part-color:#427fc3" data-category="Vehicle" inkscape:groupmode="layer" inkscape:label="Front left inset bar">
     <title>Front left inset bar</title>
     <path d="M44.6 131.0 H46.7 V144.0 H44.6 L44.0 143.2 V131.8 Z" />

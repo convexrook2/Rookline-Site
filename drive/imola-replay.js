@@ -46,4 +46,3 @@
     render();query('.imola-controls').hidden=false;
     new IntersectionObserver(entries=>{if(!entries.some(e=>e.isIntersecting)&&running)pause();}).observe(root);
   })().catch(()=>{});
-  
