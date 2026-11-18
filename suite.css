@@ -1,0 +1,16 @@
+/* Shared navigation is isolated from each product's own presentation. */
+#rooksuite-header{box-sizing:border-box;position:relative;z-index:10000;display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:74px;padding:12px max(24px,calc((100vw - 1360px)/2));background:#0c1720;color:#edf3ef;border-bottom:1px solid #31424b;font:500 14px/1.3 Inter,system-ui,sans-serif;letter-spacing:normal;text-transform:none;width:100%;margin:0}
+#rooksuite-header *{box-sizing:border-box}
+#rooksuite-header a{color:inherit;text-decoration:none}
+#rooksuite-header .rs-brand{display:flex;align-items:center;gap:11px;flex-shrink:0;font-size:18px;font-weight:800;letter-spacing:.04em}
+#rooksuite-header .rs-brand small{display:block;font-size:8px;letter-spacing:.2em;color:#9cafa9;margin-top:4px}
+#rooksuite-header .rs-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:#d7f77b;color:#12211b;font-weight:900;font-style:italic}
+#rooksuite-header nav{display:flex;gap:5px;align-items:center;overflow-x:auto;max-width:100%;scrollbar-width:thin}
+#rooksuite-header nav a{display:block;flex-shrink:0;padding:12px 16px;border-radius:5px;color:#bdcbc8;white-space:nowrap;font-size:13px;font-weight:650;border-bottom:2px solid transparent}
+#rooksuite-header nav a:hover{background:#1a2c36;color:#fff}
+#rooksuite-header nav a[aria-current=page]{color:#d7f77b;background:#23352e;border-bottom-color:#d7f77b}
+#rooksuite-header a:focus-visible{outline:3px solid #d7f77b;outline-offset:2px}
+body[data-suite-page=drive] .chapter-rail{top:74px;height:calc(100vh - 74px)}
+body[data-suite-page=drive] .masthead{top:74px}
+@media(max-width:720px){#rooksuite-header{padding:12px 16px 0;display:block;min-height:110px}#rooksuite-header .rs-brand{font-size:16px}#rooksuite-header .rs-mark{width:32px;height:32px}#rooksuite-header nav{margin-top:9px;gap:0}#rooksuite-header nav a{font-size:12px;padding:12px 8px}body[data-suite-page=drive] .chapter-rail{top:110px;height:calc(100vh - 110px)}body[data-suite-page=drive] .masthead{top:110px}}
+@media print{#rooksuite-header{display:none}}

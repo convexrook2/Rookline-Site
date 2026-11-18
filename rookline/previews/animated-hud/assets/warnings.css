@@ -1,0 +1,164 @@
+/* Current production HUD rules. Only local font URLs are adapted. */
+.lmu-live-drive__layered-hud { display: flex; flex-direction: column; grid-column: 3; grid-row: 2; }
+.lmu-live-drive__hud-mount { display: grid; place-items: center; flex: 1; min-width: 0; min-height: 0; }
+.lmu-live-drive__hud-mount > p { color: rgba(244, 247, 250, .7); font-size: 12px; }
+.lmu-live-drive__layered-hud .lmu-hud-svg { display: block; width: min(100%, 375px); height: 100%; max-height: 269px; overflow: visible; }
+.lmu-live-drive__layered-hud .lmu-hud-svg[data-rpm-artwork="continuous-v1"] { height: auto; aspect-ratio: 855 / 580; max-height: none; }
+.lmu-live-drive__layered-hud [data-rpm-background="continuous-redline-v1"][data-colour-enabled="false"] [data-rpm-limit-background] path { stroke: var(--part-color, #565866); }
+.lmu-live-drive__layered-hud .lmu-hud-svg[data-approved-artwork="20261011"] .lamp { fill: none; stroke: var(--part-color, #171929); stroke-width: 7; stroke-linecap: round; }
+
+@font-face {
+    font-family: RooklineLmuLiveNumerals;
+    src: url("./live-numerals.ttf") format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: RooklineLmuHudNumerals;
+    src: url("./hud-numerals.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+.lmu-live-drive__layered-hud .lmu-hud-svg .hud-text { font-family: RooklineLmuLiveNumerals, Arial, sans-serif; font-weight: 700; font-variant-numeric: tabular-nums; font-variation-settings: "wdth" 100; font-synthesis: none; fill: var(--part-color, #f2f2f7); }
+.lmu-live-drive__layered-hud .lmu-hud-svg[data-approved-artwork="20261011"] .lmu-live-number,
+.lmu-live-drive__layered-hud .lmu-hud-svg[data-approved-artwork="20261011"] .lmu-live-number .hud-text { font-family: RooklineLmuLiveNumerals, Arial, sans-serif; font-weight: 800; font-variation-settings: "wght" 800, "wdth" 100; font-synthesis: none; }
+.lmu-live-drive__panel.lmu-live-drive__layered-hud,
+.lmu-live-drive__panel.lmu-live-drive__layered-hud :is(h3, h4, p, dt, dd, strong, span),
+.lmu-live-drive__panel.lmu-live-drive__tyres,
+.lmu-live-drive__panel.lmu-live-drive__tyres :is(h3, h4, p, dt, dd, strong, span) { font-family: RooklineLmuLiveNumerals, Arial, sans-serif; font-variation-settings: "wdth" 100; font-synthesis: none; }
+.lmu-live-drive__layered-hud .lmu-hud-svg .part-fill { fill: var(--part-color, #f2f2f7); }
+.lmu-live-drive__layered-hud .lmu-hud-svg .part-stroke { stroke: var(--part-color, #f2f2f7); }
+.lmu-live-drive__layered-hud .lmu-hud-svg .hud-part { color: var(--part-color, #f2f2f7); }
+.lmu-live-drive__layered-hud .lmu-hud-svg [data-hud-part="rpm-track"][data-rpm-background="segmented-redline-v1"] > path[data-rpm-track-segment] { fill: var(--part-color, #515466); stroke: none; }
+.lmu-live-drive__layered-hud .lmu-hud-svg [data-hud-part="rpm-track"][data-rpm-background="segmented-redline-v1"] > path[data-rpm-redline="true"] { fill: var(--rpm-redline-colour, #793c48); }
+.lmu-live-drive__layered-hud .lmu-hud-svg [data-hud-part="rpm-track"][data-rpm-background="segmented-redline-v1"][data-colour-enabled="false"] > path[data-rpm-redline="true"],
+.lmu-live-drive__layered-hud .lmu-hud-svg [data-hud-part="rpm-track"][data-rpm-background="segmented-redline-v1"][data-paint-available="false"] > path[data-rpm-redline="true"] { fill: var(--part-color, #565866); }
+.lmu-live-drive__layered-hud .lmu-hud-svg .hud-missing { animation: rookline-lmu-hud-missing-flash 1s steps(1, end) infinite; }
+
+@keyframes rookline-lmu-hud-missing-flash {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(.18); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lmu-live-drive__layered-hud .lmu-hud-svg .hud-missing { animation: none; }
+}
+
+
+.lmu-live-drive__tyre-module { display: grid; place-items: center; min-height: 0; height: calc(100% - 32px); margin-top: 5px; }
+.lmu-live-drive__tyre-module > p { color: rgba(244, 247, 250, .7); font-size: 12px; }
+.lmu-live-drive__tyre-module > .lmu-tyres-hud { display: block; width: min(100%, 405px); height: auto; max-height: 232px; overflow: visible; }
+.lmu-live-drive__tyre-module .lmu-tyres-hud { isolation: isolate; overflow: visible; --wear-period: 1000ms; --detach-period: 2000ms; }
+.lmu-live-drive__tyre-module, .lmu-live-drive__tyre-module .lmu-tyres-hud text { font-family: RooklineLmuLiveNumerals, Arial, sans-serif; font-variant-numeric: tabular-nums; font-variation-settings: "wdth" 100; font-synthesis: none; }
+.lmu-live-drive__tyre-module .lmu-tyres-hud .used-band { fill: none; stroke: currentColor; stroke-width: 1; stroke-linejoin: round; }
+.lmu-live-drive__tyre-module .lmu-tyres-hud .warning-band { fill: none; stroke: currentColor; stroke-width: 1.45; stroke-linejoin: round; opacity: .75; }
+.lmu-live-drive__tyre-module .lmu-tyres-hud .ring { fill: none; stroke: currentColor; stroke-width: 6; stroke-linecap: butt; }
+.lmu-live-drive__tyre-module .lmu-tyres-hud .wear-pulse { animation: none; opacity: 1; }
+.lmu-live-drive__tyre-module .lmu-tyres-hud [data-warning-pulse="true"] .wear-pulse { animation: lmu-live-flat-warning-pulse 2000ms linear infinite; }
+/* Worn used-area paint is slightly transparent; life segments/text stay opaque.
+   Only the accepted fully-worn raw values pulse its glow. Layer opacity composes independently. */
+.lmu-live-drive__tyre-module .lmu-tyres-hud [data-state="worn"] .used-band { fill: currentColor; opacity: .75; }
+.lmu-live-drive__tyre-module .lmu-tyres-hud .detach-pulse { animation: lmu-live-flat-warning-pulse 2000ms linear infinite; }
+.lmu-live-drive__tyre-module .lmu-tyres-hud .flat-pulse { animation: lmu-live-flat-warning-pulse 2000ms linear infinite; }
+.lmu-live-drive__layered-hud .lmu-hud-svg .hud-flat-warning { animation: none; opacity: 1; }
+.lmu-live-drive__layered-hud .lmu-hud-svg .hud-flat-warning:where([data-warning-pulse="true"]) { animation: lmu-live-flat-warning-pulse 2000ms linear infinite; }
+/* Hidden large rings need no animation. Existing render owners align newly
+   shown warnings to the shared document origin instead of restarting strong. */
+.lmu-live-drive__tyre-module .lmu-tyres-hud [data-runtime-visible="false"] .flat-pulse { animation: none; }
+.lmu-live-drive__tyre-module .lmu-tyres-hud [data-runtime-visible="false"] .detach-pulse { animation: none; }
+.lmu-live-drive__tyre-module .lmu-tyres-hud[data-motion="reduce"] .flat-pulse { animation: none; opacity: 1; }
+/* Recorded FR colour-strength reconstruction; native overlay alpha is unknown.
+   Owner direction: start strong, reveal live thermal paint, then return strong.
+   Evidence: hud-readouts/native-flat-pulse-20261009/README.md. */
+@keyframes lmu-live-flat-warning-pulse {
+    0%, 50% { opacity: 1; }
+    55% { opacity: .807; }
+    60% { opacity: .629; }
+    65% { opacity: .492; }
+    70% { opacity: .369; }
+    75% { opacity: .250; }
+    80% { opacity: .167; }
+    85% { opacity: .105; }
+    90% { opacity: .055; }
+    95% { opacity: .026; }
+    100% { opacity: 0; }
+}
+.lmu-live-drive__tyre-module .lmu-tyres-hud[data-motion="reduce"] .wear-pulse,
+.lmu-live-drive__tyre-module .lmu-tyres-hud[data-motion="reduce"] .detach-pulse { animation: none; opacity: 1; }
+.lmu-live-drive__layered-hud .lmu-hud-svg .hud-corner-detached-warning { animation: lmu-live-flat-warning-pulse 2000ms linear infinite; visibility: hidden; pointer-events: none; }
+.lmu-live-drive__layered-hud .lmu-hud-svg .hud-corner-detached-warning[data-warning-active="true"] { visibility: inherit; }
+/* Owner correction: detached tyre, brake and suspension pulse red to grey,
+   while their independent readings continue beneath the warning. */
+.lmu-live-drive__layered-hud .lmu-hud-svg [data-hud-part^="vehicle-tyre-"].hud-detached[data-colour-mode="auto"] > [data-role$="-surface"],
+.lmu-live-drive__layered-hud .lmu-hud-svg [data-hud-part^="vehicle-inset-"].hud-detached[data-colour-mode="auto"] > path:not(.hud-corner-detached-warning) { fill: #565866; }
+.lmu-live-drive__layered-hud .lmu-hud-svg [data-hud-part^="vehicle-glyph-"].hud-detached[data-colour-mode="auto"] > path:not(.hud-corner-detached-warning) { stroke: #565866; }
+/* Keep the shared document phase running across detach transitions. Inactive
+   paint stays steady without restarting or pausing the warning animation. */
+.lmu-live-drive__layered-hud .lmu-hud-svg .hud-wing-detached-warning { animation: lmu-live-flat-warning-pulse 2000ms linear infinite; }
+.lmu-live-drive__layered-hud .lmu-hud-svg .hud-wing-detached-warning[data-warning-active="false"] { opacity: 1 !important; }
+
+@media (prefers-reduced-motion: reduce) {
+    .lmu-live-drive, .lmu-live-drive * { transition: none !important; }
+    .lmu-live-drive__wheel-state[data-wheel-state="detached"] { animation: none; }
+    .lmu-live-drive__car-status-corner[data-link-state="detached"] .lmu-live-drive__car-status-link { animation: none; }
+    .lmu-live-drive__tyre-module .lmu-tyres-hud:not([data-motion="animate"]) .wear-pulse,
+    .lmu-live-drive__tyre-module .lmu-tyres-hud:not([data-motion="animate"]) .flat-pulse,
+    .lmu-live-drive__tyre-module .lmu-tyres-hud:not([data-motion="animate"]) .detach-pulse,
+    .lmu-live-drive__layered-hud .lmu-hud-svg .hud-corner-detached-warning { animation: none; opacity: 1; }
+    .lmu-live-drive__layered-hud .lmu-hud-svg .hud-wing-detached-warning { animation: none; opacity: 1; }
+    .lmu-live-drive__layered-hud .lmu-hud-svg .hud-flat-warning { animation: none; opacity: 1; fill: none; stroke: #ff7f00; stroke-width: .8; }
+}
+
+/* Standalone preview controls share one bounded layout in both public demos. */
+.manufacturer-controls { min-width: 0; margin: 0 0 16px; padding: 12px; border: 1px solid #394457; }
+.manufacturer-controls label { display: block; margin: 8px 0; }
+.manufacturer-controls select, .manufacturer-controls input { display: block; width: 100%; max-width: 100%; margin-top: 6px; }
+.manufacturer-controls p { font-size: 12px; }
+
+/* v1.3 appearance only: source state, geometry and CSP remain authoritative. */
+.lmu-hud-svg [data-skin-owned][data-battery-activity-artwork] > path { display: none; }
+.lmu-hud-svg [data-hud-part="battery-soc"][data-state="deploying"] > [data-skin-owned] > [data-role="battery-deploy-chevrons"],
+.lmu-hud-svg [data-hud-part="battery-soc"][data-state="charging"] > [data-skin-owned] > [data-role="battery-charge-chevrons"] { display: inline; }
+/* Hide only obsolete source paint; retain its nodes, attributes and roles. */
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-hud-part="rpm-arc"] > :not([data-skin-owned]) {display:none !important;}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-role="manufacturer-rpm-paint"] .rpm-cell {fill:var(--cell-colour);stroke:none;}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-role="manufacturer-rpm-paint"] .rpm-tick {stroke:var(--cell-colour);fill:none;}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-rpm-paint-mode="source"] .rpm-cell {fill:var(--part-color,#565866);}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-rpm-paint-mode="source"] .rpm-tick {stroke:var(--part-color,#565866);}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-rpm-paint-mode="full-red"] .rpm-cell {fill:#ff2148;}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-rpm-paint-mode="full-red"] .rpm-tick {stroke:#ff2148;}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-hud-part="rpm-track"][data-colour-mode="auto"][data-colour-enabled="true"] > path {stroke:var(--skin-track);}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-hud-part="rpm-track"] > g:not([data-rpm-limit-background]):not([data-skin-owned]) {display:none;}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-role="manufacturer-rpm-track"] .rpm-cell {fill:var(--part-color,#565866);stroke:none;opacity:.38;}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-role="manufacturer-rpm-track"] .rpm-tick {stroke:var(--part-color,#565866);fill:none;opacity:.38;}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-hud-part="rpm-track"][data-colour-mode="auto"][data-colour-enabled="true"] [data-track-red-zone="true"].rpm-cell {fill:#794452;opacity:.8;}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-hud-part="rpm-track"][data-colour-mode="auto"][data-colour-enabled="true"] [data-track-red-zone="true"].rpm-tick {stroke:#794452;opacity:.8;}
+.lmu-hud-svg[data-manufacturer-skin-instance][data-manufacturer-style="original"] [data-role="manufacturer-rpm-track"] {display:none;}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-rpm-limit-background] > g {display:none;}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-hud-part="outer-rim"][data-colour-mode="auto"][data-colour-enabled="true"] {--part-color:var(--skin-rim) !important;}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-hud-part="main-plate"][data-colour-mode="auto"][data-colour-enabled="true"] {--part-color:var(--skin-plate) !important;}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"])[data-shift-appearance="manufacturer"] [data-hud-part="shift-light-left"][data-state="on"][data-colour-mode="auto"][data-colour-enabled="true"][data-paint-available="true"] > .lamp { stroke: var(--skin-lamp-0) !important; filter: var(--skin-lamp-filter-0) !important; }
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"])[data-shift-appearance="manufacturer"] [data-hud-part="shift-light-centre"][data-state="on"][data-colour-mode="auto"][data-colour-enabled="true"][data-paint-available="true"] > .lamp { stroke: var(--skin-lamp-1) !important; filter: var(--skin-lamp-filter-1) !important; }
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"])[data-shift-appearance="manufacturer"] [data-hud-part="shift-light-right"][data-state="on"][data-colour-mode="auto"][data-colour-enabled="true"][data-paint-available="true"] > .lamp { stroke: var(--skin-lamp-2) !important; filter: var(--skin-lamp-filter-2) !important; }
+/* Owner October 14: RPM contrast and steady known-off shift-slot glow. */
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]) [data-role="manufacturer-rpm-paint"][data-rpm-paint-mode="brand"][data-source-progress="available"] { filter: brightness(1.25); }
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]):has([data-role="manufacturer-rpm-paint"][data-rpm-paint-mode="brand"][data-source-progress="available"]) [data-hud-part="rpm-track"][data-colour-mode="auto"][data-colour-enabled="true"][data-paint-available="true"] > [data-role="manufacturer-rpm-track"] > :is(.rpm-cell, .rpm-tick)[data-track-red-zone="false"] { opacity: .18; }
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"]):has([data-role="manufacturer-rpm-paint"][data-rpm-paint-mode="brand"][data-source-progress="available"]) [data-hud-part="rpm-track"][data-colour-mode="auto"][data-colour-enabled="true"][data-paint-available="true"] > path[data-approved-node="50"] { opacity: .55; }
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"])[data-shift-appearance="manufacturer"] [data-hud-part="shift-light-left"][data-state="off"][data-colour-mode="auto"][data-colour-enabled="true"][data-paint-available="true"] > .lamp { stroke: var(--skin-lamp-0) !important; filter: var(--skin-lamp-filter-0) !important; opacity: .22; }
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"])[data-shift-appearance="manufacturer"] [data-hud-part="shift-light-centre"][data-state="off"][data-colour-mode="auto"][data-colour-enabled="true"][data-paint-available="true"] > .lamp { stroke: var(--skin-lamp-1) !important; filter: var(--skin-lamp-filter-1) !important; opacity: .22; }
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"])[data-shift-appearance="manufacturer"] [data-hud-part="shift-light-right"][data-state="off"][data-colour-mode="auto"][data-colour-enabled="true"][data-paint-available="true"] > .lamp { stroke: var(--skin-lamp-2) !important; filter: var(--skin-lamp-filter-2) !important; opacity: .22; }
+/* End owner October 14 contrast slice. */
+
+/* Owner October 17: luminous lit cores with close and soft outer colour bloom.
+   Keep the controller's paint admission, custom mode and group opacity intact. */
+.lmu-hud-svg [data-hud-part^="shift-light-"][data-state="on"][data-colour-mode="auto"][data-colour-enabled="true"][data-paint-available="true"] {
+    color: var(--shift-glow-colour, var(--part-color));
+    filter: saturate(.25) brightness(2.4) drop-shadow(0 0 2px currentColor) drop-shadow(0 0 6px currentColor) drop-shadow(0 0 12px currentColor);
+}
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"])[data-shift-appearance="manufacturer"] [data-hud-part="shift-light-left"] { --shift-glow-colour: var(--skin-lamp-0); }
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"])[data-shift-appearance="manufacturer"] [data-hud-part="shift-light-centre"] { --shift-glow-colour: var(--skin-lamp-1); }
+.lmu-hud-svg[data-manufacturer-style]:not([data-manufacturer-style="original"])[data-shift-appearance="manufacturer"] [data-hud-part="shift-light-right"] { --shift-glow-colour: var(--skin-lamp-2); }

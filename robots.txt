@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://convexrook2.github.io/Rookline-Site/sitemap.xml

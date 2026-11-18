@@ -1,0 +1,50 @@
+FLAG MOTION
+Adapted from "Chequered Flag" (U+1F3C1), Google Noto Animated Emoji.
+Creator: Google / the Noto Emoji team.
+License: Creative Commons Attribution 4.0 International (CC BY 4.0).
+License URL: https://creativecommons.org/licenses/by/4.0/
+Project and license statement: https://googlefonts.github.io/noto-emoji-files/?view=docs
+Original source: https://fonts.gstatic.com/s/e/notoemoji/latest/1f3c1/lottie.json
+
+Modifications: removed 32 checkerboard vector/matte layers; retained the
+original cloth keyframes, shape geometry, timing, occlusion, and pole.
+The pole-free Lottie hides the pole drawing while preserving its parenting
+transforms. The reusable JavaScript renderer samples the original vector
+geometry at 60 frames per second and adds reconstructed image deformation.
+Drive interpolates compatible adjacent sampled poses on its existing HUD frame
+clock. The continuous-wave excerpt repeats in two seconds; the full sequence,
+including its ending, repeats in four seconds. The supplied source poses remain unchanged.
+The exported animated HTML retains a source and license attribution comment.
+
+Suggested credit for an app's credits or notices:
+"Flag motion adapted from Google Noto Animated Emoji, CC BY 4.0.
+Checkerboard removed and custom artwork support added."
+Include the source and license links above with this credit.
+
+The uploaded artwork belongs to its respective owner. No Google endorsement
+is implied. The original motion license is separate from the implementation
+code license below.
+
+IMPLEMENTATION CODE
+The new flag renderer, editor, and examples are supplied under the MIT License.
+
+Copyright (c) 2026
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+

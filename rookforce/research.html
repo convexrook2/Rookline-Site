@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050a0e">
+  <meta name="description" content="Explore RookForce's LMU Real Feel research: per-car evidence, stored tuning targets, calculation examples and the limits of what has been measured.">
+  <title>Real Feel Research — RookForce</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="research.css">
+  <script src="research.js" defer></script>
+  <link rel="stylesheet" href="community.css">
+<link rel="stylesheet" href="../suite.css"></head>
+<body class="research-page" data-suite-page="rookforce"><header id="rooksuite-header"><a class="rs-brand" href="../index.html" aria-label="Rookline website home"><span class="rs-mark" aria-hidden="true">R/</span><span>ROOKLINE<small>BY CONVEXROOK</small></span></a><nav aria-label="Rookline products"><a href="../index.html">Home</a><a href="../rookline/">Rookline</a><a href="../drive/">Drive</a><a href="../rookforce/" aria-current="page">RookForce</a><a href="../planner/">LMU Planner</a></nav></header>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html" aria-label="RookForce overview"><img src="assets/rookforce-logo.png" width="1474" height="248" alt="RookForce"></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="index.html">Overview</a><a href="guide.html">How to use</a><a href="research.html" aria-current="page">Real Feel Research</a><a href="profiles.html">Profiles</a><a class="discord-link" href="https://discord.gg/UPVYArKnkH" target="_blank" rel="noopener noreferrer" aria-label="Join Rook Driving Suite Community on Discord (opens in a new tab)"><img src="assets/discord-mark.svg" width="22" height="17" alt="" aria-hidden="true">Join Discord<span aria-hidden="true">↗</span></a></nav>
+    </div>
+  </header>
+  <main id="main" class="wrap research-main">
+    <section class="research-intro" aria-labelledby="research-title">
+      <div>
+        <span class="eyebrow">Le Mans Ultimate · the thinking behind the targets</span>
+        <h1 id="research-title">Feel, with<br><em>evidence.</em></h1>
+        <p class="research-lead">A car's steering system tells us what to investigate. It does not tell us which percentage to use.</p>
+        <p class="research-deck">Real Feel combines published vehicle facts with RookForce's tuning interpretation. Explore the stored car targets, their history and the evidence still needed to test them.</p>
+        <div class="research-jumps"><a href="#cars">Explore the cars</a><a href="#method">Method &amp; limits</a><a href="#sources">Source library</a></div>
+      </div>
+      <aside class="research-principle" aria-label="How to read this research">
+        <span class="eyebrow">Three different claims</span>
+        <div><span class="principle-number">01</span><p><strong>Published fact</strong>A constructor identifies hydraulic steering assistance.</p></div>
+        <div><span class="principle-number">02</span><p><strong>Tuning interpretation</strong>RookForce stores a per-car Real base and other slider targets.</p></div>
+        <div><span class="principle-number">03</span><p><strong>Physical validation</strong>A measured real-car force match has not been established here.</p></div>
+        <p class="snapshot-note">Research snapshot · 29 September 2026<br>40 car / variant entries · 6 LMU controls</p>
+      </aside>
+    </section>
+
+    <section class="research-cars" id="cars" aria-labelledby="cars-title">
+      <div class="research-section-heading"><div><span class="eyebrow">The car comes first</span><h2 id="cars-title">Open the evidence.</h2></div><p>“Real base” is the stored Strength reference for an 18 Nm wheelbase at 100% profile gain. It is a tuning target, not measured real-car torque.</p></div>
+      <div class="research-filters">
+        <label>Find a car<input id="car-search" type="search" placeholder="Porsche, ORECA, Evo…" autocomplete="off"></label>
+        <label>Class<select id="class-filter"><option value="">All classes</option><option>Hypercar</option><option>LMGT3</option><option>LMP2</option><option>ELMS LMP2</option><option>LMP3</option><option>GTE</option></select></label>
+        <label>Evidence<select id="evidence-filter"><option value="">All evidence</option><option value="documented">Published architecture or variant</option><option value="related">Related or limited evidence</option><option value="gap">Exact-car evidence gap</option></select></label>
+      </div>
+      <p id="car-status" class="research-status" role="status" aria-live="polite">Loading the research snapshot…</p>
+      <noscript><p>Enable JavaScript to browse the car snapshot. The methodology, example and source overview below remain available.</p></noscript>
+      <div class="car-workspace">
+        <div class="car-library" tabindex="0" role="region" aria-label="Scrollable car research list">
+          <table class="car-table"><caption class="sr-only">Stored exact-car Real bases and available evidence. Select a car to read its research.</caption><thead><tr><th scope="col">Car / variant</th><th scope="col">Real base</th><th scope="col">Evidence</th></tr></thead><tbody id="car-rows"></tbody></table>
+          <p id="empty-cars" hidden>No cars match. Clear the search or choose a different filter.</p>
+        </div>
+        <article id="car-detail" class="car-detail" aria-label="Selected car research"><p>Select a car to see its evidence and stored targets.</p></article>
+      </div>
+      <p class="research-caption">Static source snapshot. These values do not show your current game, connected wheelbase, active profile or applied settings.</p>
+    </section>
+
+    <section class="research-example" id="calculation" aria-labelledby="example-title">
+      <div><span class="eyebrow">One reference · separate inputs</span><h2 id="example-title">From base<br>to your wheel.</h2><p>RookForce preserves the car's stored Real base. The selected LMU Strength accounts for verified maximum wheelbase torque, active-profile Overall Force, effort mode and personal scale.</p><a href="#projection-details">Read the assumptions</a></div>
+      <div class="calculation-card">
+        <span class="eyebrow">Illustrative Porsche 963 example · assumed inputs</span>
+        <div class="calculation-inputs"><div><span>Stored Real base</span><strong>44<span>%</span></strong></div><div><span>Maximum torque</span><strong>18<span>Nm</span></strong></div><div><span>Profile gain</span><strong>60<span>%</span></strong></div></div>
+        <div class="calculation-equation"><span>Real mode · personal scale 100%</span><p>44 × (18 ÷ 18) ÷ 0.60 = 73.333…</p></div>
+        <div class="calculation-result"><strong>73<span>%</span></strong><p>Selected LMU Strength<br><span>One final half-up rounding</span></p></div>
+        <p class="calculation-note">This demonstrates the implemented arithmetic. It does not measure delivered wheel torque or validate a real-car match.</p>
+      </div>
+    </section>
+
+    <section class="research-method" id="method" aria-labelledby="method-title">
+      <div class="research-section-heading"><div><span class="eyebrow">The detail stays within reach</span><h2 id="method-title">Method &amp; limits.</h2></div><p>Good provenance improves the explanation. A numerical recommendation still needs its own proof.</p></div>
+      <details open><summary>What “Real Feel” establishes today</summary><div class="disclosure-body"><p>The stored targets originate in a Forte-based tuning workbook and a later power-steering correction. Manufacturer facts establish architecture or model revisions for some cars. Class rules establish permission; they do not prove a fitted assistance system or its force.</p><p><strong>No calibrated real-car handwheel torque or vibration dataset was recovered for this 40-entry review.</strong> The percentages are RookForce interpretations. Their software calculation is explicit; physical equivalence remains unverified.</p><p>Evidence varies by car. An architecture source, a public steering-angle interface and an unresolved physical reference are shown separately in the car browser. Confidence in a source is not confidence that a percentage is physically correct.</p></div></details>
+      <details><summary>The six LMU controls</summary><div class="disclosure-body control-grid">
+        <div><h3>Strength</h3><p>Adjusts feedback intensity. Only this target receives effort-mode, wheelbase, profile-gain and personal-scale projection.</p><a href="https://guide.lemansultimate.com/hc/en-gb/articles/13152295737359-How-to-set-up-your-wheel-and-pedals">Official wheel guide</a></div>
+        <div><h3>Additional FFB</h3><p>LMU can mix physics-triggered vibrotactile cues into ordinary FFB. That supports investigating the cues, without assuming zero or any other amount is automatically realistic.</p><a href="https://lemansultimate.com/le-mans-ultimate-releases-v1-3-update-with-final-elms-content-performance-updates/">Studio 397's explanation</a></div>
+        <div><h3>Engine effects</h3><p>LMU uses this name on its Haptics page. RookForce's setting binding identifies the option; its complete physical output route remains unresolved.</p><a href="https://guide.lemansultimate.com/hc/en-gb/articles/16364215047311-V1-3-3-Update-3-Patch-3">Official v1.3.3 notes</a></div>
+        <div><h3>Sensitivity</h3><p>Shapes response separately from gain. RookForce's catalog resolver enforces a minimum of 100%; that does not certify the full response curve.</p><a href="https://guide.lemansultimate.com/hc/en-gb/articles/13152295737359-How-to-set-up-your-wheel-and-pedals">Official control description</a></div>
+        <div><h3>Smoothing</h3><p>Softens rapid force changes. Filtering can affect texture and timing; a “refined” car description cannot choose a level.</p><a href="https://guide.lemansultimate.com/hc/en-gb/articles/13152295737359-How-to-set-up-your-wheel-and-pedals">Official wheel guide</a></div>
+        <div><h3>Collision</h3><p>Adjusts impact feedback. The stored policy is separate from architecture and from measured steering effort.</p><a href="https://guide.lemansultimate.com/hc/en-gb/articles/13152295737359-How-to-set-up-your-wheel-and-pedals">Official wheel guide</a></div>
+      </div></details>
+      <details id="projection-details"><summary>Projection, units and missing inputs</summary><div class="disclosure-body"><p class="formula">Selected % = Real base % × (18 Nm ÷ verified maximum Nm) × mode × personal scale ÷ active-profile gain</p><p>Mode factors are Soft 0.80, Medium 0.90, Hard 0.95 and Real 1.00. Personal scale is 50–100% in 5-point steps; gain and personal scale are fractions in this equation. The implementation retains precision, rounds once half-up and caps LMU Strength at 100%.</p><p>A capped target is marked limited. The separate Real reference uses Real mode and 100% personal scale with the same torque and gain. A current live LMU readback equal to an achievable reference is distinct from merely matching a personal target.</p><p>Maximum torque must be established for the current connected device and capability. High Torque mode, a product-family name or Overall Force alone cannot establish it. Gain comes from the latest verified settings of the uniquely active RaceHub profile. Editing that profile withholds its settings and dependent target until current verification completes; keeping the profile list available does not verify the edited gain. Missing, stale, ambiguous or changed evidence withholds the dependent current target and guarded write.</p><p>The formula normalizes an accepted tuning reference. It assumes a proportional gain relationship for this product calculation; it is not a measured transfer function for the wheel, LMU mix, clipping, filtering or real car. RookForce does not edit RaceHub profiles to achieve the target.</p></div></details>
+      <details><summary>Research history and what was adopted</summary><div class="disclosure-body"><ol class="research-timeline"><li><strong>July 2026 · original and corrected workbook</strong>Forty tuning entries used manufacturer settings as a starting point. Power-assistance evidence informed later interpretation. No measured exact-car force table was supplied.</li><li><strong>September · exact reference and personal effort</strong>The stored exact-car Real base is preserved while effort mode, personal scale, verified maximum torque and active-profile gain project Strength. Series/class research buckets remain a separate catalog path.</li><li><strong>26 September · renewed primary-source research</strong>The brief lists 40 historical labels, 28 external sources and 5 repository references. It proposes better control interpretation and one-car comparisons, without supplying an approved replacement numeric fleet.</li><li><strong>27 September · bounded adoption</strong>Integration review led to “Engine effects” wording and removal of a fabricated zero target where Minimum Steering Torque was absent. Stored values and automatic-apply behavior were preserved.</li><li><strong>29 September · this source audit</strong>The corrected workbook was recovered and compared with stored targets. Differences are disclosed per car. New numeric tuning and matched real-car validation remain separate future work.</li></ol></div></details>
+      <details><summary>How a stronger target could earn acceptance</summary><div class="disclosure-body"><p>Start with one exact car, one control and one observed issue. Record the game build, variant, setup, tyres, track conditions, output device and relevant profile. Compare a retained baseline and candidate at matched vehicle states, then report Retain, Revert or Inconclusive.</p><p>LMU's native telemetry documentation lists Steering Shaft Torque and FFB Output at 100 Hz in its example configuration. Those are game channels, not measured real-car or delivered wheel torque. Units, actual sample timing, assistance treatment and signal-chain stage need verification before calibration claims. A 100 Hz recording cannot resolve the whole 30–100 Hz vibration band without aliasing.</p><p>Useful cueing can be evaluated without a real-car laboratory. Claiming physical equivalence requires calibrated real-car reference data and an appropriate measured hardware response. No such experiment ran for this page.</p><a href="https://guide.lemansultimate.com/hc/en-gb/articles/14524956311695-Telemetry-Recording">Official telemetry reference</a></div></details>
+      <details><summary>Known provenance differences</summary><div class="disclosure-body"><p>The recovered corrected workbook and later research table differ on Peugeot wingless and ORECA competition treatment, several Evo Additional FFB values, and two Sensitivity floors. Current stored targets are displayed faithfully; this website changes none of them.</p><p>Retained series/class buckets also have a different Strength normalization from the exact-car table. The current exact automatic plan selects the exact-car table. A series-bucket result must not be presented as that same Real base.</p><p>Current build-review and exact-research metadata describe different checkpoints. They do not establish present compatibility or fresh validation for every car. Manufacturer guides can change too: Asetek's live baseline now differs from the historical workbook starting point.</p></div></details>
+    </section>
+
+    <section class="research-sources" id="sources" aria-labelledby="sources-title"><div class="research-section-heading"><div><span class="eyebrow">Follow the primary evidence</span><h2 id="sources-title">Source library.</h2></div><p>Sources establish specific facts. None supplies a calibrated percentage for all 40 cars.</p></div><p class="source-intro">The September brief's external inventory is retained below, alongside Asetek's baseline. Access notes distinguish this audit's checks from inherited references. Expand a source for its claim, date, limits and adoption.</p><div id="source-list" class="source-list"></div><noscript><p>Primary starting points: <a href="https://guide.lemansultimate.com/hc/en-gb/articles/13152295737359-How-to-set-up-your-wheel-and-pedals">LMU wheel guide</a>, <a href="https://lemansultimate.com/le-mans-ultimate-releases-v1-3-update-with-final-elms-content-performance-updates/">Studio 397 haptics explanation</a>, <a href="https://www.asetek.com/simsports/guides/le-mans-ultimate-1-3-settings/">Asetek baseline</a>.</p></noscript></section>
+  </main>
+  <footer class="site-footer"><div class="wrap footer-inner"><a class="footer-brand" href="index.html" aria-label="RookForce overview"><img src="assets/rookforce-logo.png" width="1474" height="248" alt="RookForce"></a><a class="research-footer-link" href="#method">Method &amp; limits</a><a class="research-footer-link" href="index.html#download">Downloads &amp; release notes</a><a class="discord-link" href="https://discord.gg/UPVYArKnkH" target="_blank" rel="noopener noreferrer" aria-label="Join Rook Driving Suite Community on Discord (opens in a new tab)"><img src="assets/discord-mark.svg" width="22" height="17" alt="" aria-hidden="true">Join Discord<span aria-hidden="true">↗</span></a></div></footer>
+</body>
+</html>

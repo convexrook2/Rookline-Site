@@ -1,0 +1,23 @@
+/* The accepted Imola map/playback, kept compact in the existing page section. */
+.imola-replay { width:100%; margin:0; color:var(--white); }
+.imola-replay [hidden] { display:none!important; }
+.imola-map,.imola-replay>[data-poster] { display:block; width:100%; height:auto; aspect-ratio:680/350; }
+.imola-legend { display:flex; flex-wrap:wrap; gap:7px 11px; margin:12px 0 16px; font:11px/1.4 var(--text); }
+.imola-legend span { display:inline-flex; align-items:center; gap:5px; }
+.imola-legend i { display:inline-block; width:18px; height:4px; background:var(--wet-colour); }
+.imola-controls { display:flex; gap:9px; align-items:end; flex-wrap:wrap; font:11px/1.4 var(--text); }
+.imola-controls button,.imola-controls select { min-height:38px; padding:7px 9px; border:1px solid #596371; border-radius:5px; background:#18212e; color:var(--white); font:inherit; }
+.imola-controls button[data-play] { background:var(--accent); border-color:var(--accent); color:var(--ink); min-width:51px; }
+.imola-controls button:hover,.imola-controls select:hover { border-color:var(--accent); background:#303e50; }
+.imola-controls button[data-play]:hover { background:#f1ffc2; }
+.imola-controls button:active { transform:translateY(1px); }
+.imola-time { flex:1; min-width:100px; }
+.imola-time label { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.imola-time output { font-variant-numeric:tabular-nums; }
+.imola-controls label { display:block; margin-bottom:5px; }
+.imola-controls .imola-time label { display:flex; }
+.imola-time input { display:block; width:100%; height:33px; margin:0; accent-color:var(--accent); }
+.imola-speed { min-width:58px; }
+.imola-speed select { width:100%; }
+.imola-replay :is(button,input,select):focus-visible { outline:2px solid var(--white); outline-offset:3px; }
+@media(pointer:coarse) { .imola-controls button,.imola-controls select,.imola-time input { min-height:44px; } }

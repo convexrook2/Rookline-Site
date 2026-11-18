@@ -1,0 +1,9 @@
+.wetness-layout { grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start; }
+.wetness-copy { grid-column:1 / -1; }
+.wetness-example { max-width:none; justify-self:stretch; }
+.daytona-example { min-width:0; scroll-margin-top:2rem; }
+.daytona-example iframe { display:block; width:100%; border:0; }
+.interlagos-example { grid-column:1/-1; width:100%; max-width:660px; min-width:0; justify-self:center; }
+.interlagos-example iframe { display:block; width:100%; border:0; margin-top:12px; }
+.interlagos-example .replay-caption { margin-top:12px; color:var(--muted-foreground,var(--white)); font:12px/1.5 var(--text); }
+@media(max-width:900px) { .wetness-layout { grid-template-columns:minmax(0,1fr); } }

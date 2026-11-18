@@ -1,0 +1,1651 @@
+{
+  "reviewed": "2026-11-04",
+  "scope": "Static research snapshot; no connection to a running game or wheelbase.",
+  "controls": [
+    {
+      "key": "ffbStrength",
+      "label": "Strength",
+      "unit": "%"
+    },
+    {
+      "key": "ffbSmoothing",
+      "label": "Smoothing",
+      "unit": "level"
+    },
+    {
+      "key": "additionalFfbEffects",
+      "label": "Additional FFB",
+      "unit": "%"
+    },
+    {
+      "key": "engineFfbEffects",
+      "label": "Engine effects",
+      "unit": "%"
+    },
+    {
+      "key": "collisionStrength",
+      "label": "Collision",
+      "unit": "%"
+    },
+    {
+      "key": "steeringTorqueSensitivity",
+      "label": "Sensitivity",
+      "unit": "%"
+    }
+  ],
+  "cars": [
+    {
+      "id": "car-01",
+      "name": "Alpine A424",
+      "class": "Hypercar",
+      "series": "Applicable catalog context",
+      "base": 42,
+      "targets": {
+        "ffbStrength": "42",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "12",
+        "engineFfbEffects": "0",
+        "collisionStrength": "56",
+        "steeringTorqueSensitivity": "103"
+      },
+      "evidence": "Architecture documented",
+      "fact": "Alpine identifies electric steering assistance.",
+      "sourceIds": [
+        "CAR-01"
+      ],
+      "interpretation": "Assistance is documented; its level cannot choose 42% Strength.",
+      "history": {
+        "original": 43,
+        "workbook": 42,
+        "stored": 42
+      },
+      "historicalArchitecture": "Electric power-assisted steering",
+      "historicalScope": "car-specific",
+      "historicalSourceConfidence": 0.95,
+      "historicalSettingsConfidence": 0.88,
+      "nextQuestion": "Store architecture separately from numerical tuning. Do not infer low force or muted texture from EPS. Examine the native load/detail response for the exact season.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-02",
+      "name": "Aston Martin Valkyrie AMR-LMH",
+      "class": "Hypercar",
+      "series": "Applicable catalog context",
+      "base": 44,
+      "targets": {
+        "ffbStrength": "44",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "10",
+        "engineFfbEffects": "1",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "101"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 46,
+        "workbook": 44,
+        "stored": 44
+      },
+      "historicalArchitecture": "Power steering allowed by LMH rules; exact car assist type not public in found sources",
+      "historicalScope": "class regulation",
+      "historicalSourceConfidence": 0.55,
+      "historicalSettingsConfidence": 0.67,
+      "nextQuestion": "Use the race variant’s operating envelope. Do not transfer road-car redline, AMR Pro or Valkyrie LM settings. Test engine-related cues by engine state, not loudness.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-03",
+      "name": "BMW M Hybrid V8",
+      "class": "Hypercar",
+      "series": "Applicable catalog context",
+      "base": 44,
+      "targets": {
+        "ffbStrength": "44",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "11",
+        "engineFfbEffects": "1",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "101"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 46,
+        "workbook": 44,
+        "stored": 44
+      },
+      "historicalArchitecture": "Power steering allowed by LMDh rules; exact car assist type not public in found sources",
+      "historicalScope": "class regulation",
+      "historicalSourceConfidence": 0.55,
+      "historicalSettingsConfidence": 0.67,
+      "nextQuestion": "Keep separate from Evo/Joker. Investigate a claimed change at matched states, not from a class-wide “heavy LMDh” assumption.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-04",
+      "name": "BMW M Hybrid V8 Evo/Joker",
+      "class": "Hypercar",
+      "series": "Applicable catalog context",
+      "base": 43,
+      "targets": {
+        "ffbStrength": "43",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "12",
+        "engineFfbEffects": "1",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "102"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 45,
+        "workbook": 43,
+        "stored": 43
+      },
+      "historicalArchitecture": "Power steering allowed by LMDh rules; exact car assist type not public in found sources",
+      "historicalScope": "class regulation",
+      "historicalSourceConfidence": 0.55,
+      "historicalSettingsConfidence": 0.67,
+      "nextQuestion": "Require a revision-specific source and native response evidence before inheriting any extra texture or STS adjustment from the Evo name.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-05",
+      "name": "Cadillac V-Series.R",
+      "class": "Hypercar",
+      "series": "Applicable catalog context",
+      "base": 45,
+      "targets": {
+        "ffbStrength": "45",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "10",
+        "engineFfbEffects": "2",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "100"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 48,
+        "workbook": 45,
+        "stored": 45
+      },
+      "historicalArchitecture": "Power steering confirmed by real race failure reports; exact assist architecture not public in found sources",
+      "historicalScope": "car evidence of system presence / type unknown",
+      "historicalSourceConfidence": 0.6,
+      "historicalSettingsConfidence": 0.69,
+      "nextQuestion": "A prominent engine sound is not evidence for stronger motor vibration. Validate the relevant model revision and event-linked output; do not assume the highest Strength.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-06",
+      "name": "Ferrari 499P",
+      "class": "Hypercar",
+      "series": "Applicable catalog context",
+      "base": 42,
+      "targets": {
+        "ffbStrength": "42",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "10",
+        "engineFfbEffects": "0",
+        "collisionStrength": "55",
+        "steeringTorqueSensitivity": "103"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 43,
+        "workbook": 42,
+        "stored": 42
+      },
+      "historicalArchitecture": "Power steering allowed by LMH rules; exact car assist type not public in found sources",
+      "historicalScope": "class regulation",
+      "historicalSourceConfidence": 0.55,
+      "historicalSettingsConfidence": 0.67,
+      "nextQuestion": "“Smooth assisted LMH” is an interpretation, not calibration. Investigate torque progression and added cues independently.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-07",
+      "name": "Genesis GMR-001",
+      "class": "Hypercar",
+      "series": "Applicable catalog context",
+      "base": 43,
+      "targets": {
+        "ffbStrength": "43",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "12",
+        "engineFfbEffects": "1",
+        "collisionStrength": "56",
+        "steeringTorqueSensitivity": "102"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 44,
+        "workbook": 43,
+        "stored": 43
+      },
+      "historicalArchitecture": "Power steering allowed by LMDh rules; exact car assist type not public in found sources",
+      "historicalScope": "class regulation",
+      "historicalSourceConfidence": 0.55,
+      "historicalSettingsConfidence": 0.67,
+      "nextQuestion": "Do not turn recent model introduction or LMDh classification into a percentage. Preserve a scoped provisional baseline until a specific contradiction appears.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-08",
+      "name": "Glickenhaus SCG 007",
+      "class": "Hypercar",
+      "series": "Applicable catalog context",
+      "base": 43,
+      "targets": {
+        "ffbStrength": "43",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "13",
+        "engineFfbEffects": "1",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "101"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 45,
+        "workbook": 43,
+        "stored": 43
+      },
+      "historicalArchitecture": "Power steering allowed by LMH rules; exact car assist type not public in found sources",
+      "historicalScope": "class regulation",
+      "historicalSourceConfidence": 0.55,
+      "historicalSettingsConfidence": 0.67,
+      "nextQuestion": "Program age and non-hybrid status cannot justify extra texture. Compare native surface/RPM relationships before proposing a change.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-09",
+      "name": "Isotta Fraschini Tipo 6-C",
+      "class": "Hypercar",
+      "series": "Applicable catalog context",
+      "base": 42,
+      "targets": {
+        "ffbStrength": "42",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "14",
+        "engineFfbEffects": "0",
+        "collisionStrength": "56",
+        "steeringTorqueSensitivity": "102"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 44,
+        "workbook": 42,
+        "stored": 42
+      },
+      "historicalArchitecture": "Power steering allowed by LMH rules; exact car assist type not public in found sources",
+      "historicalScope": "class regulation",
+      "historicalSourceConfidence": 0.55,
+      "historicalSettingsConfidence": 0.67,
+      "nextQuestion": "A smaller program is not a mechanical property. Remove that rationale only through a bounded reviewed correction; do not silently discard working settings.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-10",
+      "name": "Lamborghini SC63",
+      "class": "Hypercar",
+      "series": "Applicable catalog context",
+      "base": 44,
+      "targets": {
+        "ffbStrength": "44",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "12",
+        "engineFfbEffects": "1",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "102"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 45,
+        "workbook": 44,
+        "stored": 44
+      },
+      "historicalArchitecture": "Power steering allowed by LMDh rules; exact car assist type not public in found sources",
+      "historicalScope": "class regulation",
+      "historicalSourceConfidence": 0.55,
+      "historicalSettingsConfidence": 0.67,
+      "nextQuestion": "Avoid copying another LMDh’s gain or texture solely from its class. Validate exact identity and distinguish engine-linked from surface-linked response.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-11",
+      "name": "Peugeot 9X8 wingless",
+      "class": "Hypercar",
+      "series": "Applicable catalog context",
+      "base": 42,
+      "targets": {
+        "ffbStrength": "42",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "14",
+        "engineFfbEffects": "0",
+        "collisionStrength": "55",
+        "steeringTorqueSensitivity": "104"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 42,
+        "workbook": 41,
+        "stored": 42
+      },
+      "historicalArchitecture": "Power steering allowed by LMH rules; exact car assist type not public in found sources",
+      "historicalScope": "class regulation",
+      "historicalSourceConfidence": 0.55,
+      "historicalSettingsConfidence": 0.67,
+      "nextQuestion": "Keep its identity separate from the later car. Aerodynamic concept alone does not determine Additional FFB or smoothing.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [
+        "ffbStrength: workbook 41, stored 42",
+        "additionalFfbEffects: workbook 15, stored 14"
+      ],
+      "identityNote": "Requires current variant context; season/name alone is insufficient."
+    },
+    {
+      "id": "car-12",
+      "name": "Peugeot 9X8 2024",
+      "class": "Hypercar",
+      "series": "Applicable catalog context",
+      "base": 43,
+      "targets": {
+        "ffbStrength": "43",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "12",
+        "engineFfbEffects": "0",
+        "collisionStrength": "56",
+        "steeringTorqueSensitivity": "102"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 44,
+        "workbook": 43,
+        "stored": 43
+      },
+      "historicalArchitecture": "Power steering allowed by LMH rules; exact car assist type not public in found sources",
+      "historicalScope": "class regulation",
+      "historicalSourceConfidence": 0.55,
+      "historicalSettingsConfidence": 0.67,
+      "nextQuestion": "Require the post-wing specification. Do not infer “calmer” or lower texture simply from bodywork changes; compare state-matched native output.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "Requires current variant context; season/name alone is insufficient."
+    },
+    {
+      "id": "car-13",
+      "name": "Porsche 963",
+      "class": "Hypercar",
+      "series": "Applicable catalog context",
+      "base": 44,
+      "targets": {
+        "ffbStrength": "44",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "12",
+        "engineFfbEffects": "1",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "102"
+      },
+      "evidence": "Architecture documented",
+      "fact": "Multimatic identifies hydraulic steering assistance.",
+      "sourceIds": [
+        "CAR-02"
+      ],
+      "interpretation": "Hydraulic assistance does not establish a heavier feel than electric assistance.",
+      "history": {
+        "original": 45,
+        "workbook": 44,
+        "stored": 44
+      },
+      "historicalArchitecture": "Hydraulic power steering",
+      "historicalScope": "car-specific",
+      "historicalSourceConfidence": 0.95,
+      "historicalSettingsConfidence": 0.88,
+      "nextQuestion": "Strong architecture evidence, not a gain reference. Compare torque progression and texture separately; hydraulic does not prove heavier than Alpine.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-14",
+      "name": "Toyota GR010-Hybrid",
+      "class": "Hypercar",
+      "series": "Applicable catalog context",
+      "base": 44,
+      "targets": {
+        "ffbStrength": "44",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "9",
+        "engineFfbEffects": "0",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "101"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 46,
+        "workbook": 44,
+        "stored": 44
+      },
+      "historicalArchitecture": "Power steering allowed by LMH rules; exact car assist type not public in found sources",
+      "historicalScope": "class regulation",
+      "historicalSourceConfidence": 0.55,
+      "historicalSettingsConfidence": 0.67,
+      "nextQuestion": "Preserve GR010 identity and game specification. Do not let “stable high-aero” prescribe lower extra cues without observed benefit.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-15",
+      "name": "Toyota TR010",
+      "class": "Hypercar",
+      "series": "Applicable catalog context",
+      "base": 43,
+      "targets": {
+        "ffbStrength": "43",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "10",
+        "engineFfbEffects": "0",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "102"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 45,
+        "workbook": 43,
+        "stored": 43
+      },
+      "historicalArchitecture": "Power steering allowed by LMH rules; exact car assist type not public in found sources",
+      "historicalScope": "class regulation",
+      "historicalSourceConfidence": 0.55,
+      "historicalSettingsConfidence": 0.67,
+      "nextQuestion": "Treat as a distinct listed variant pending exact catalog mapping. Do not assume either identical or one-point-lighter settings.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-16",
+      "name": "Vanwall Vandervell 680",
+      "class": "Hypercar",
+      "series": "Applicable catalog context",
+      "base": 43,
+      "targets": {
+        "ffbStrength": "43",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "14",
+        "engineFfbEffects": "2",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "100"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 46,
+        "workbook": 43,
+        "stored": 43
+      },
+      "historicalArchitecture": "Power steering allowed by LMH rules; exact car assist type not public in found sources",
+      "historicalScope": "class regulation",
+      "historicalSourceConfidence": 0.55,
+      "historicalSettingsConfidence": 0.67,
+      "nextQuestion": "“Privateer” is not a source for engine/detail intensity. Use engine-state and surface discrimination rather than program characterization.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-17",
+      "name": "Aston Martin Vantage AMR LMGT3",
+      "class": "LMGT3",
+      "series": "Applicable catalog context",
+      "base": 38,
+      "targets": {
+        "ffbStrength": "38",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "17",
+        "engineFfbEffects": "2",
+        "collisionStrength": "55",
+        "steeringTorqueSensitivity": "102"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 45,
+        "workbook": 38,
+        "stored": 38
+      },
+      "historicalArchitecture": "Power-assisted steering",
+      "historicalScope": "car-specific",
+      "historicalSourceConfidence": 0.88,
+      "historicalSettingsConfidence": 0.86,
+      "nextQuestion": "Do not import road-car steering descriptions or the GTE profile. Separate body/engine cues from the base steering progression.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-18",
+      "name": "BMW M4 LMGT3",
+      "class": "LMGT3",
+      "series": "Applicable catalog context",
+      "base": 39,
+      "targets": {
+        "ffbStrength": "39",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "15",
+        "engineFfbEffects": "1",
+        "collisionStrength": "56",
+        "steeringTorqueSensitivity": "100"
+      },
+      "evidence": "Variant documented",
+      "fact": "BMW separates the earlier M4 from the EVO generation.",
+      "sourceIds": [
+        "CAR-07"
+      ],
+      "interpretation": "A model revision does not establish a numerical FFB difference.",
+      "history": {
+        "original": 47,
+        "workbook": 39,
+        "stored": 39
+      },
+      "historicalArchitecture": "Motorsport hydraulic power steering",
+      "historicalScope": "car-specific from official PDF snippet",
+      "historicalSourceConfidence": 0.8,
+      "historicalSettingsConfidence": 0.76,
+      "nextQuestion": "Bind the earlier variant explicitly. Front-engine layout does not establish greater force or engine-effect amplitude.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-19",
+      "name": "BMW M4 LMGT3 Evo",
+      "class": "LMGT3",
+      "series": "Applicable catalog context",
+      "base": 39,
+      "targets": {
+        "ffbStrength": "39",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "15",
+        "engineFfbEffects": "1",
+        "collisionStrength": "56",
+        "steeringTorqueSensitivity": "100"
+      },
+      "evidence": "Variant documented",
+      "fact": "BMW describes the EVO chassis and model evolution.",
+      "sourceIds": [
+        "CAR-07"
+      ],
+      "interpretation": "Chassis changes can motivate a comparison, without prescribing extra engine effects.",
+      "history": {
+        "original": 47,
+        "workbook": 39,
+        "stored": 39
+      },
+      "historicalArchitecture": "Motorsport hydraulic power steering",
+      "historicalScope": "car-specific",
+      "historicalSourceConfidence": 0.86,
+      "historicalSettingsConfidence": 0.85,
+      "nextQuestion": "Chassis revision can motivate response comparison; it does not automatically require different engine vibration. Keep tuning controls independently justified.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-20",
+      "name": "Corvette Z06 LMGT3.R",
+      "class": "LMGT3",
+      "series": "Applicable catalog context",
+      "base": 39,
+      "targets": {
+        "ffbStrength": "39",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "16",
+        "engineFfbEffects": "2",
+        "collisionStrength": "56",
+        "steeringTorqueSensitivity": "101"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 46,
+        "workbook": 39,
+        "stored": 39
+      },
+      "historicalArchitecture": "FIA GT3/LMGT3 homologation context; exact car assist type not public in found sources",
+      "historicalScope": "class/category inferred",
+      "historicalSourceConfidence": 0.4,
+      "historicalSettingsConfidence": 0.62,
+      "nextQuestion": "Do not inherit C8.R GTE settings from manufacturer or body similarity. Investigate native load/detail behaviour in the actual LMGT3 car.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-21",
+      "name": "Ferrari 296 LMGT3",
+      "class": "LMGT3",
+      "series": "Applicable catalog context",
+      "base": 36,
+      "targets": {
+        "ffbStrength": "36",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "19",
+        "engineFfbEffects": "1",
+        "collisionStrength": "54",
+        "steeringTorqueSensitivity": "104"
+      },
+      "evidence": "Related data interface",
+      "fact": "AiM publishes steering-angle and operating-state channels for the 296 GT3.",
+      "sourceIds": [
+        "DATA-01"
+      ],
+      "interpretation": "Steering angle is not effort; exact LMGT3 protocol applicability remains open.",
+      "history": {
+        "original": 41,
+        "workbook": 36,
+        "stored": 36
+      },
+      "historicalArchitecture": "Power steering pump confirmed; exact assist architecture not public in found sources",
+      "historicalScope": "base/Evo family evidence",
+      "historicalSourceConfidence": 0.65,
+      "historicalSettingsConfidence": 0.71,
+      "nextQuestion": "Useful for future matched-state real-data requests; angle is not effort. Exact LMGT3 applicability must be checked before treating the GT3 interface as complete.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-22",
+      "name": "Ferrari 296 GT3 Evo",
+      "class": "LMGT3",
+      "series": "Applicable catalog context",
+      "base": 37,
+      "targets": {
+        "ffbStrength": "37",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "19",
+        "engineFfbEffects": "1",
+        "collisionStrength": "54",
+        "steeringTorqueSensitivity": "103"
+      },
+      "evidence": "Limited primary excerpt",
+      "fact": "Ferrari's indexed announcement describes steering-pump cooling.",
+      "sourceIds": [
+        "CAR-06"
+      ],
+      "interpretation": "Full article access is limited; cooling does not choose Strength or texture.",
+      "history": {
+        "original": 42,
+        "workbook": 37,
+        "stored": 37
+      },
+      "historicalArchitecture": "Power steering pump confirmed; exact assist architecture not public in found sources",
+      "historicalScope": "car-specific Evo evidence",
+      "historicalSourceConfidence": 0.72,
+      "historicalSettingsConfidence": 0.73,
+      "nextQuestion": "Treat thermal consistency as a question, not evidence for more assistance, lower gain or more texture. Do not invent pump-temperature simulation.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [
+        "additionalFfbEffects: workbook 18, stored 19"
+      ],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-23",
+      "name": "Ford Mustang LMGT3",
+      "class": "LMGT3",
+      "series": "Applicable catalog context",
+      "base": 40,
+      "targets": {
+        "ffbStrength": "40",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "17",
+        "engineFfbEffects": "3",
+        "collisionStrength": "56",
+        "steeringTorqueSensitivity": "100"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 47,
+        "workbook": 40,
+        "stored": 40
+      },
+      "historicalArchitecture": "FIA GT3/LMGT3 homologation context; exact car assist type not public in found sources",
+      "historicalScope": "class/category inferred",
+      "historicalSourceConfidence": 0.4,
+      "historicalSettingsConfidence": 0.62,
+      "nextQuestion": "Engine size or exhaust sound cannot choose Engine FFB. Discriminate RPM-linked cues from road and wheel-speed cues.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-24",
+      "name": "Ford Mustang GT3 Evo",
+      "class": "LMGT3",
+      "series": "Applicable catalog context",
+      "base": 39,
+      "targets": {
+        "ffbStrength": "39",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "17",
+        "engineFfbEffects": "3",
+        "collisionStrength": "56",
+        "steeringTorqueSensitivity": "101"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 46,
+        "workbook": 39,
+        "stored": 39
+      },
+      "historicalArchitecture": "FIA GT3/LMGT3 homologation context; exact car assist type not public in found sources",
+      "historicalScope": "class/category inferred",
+      "historicalSourceConfidence": 0.4,
+      "historicalSettingsConfidence": 0.62,
+      "nextQuestion": "A changed badge or aero package cannot justify a one-point setting change. Compare exact native configurations before promoting a candidate.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [
+        "additionalFfbEffects: workbook 16, stored 17"
+      ],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-25",
+      "name": "Lamborghini Huracan LMGT3 Evo2",
+      "class": "LMGT3",
+      "series": "Applicable catalog context",
+      "base": 37,
+      "targets": {
+        "ffbStrength": "37",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "18",
+        "engineFfbEffects": "2",
+        "collisionStrength": "55",
+        "steeringTorqueSensitivity": "103"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 43,
+        "workbook": 37,
+        "stored": 37
+      },
+      "historicalArchitecture": "FIA GT3/LMGT3 homologation context; exact car assist type not public in found sources",
+      "historicalScope": "class/category inferred",
+      "historicalSourceConfidence": 0.4,
+      "historicalSettingsConfidence": 0.62,
+      "nextQuestion": "Preserve Evo2 and class identity. Do not generalize from SC63, road Huracan or another mid-engine GT3.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-26",
+      "name": "Lexus RC F LMGT3",
+      "class": "LMGT3",
+      "series": "Applicable catalog context",
+      "base": 39,
+      "targets": {
+        "ffbStrength": "39",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "14",
+        "engineFfbEffects": "2",
+        "collisionStrength": "56",
+        "steeringTorqueSensitivity": "100"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 46,
+        "workbook": 39,
+        "stored": 39
+      },
+      "historicalArchitecture": "FIA GT3/LMGT3 homologation context; exact car assist type not public in found sources",
+      "historicalScope": "class/category inferred",
+      "historicalSourceConfidence": 0.4,
+      "historicalSettingsConfidence": 0.62,
+      "nextQuestion": "“Heavy and calm” is not a source for STS, smoothing or Strength. Test each suspected issue separately.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [
+        "steeringTorqueSensitivity: workbook 99, stored 100"
+      ],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-27",
+      "name": "McLaren 720S LMGT3 Evo",
+      "class": "LMGT3",
+      "series": "Applicable catalog context",
+      "base": 36,
+      "targets": {
+        "ffbStrength": "36",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "19",
+        "engineFfbEffects": "1",
+        "collisionStrength": "54",
+        "steeringTorqueSensitivity": "104"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 41,
+        "workbook": 36,
+        "stored": 36
+      },
+      "historicalArchitecture": "FIA GT3/LMGT3 homologation context; exact car assist type not public in found sources",
+      "historicalScope": "class/category inferred",
+      "historicalSourceConfidence": 0.4,
+      "historicalSettingsConfidence": 0.62,
+      "nextQuestion": "Road 720S steering praise is not quantitative race evidence. Evaluate information around grip transition rather than assigning artificial centre bite.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-28",
+      "name": "Mercedes-AMG LMGT3",
+      "class": "LMGT3",
+      "series": "Applicable catalog context",
+      "base": 40,
+      "targets": {
+        "ffbStrength": "40",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "14",
+        "engineFfbEffects": "3",
+        "collisionStrength": "56",
+        "steeringTorqueSensitivity": "100"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 48,
+        "workbook": 40,
+        "stored": 40
+      },
+      "historicalArchitecture": "FIA GT3/LMGT3 homologation context; exact car assist type not public in found sources",
+      "historicalScope": "class/category inferred",
+      "historicalSourceConfidence": 0.4,
+      "historicalSettingsConfidence": 0.62,
+      "nextQuestion": "Do not make it the heaviest or most engine-vibratory entry from brand reputation. Preserve a working profile while identifying a concrete mismatch.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [
+        "steeringTorqueSensitivity: workbook 99, stored 100"
+      ],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-29",
+      "name": "Porsche 911 GT3 R",
+      "class": "LMGT3",
+      "series": "Applicable catalog context",
+      "base": 38,
+      "targets": {
+        "ffbStrength": "38",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "16",
+        "engineFfbEffects": "2",
+        "collisionStrength": "55",
+        "steeringTorqueSensitivity": "103"
+      },
+      "evidence": "Variant documented",
+      "fact": "Porsche identifies the predecessor and its MY2026 evolution.",
+      "sourceIds": [
+        "CAR-05"
+      ],
+      "interpretation": "Resolve generation before transferring steering-system details.",
+      "history": {
+        "original": 43,
+        "workbook": 38,
+        "stored": 38
+      },
+      "historicalArchitecture": "Electro-hydraulic power-assisted steering",
+      "historicalScope": "car-specific",
+      "historicalSourceConfidence": 0.95,
+      "historicalSettingsConfidence": 0.88,
+      "nextQuestion": "Resolve 991 versus 992 and pre-Evo versus Evo explicitly. Do not transfer any older media-guide calibration merely because the public label matches.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-30",
+      "name": "Porsche 911 GT3 R Evo",
+      "class": "LMGT3",
+      "series": "Applicable catalog context",
+      "base": 38,
+      "targets": {
+        "ffbStrength": "38",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "16",
+        "engineFfbEffects": "2",
+        "collisionStrength": "55",
+        "steeringTorqueSensitivity": "102"
+      },
+      "evidence": "Variant documented",
+      "fact": "Porsche describes additional steering-fluid cooling for its MY2026 evolution.",
+      "sourceIds": [
+        "CAR-05"
+      ],
+      "interpretation": "Improved consistency is documented; a one-point gain change is not.",
+      "history": {
+        "original": 44,
+        "workbook": 38,
+        "stored": 38
+      },
+      "historicalArchitecture": "Electro-hydraulic power-assisted steering; Evo assumed same base architecture",
+      "historicalScope": "base car specific / Evo inferred",
+      "historicalSourceConfidence": 0.82,
+      "historicalSettingsConfidence": 0.77,
+      "nextQuestion": "The supported direction is consistency, not a lower scalar. Check whether the game models relevant differences before attempting thermal interpretation.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [
+        "additionalFfbEffects: workbook 15, stored 16"
+      ],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-31",
+      "name": "ORECA 07 Gibson 2023",
+      "class": "LMP2",
+      "series": "WEC",
+      "base": 43,
+      "targets": {
+        "ffbStrength": "43",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "14",
+        "engineFfbEffects": "1",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "100"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 45,
+        "workbook": 43,
+        "stored": 43
+      },
+      "historicalArchitecture": "Homologation-controlled LMP2; exact public steering assist type not found",
+      "historicalScope": "no direct source found",
+      "historicalSourceConfidence": 0.3,
+      "historicalSettingsConfidence": 0.58,
+      "nextQuestion": "Verify actual championship specification. A year label alone cannot determine tyres, permitted performance or the force response.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "Competition specification WEC; the year label alone does not identify the force response."
+    },
+    {
+      "id": "car-32",
+      "name": "ORECA 07 Gibson 2024",
+      "class": "ELMS LMP2",
+      "series": "ELMS",
+      "base": 46,
+      "targets": {
+        "ffbStrength": "46",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "13",
+        "engineFfbEffects": "1",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "101"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 45,
+        "workbook": 43,
+        "stored": 46
+      },
+      "historicalArchitecture": "Homologation-controlled LMP2; exact public steering assist type not found",
+      "historicalScope": "no direct source found",
+      "historicalSourceConfidence": 0.3,
+      "historicalSettingsConfidence": 0.58,
+      "nextQuestion": "Do not mistake an ELMS/restricted-LMP2 difference for a simple model-year assist change. Retain separate validated operating conditions.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [
+        "ffbStrength: workbook 43, stored 46",
+        "additionalFfbEffects: workbook 14, stored 13",
+        "steeringTorqueSensitivity: workbook 100, stored 101"
+      ],
+      "identityNote": "Competition specification ELMS; the year label alone does not identify the force response."
+    },
+    {
+      "id": "car-33",
+      "name": "Ginetta G61-LT-P325-Evo",
+      "class": "LMP3",
+      "series": "Applicable catalog context",
+      "base": 39,
+      "targets": {
+        "ffbStrength": "39",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "20",
+        "engineFfbEffects": "1",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "104"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 46,
+        "workbook": 39,
+        "stored": 39
+      },
+      "historicalArchitecture": "No exact public steering assist source found for this LMP3 chassis in this pass",
+      "historicalScope": "unsupported exact car",
+      "historicalSourceConfidence": 0.25,
+      "historicalSettingsConfidence": 0.57,
+      "nextQuestion": "Do not use a previous G61-LT-P3 technical sheet as direct P325-Evo validation. Establish generation before importing engine or steering facts.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-34",
+      "name": "Ligier JS P325",
+      "class": "LMP3",
+      "series": "Applicable catalog context",
+      "base": 38,
+      "targets": {
+        "ffbStrength": "38",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "19",
+        "engineFfbEffects": "1",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "103"
+      },
+      "evidence": "Architecture documented",
+      "fact": "Ligier specifies cooled hydraulic steering assistance.",
+      "sourceIds": [
+        "CAR-03"
+      ],
+      "interpretation": "This newer source improves the architecture description, without validating 38%.",
+      "history": {
+        "original": 45,
+        "workbook": 38,
+        "stored": 38
+      },
+      "historicalArchitecture": "No exact public steering assist source found for this LMP3 chassis in this pass",
+      "historicalScope": "unsupported exact car",
+      "historicalSourceConfidence": 0.25,
+      "historicalSettingsConfidence": 0.57,
+      "nextQuestion": "Useful contrast with ADESS; not evidence that it must be heavier. Shared engine family does not equal shared handwheel vibration.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-35",
+      "name": "Duqueine D09",
+      "class": "LMP3",
+      "series": "Applicable catalog context",
+      "base": 39,
+      "targets": {
+        "ffbStrength": "39",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "20",
+        "engineFfbEffects": "1",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "104"
+      },
+      "evidence": "Related data interface",
+      "fact": "AiM publishes an operating-state interface for the D09 V35A/V51.",
+      "sourceIds": [
+        "DATA-02"
+      ],
+      "interpretation": "The interface supplies no measured driver-hand torque trace.",
+      "history": {
+        "original": 46,
+        "workbook": 39,
+        "stored": 39
+      },
+      "historicalArchitecture": "No exact public steering assist source found for this LMP3 chassis in this pass",
+      "historicalScope": "unsupported exact car",
+      "historicalSourceConfidence": 0.25,
+      "historicalSettingsConfidence": 0.57,
+      "nextQuestion": "Useful state-channel request; not a physical torque trace. Resolve protocol/model applicability and distinguish missing data from a measured zero.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-36",
+      "name": "ADESS AD25",
+      "class": "LMP3",
+      "series": "Applicable catalog context",
+      "base": 38,
+      "targets": {
+        "ffbStrength": "38",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "21",
+        "engineFfbEffects": "1",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "104"
+      },
+      "evidence": "Architecture documented",
+      "fact": "ADESS specifies adjustable electrical steering assistance.",
+      "sourceIds": [
+        "CAR-04"
+      ],
+      "interpretation": "The real assistance setting matters; no force map calibrates 38%.",
+      "history": {
+        "original": 45,
+        "workbook": 38,
+        "stored": 38
+      },
+      "historicalArchitecture": "Electrical adjustable power steering",
+      "historicalScope": "car-specific",
+      "historicalSourceConfidence": 0.95,
+      "historicalSettingsConfidence": 0.88,
+      "nextQuestion": "A single universal “real” force is questionable without the assistance setting. Do not treat all available assist levels as one calibrated target.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-37",
+      "name": "Aston Martin Vantage AMR GTE",
+      "class": "GTE",
+      "series": "Applicable catalog context",
+      "base": 40,
+      "targets": {
+        "ffbStrength": "40",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "16",
+        "engineFfbEffects": "2",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "101"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 45,
+        "workbook": 40,
+        "stored": 40
+      },
+      "historicalArchitecture": "Hydraulic power assisted steering",
+      "historicalScope": "car-specific",
+      "historicalSourceConfidence": 0.85,
+      "historicalSettingsConfidence": 0.85,
+      "nextQuestion": "Do not inherit LMGT3 characteristics. Evaluate native output for the GTE specification and avoid class-wide personality multipliers.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-38",
+      "name": "Chevrolet Corvette C8.R GTE",
+      "class": "GTE",
+      "series": "Applicable catalog context",
+      "base": 41,
+      "targets": {
+        "ffbStrength": "41",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "17",
+        "engineFfbEffects": "2",
+        "collisionStrength": "58",
+        "steeringTorqueSensitivity": "101"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 46,
+        "workbook": 41,
+        "stored": 41
+      },
+      "historicalArchitecture": "No exact public steering assist source found for this GTE car in this pass",
+      "historicalScope": "unsupported exact car",
+      "historicalSourceConfidence": 0.3,
+      "historicalSettingsConfidence": 0.58,
+      "nextQuestion": "Keep separate from Z06 LMGT3.R. A common manufacturer or related engine sound cannot transfer an engine-effect setting.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-39",
+      "name": "Ferrari 488 GTE Evo",
+      "class": "GTE",
+      "series": "Applicable catalog context",
+      "base": 38,
+      "targets": {
+        "ffbStrength": "38",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "18",
+        "engineFfbEffects": "1",
+        "collisionStrength": "57",
+        "steeringTorqueSensitivity": "103"
+      },
+      "evidence": "Evidence gap",
+      "fact": "An exact-car steering-force or vibration reference remains unresolved in this review.",
+      "sourceIds": [],
+      "interpretation": "Stored settings are tuning interpretations. Assistance rules and vehicle personality cannot validate a percentage.",
+      "history": {
+        "original": 42,
+        "workbook": 38,
+        "stored": 38
+      },
+      "historicalArchitecture": "No exact public steering assist source found for this GTE car in this pass",
+      "historicalScope": "unsupported exact car",
+      "historicalSourceConfidence": 0.3,
+      "historicalSettingsConfidence": 0.58,
+      "nextQuestion": "Do not substitute 296 data or road-car 488 traits. Any existing “sharpness” adjustment needs a separate tested purpose.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    },
+    {
+      "id": "car-40",
+      "name": "Porsche 911 RSR-19 GTE",
+      "class": "GTE",
+      "series": "Applicable catalog context",
+      "base": 39,
+      "targets": {
+        "ffbStrength": "39",
+        "ffbSmoothing": "1",
+        "additionalFfbEffects": "17",
+        "engineFfbEffects": "2",
+        "collisionStrength": "57",
+        "steeringTorqueSensitivity": "103"
+      },
+      "evidence": "Architecture documented",
+      "fact": "Porsche's MY2019 technical record specifies electrohydraulic steering assistance.",
+      "sourceIds": [
+        "CAR-10"
+      ],
+      "interpretation": "Keep GTE RSR separate from GT3 R; no calibrated Strength follows.",
+      "history": {
+        "original": 43,
+        "workbook": 39,
+        "stored": 39
+      },
+      "historicalArchitecture": "Electro-hydraulic power steering",
+      "historicalScope": "car-specific",
+      "historicalSourceConfidence": 0.95,
+      "historicalSettingsConfidence": 0.88,
+      "nextQuestion": "Do not merge with 911 GT3 R. Preserve separate architecture and test cases rather than transferring values through the 911 name.",
+      "adoption": "Stored exact-car target retained. September 26 numerical retuning remains research only.",
+      "differences": [],
+      "identityNote": "A current exact model/class identity is required; team and livery text cannot select a numerical target."
+    }
+  ],
+  "sources": [
+    {
+      "id": "LMU-01",
+      "title": "LMU wheel and pedal setup guide",
+      "url": "https://guide.lemansultimate.com/hc/en-gb/articles/13152295737359-How-to-set-up-your-wheel-and-pedals",
+      "date": "Live guide; date unstated",
+      "claim": "Controls change the simulated feedback response.",
+      "limits": "No complete signal-chain equations or physical per-car calibration.",
+      "access": "Fetched 2026-09-29",
+      "adoption": "CURRENT control interpretation"
+    },
+    {
+      "id": "LMU-02",
+      "title": "LMU v1.3: physics-driven haptics and output routes",
+      "url": "https://lemansultimate.com/le-mans-ultimate-releases-v1-3-update-with-final-elms-content-performance-updates/",
+      "date": "2026-03-26",
+      "claim": "Physics-triggered vibrotactile effects can join ordinary FFB; separate haptic output is supported.",
+      "limits": "No complete mix order or amplitude calibration.",
+      "access": "Fetched 2026-09-29",
+      "adoption": "RESEARCH ONLY for new numerical tuning"
+    },
+    {
+      "id": "LMU-03",
+      "title": "Logitech LMU integration explanation",
+      "url": "https://www.logitech.com/blog/2026/04/14/logitech-g-and-le-mans-ultimate/",
+      "date": "2026-04-14 (brief)",
+      "claim": "Integration examples: scrub, shifts, pit limiter and kerbs.",
+      "limits": "Intended effects; no measured real-car amplitudes.",
+      "access": "September 26 brief; not re-fetched",
+      "adoption": "RESEARCH ONLY"
+    },
+    {
+      "id": "LMU-04",
+      "title": "LMU v1.3.3 release notes",
+      "url": "https://guide.lemansultimate.com/hc/en-gb/articles/16364215047311-V1-3-3-Update-3-Patch-3",
+      "date": "v1.3.3",
+      "claim": "Engine Effects was added to the Haptics page; input filtering changed.",
+      "limits": "Terminology does not prove steering-motor output.",
+      "access": "Fetched 2026-09-29",
+      "adoption": "ADOPTED WITH MODIFICATION: Engine effects label"
+    },
+    {
+      "id": "LMU-05",
+      "title": "LMU v1.4.2 release notes",
+      "url": "https://guide.lemansultimate.com/hc/en-gb/articles/17713037697807-V1-4-2-Update-1-4-Patch-2",
+      "date": "v1.4.2; September 2026",
+      "claim": "Hypercar tyre update addresses Daytona oscillation.",
+      "limits": "Build and condition specific; brake torque is separate from steering torque.",
+      "access": "Fetched 2026-09-29",
+      "adoption": "RESEARCH ONLY for new tuning"
+    },
+    {
+      "id": "LMU-06",
+      "title": "LMU v1.4.2.1 hotfix notes",
+      "url": "https://guide.lemansultimate.com/hc/en-gb/articles/17739847034383-v1-4-2-1-Update-4-Patch-2-Hotfix-1",
+      "date": "v1.4.2.1; September 2026",
+      "claim": "Hotfix reference located in the September brief.",
+      "limits": "Does not identify installed build or present compatibility.",
+      "access": "September 26 brief; not re-fetched",
+      "adoption": "RESEARCH ONLY"
+    },
+    {
+      "id": "LMU-07",
+      "title": "LMU June 2025 update notes",
+      "url": "https://lemansultimate.com/update-5-june-2025-release-notes/",
+      "date": "2025-06-09 (brief)",
+      "claim": "Tyre, low-speed weight and FFB equalization history.",
+      "limits": "Not an inverse calibration formula.",
+      "access": "September 26 brief; not re-fetched",
+      "adoption": "RESEARCH ONLY"
+    },
+    {
+      "id": "LMU-08",
+      "title": "LMU March 2024 patch notes",
+      "url": "https://lemansultimate.com/patch-1-12th-march-2024-public-notes/",
+      "date": "2024-03-12 (brief)",
+      "claim": "Historical STS range reported as 100–200%.",
+      "limits": "Old range does not establish current curve.",
+      "access": "September 26 brief; not re-fetched",
+      "adoption": "CURRENT source floor 100; full equivalence UNKNOWN"
+    },
+    {
+      "id": "LMU-09",
+      "title": "LMU native telemetry recording",
+      "url": "https://guide.lemansultimate.com/hc/en-gb/articles/14524956311695-Telemetry-Recording",
+      "date": "Live telemetry guide; date unstated",
+      "claim": "Native DuckDB example includes Steering Shaft Torque and FFB Output at 100 Hz.",
+      "limits": "Example configuration does not certify actual sample rate, units or signal-chain stage.",
+      "access": "Fetched 2026-09-29",
+      "adoption": "RESEARCH ONLY: no measurement run"
+    },
+    {
+      "id": "RES-01",
+      "title": "Steering vibration and vehicle-motion fidelity study",
+      "url": "https://arxiv.org/html/2403.17800v2",
+      "date": "arXiv v2 2025-04-15; 2024 study",
+      "claim": "Vibration and body-motion fidelity can affect steering feel.",
+      "limits": "Road-car study; no LMU race-car calibration.",
+      "access": "Fetched 2026-09-29",
+      "adoption": "RESEARCH ONLY"
+    },
+    {
+      "id": "RES-02",
+      "title": "Road and non-road harshness in a driving simulator",
+      "url": "https://arxiv.org/html/2504.11097v1",
+      "date": "arXiv v1 2025-04-15; preprint",
+      "claim": "Road and non-road vibration contributions merit separate evaluation.",
+      "limits": "Transducers do not prove equivalent rotational wheel torque.",
+      "access": "Fetched 2026-09-29",
+      "adoption": "RESEARCH ONLY"
+    },
+    {
+      "id": "RES-03",
+      "title": "Rack-force estimation and component decomposition",
+      "url": "https://arxiv.org/html/2006.16319v1",
+      "date": "2020 author manuscript (brief)",
+      "claim": "Rack-force components should be distinguished.",
+      "limits": "No exact LMU-car assistance map.",
+      "access": "September 26 brief; not re-fetched",
+      "adoption": "RESEARCH ONLY"
+    },
+    {
+      "id": "RES-04",
+      "title": "Realistic handwheel haptics: torque-based control",
+      "url": "https://research.tudelft.nl/en/publications/experimental-validation-of-torque-based-control-for-realistic-han/",
+      "date": "2022 publication; DOI in brief",
+      "claim": "Friction and dynamic response inform realistic handwheel control.",
+      "limits": "Brief consulted publication record/abstract only.",
+      "access": "September 26 brief; not re-fetched",
+      "adoption": "RESEARCH ONLY"
+    },
+    {
+      "id": "RES-05",
+      "title": "Pneumatic trail and vehicle handling limits",
+      "url": "https://tech.jsae.or.jp/paperinfo/en/content/conf2008-03.014/",
+      "date": "2008 publication (brief)",
+      "claim": "Pneumatic trail can inform handling-limit research.",
+      "limits": "Publication record/abstract; no universal understeer rule or gain.",
+      "access": "September 26 brief; not re-fetched",
+      "adoption": "RESEARCH ONLY"
+    },
+    {
+      "id": "CAR-01",
+      "title": "Alpine A424 official technical page",
+      "url": "https://www.alpine-cars.co.uk/fia-wec/a424.html",
+      "date": "Live A424 specification; revision unstated",
+      "claim": "Electric steering assistance.",
+      "limits": "No driver-side torque or assistance curve; season applicability needs care.",
+      "access": "Official indexed excerpt 2026-09-29; full-page fetch unavailable",
+      "adoption": "CURRENT historical architecture reference; no new numeric adoption"
+    },
+    {
+      "id": "CAR-02",
+      "title": "Porsche 963 constructor technical page",
+      "url": "https://www.multimaticmotorsports.com/cars/porsche-963/",
+      "date": "Live 963 specification; revision unstated",
+      "claim": "Hydraulic steering assistance.",
+      "limits": "No driver-side torque or assistance map.",
+      "access": "Fetched 2026-09-29",
+      "adoption": "CURRENT historical architecture reference"
+    },
+    {
+      "id": "CAR-03",
+      "title": "Ligier JS P325 technical specification",
+      "url": "https://ligierautomotive.com/en/vehicles/sports-prototypes/ligier-js-p325/",
+      "date": "JS P325; competition from 2025",
+      "claim": "Hydraulic steering assistance with cooling.",
+      "limits": "No force map; shared engine does not imply shared vibration.",
+      "access": "Fetched 2026-09-29",
+      "adoption": "RESEARCH ONLY: newer architecture finding"
+    },
+    {
+      "id": "CAR-04",
+      "title": "ADESS AD25 technical sheet",
+      "url": "https://adess-ag.com/manufacturer/adess-ad25-lmp3.html",
+      "date": "Live AD25 specification; revision unstated",
+      "claim": "Adjustable electrical steering assistance.",
+      "limits": "Assist setting and force map absent.",
+      "access": "Fetched 2026-09-29",
+      "adoption": "CURRENT historical architecture reference"
+    },
+    {
+      "id": "CAR-05",
+      "title": "Porsche 911 GT3 R model-year-2026 evolution",
+      "url": "https://newsroom.porsche.com/en_AE/2025/motorsports/porsche-the-new-911-gt3-r-model-year-2026-customer-race-car-40262.html",
+      "date": "2025-08-08; MY2026",
+      "claim": "Extra fluid cooling for electrohydraulic assistance supports force consistency.",
+      "limits": "Not a calibrated gain reduction; game thermal modeling unknown.",
+      "access": "Fetched 2026-09-29",
+      "adoption": "RESEARCH ONLY: newer Evo finding"
+    },
+    {
+      "id": "CAR-06",
+      "title": "Ferrari 296 GT3 Evo technical announcement",
+      "url": "https://www.ferrari.com/en-BE/competizioni-gt/articles/ferrari-296-gt3-evo-bred-from-victory-evolved-to-push-limits?amp=true",
+      "date": "2025 Evo announcement (brief)",
+      "claim": "Steering-pump cooling change.",
+      "limits": "Indexed excerpt only; full article unavailable; no numerical gain.",
+      "access": "Official indexed excerpt 2026-09-29; full page blocked",
+      "adoption": "RESEARCH ONLY: newer Evo finding"
+    },
+    {
+      "id": "CAR-07",
+      "title": "BMW M4 GT3 EVO official specification",
+      "url": "https://www.bmw-m.com/en/fastlane/motorsport/race-cars/bmw-m4-gt3-evo.html",
+      "date": "EVO generation from 2025",
+      "claim": "OEM describes variant/chassis evolution.",
+      "limits": "No steering-torque or vibration calibration.",
+      "access": "Page fetched 2026-09-29; architecture specifics not inferred",
+      "adoption": "RESEARCH ONLY for new numerical tuning"
+    },
+    {
+      "id": "CAR-08",
+      "title": "Valkyrie AMR-LMH race-car launch",
+      "url": "https://media.astonmartin.com/valkyrie-takes-the-ultimate-hypercar-from-the-road-to-the-track-as-new-quest-for-le-mans-glory-begins/?lang=eng",
+      "date": "2025 racing launch (brief)",
+      "claim": "Race-adapted naturally aspirated V12, distinct from road car.",
+      "limits": "No steering-wheel vibration amplitude.",
+      "access": "September 26 brief; not re-fetched",
+      "adoption": "RESEARCH ONLY"
+    },
+    {
+      "id": "CAR-09",
+      "title": "ORECA 07 launch technical description",
+      "url": "https://www.oreca.com/actualites/motorsport/oreca-07-la-nouveaute",
+      "date": "2016-06-16 launch (brief)",
+      "claim": "Brief reports family-level steering assistance.",
+      "limits": "Retrieved page did not corroborate the steering phrase in this pass; exact championship effort unknown.",
+      "access": "Page fetched; claim remains brief-derived",
+      "adoption": "RESEARCH ONLY; current physical assertion qualified"
+    },
+    {
+      "id": "CAR-10",
+      "title": "Porsche 911 RSR technical record",
+      "url": "https://newsroom.porsche.com/en_AU/motorsports/media-guide/race-cars/porsche-911-rsr.html",
+      "date": "Model year 2019 technical record",
+      "claim": "Electrohydraulic steering assistance for GTE RSR.",
+      "limits": "Repeated rear-axle steering text is not proof of rear-wheel steering.",
+      "access": "Fetched 2026-09-29",
+      "adoption": "CURRENT historical architecture reference"
+    },
+    {
+      "id": "REG-01",
+      "title": "FIA 2026 LMH technical regulations",
+      "url": "https://www.fia.com/system/files/documents/2026_lmh_technical_regs_2025.10.16_published_2025.10.17_clean_version_0.pdf",
+      "date": "2025-10-16 revision (brief)",
+      "claim": "LMH rules permit power assistance.",
+      "limits": "Permission does not prove fitted car design or magnitude.",
+      "access": "September 26 brief; not re-fetched",
+      "adoption": "CURRENT historical proxy; fitted state UNKNOWN"
+    },
+    {
+      "id": "REG-02",
+      "title": "FIA LMDh technical regulations",
+      "url": "https://www.fia.com/system/files/documents/lmdh-technical-regulations-2025.10.16-blackline.pdf",
+      "date": "2025-10-16 revision (brief)",
+      "claim": "LMDh rules permit power assistance.",
+      "limits": "Permission does not prove fitted car design or magnitude.",
+      "access": "September 26 brief; not re-fetched",
+      "adoption": "CURRENT historical proxy; fitted state UNKNOWN"
+    },
+    {
+      "id": "DATA-01",
+      "title": "AiM Ferrari 296 GT3 data interface",
+      "url": "https://www.aim-sportline.com/download/ecu/racing/Ferrari_296_GT3_101_eng.pdf",
+      "date": "296 GT3 from 2023; protocol release in PDF",
+      "claim": "Public steering-angle and operating-state interface.",
+      "limits": "Channel interface is not a recorded torque dataset; LMGT3 applicability needs review.",
+      "access": "PDF fetched 2026-09-29",
+      "adoption": "RESEARCH ONLY"
+    },
+    {
+      "id": "DATA-02",
+      "title": "AiM Duqueine D09 V35A V51 data interface",
+      "url": "https://www.aim-sportline.com/download/ecu/racing/Duqueine_D09_V35A_V51_100_eng.pdf",
+      "date": "D09 V35A/V51 from 2025; release 1.001 (brief)",
+      "claim": "Public state-channel interface.",
+      "limits": "No real force/vibration trace or inferred missing-zero.",
+      "access": "PDF fetched 2026-09-29",
+      "adoption": "RESEARCH ONLY"
+    },
+    {
+      "id": "ASE-01",
+      "title": "Asetek LMU baseline guide",
+      "url": "https://www.asetek.com/simsports/guides/le-mans-ultimate-1-3-settings/",
+      "date": "Live mutable guide; access 2026-09-29",
+      "claim": "Current general Strength 65–70%; Additional FFB 0%.",
+      "limits": "Manufacturer starting settings; not historical July values or per-car calibration.",
+      "access": "Fetched 2026-09-29",
+      "adoption": "ADOPTED WITH MODIFICATION: historical baseline retained as provenance"
+    }
+  ]
+}

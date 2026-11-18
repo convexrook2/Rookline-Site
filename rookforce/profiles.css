@@ -1,0 +1,73 @@
+.profiles-page{min-width:0}
+.profiles-page .site-header{position:relative;border-top:3px solid #ee313b;border-bottom:1px solid var(--line);background:#071016}
+.profiles-main{padding-bottom:40px}
+.profiles-intro{display:flex;justify-content:space-between;gap:28px;align-items:center;padding:25px 0 22px}
+.profiles-intro h1{margin:9px 0 10px;font-size:clamp(2.4rem,4vw,4rem);letter-spacing:-.02em;line-height:1}
+.profiles-intro>div>p{color:var(--secondary);font-size:.85rem;margin:0}
+.profiles-all{flex:none;text-align:right}
+.profiles-all p{font-size:.7rem;color:var(--secondary);margin:9px 0 0}
+.profiles-library{border-top:1px solid var(--line);padding-top:20px}
+.profiles-heading{display:flex;gap:20px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.profiles-heading h2{font-size:1.7rem;margin:0}
+.profiles-heading p{font-size:.72rem;color:var(--muted);margin:0;line-height:1.5}
+.profiles-filters{display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,.4fr);gap:18px}
+.profiles-filters label{display:grid;gap:7px;font-size:.75rem;color:var(--secondary);font-weight:700}
+.profiles-filters input,.profiles-filters select{width:100%;min-width:0;min-height:44px;padding:10px 13px;background:#0e1c25;color:var(--text);border:1px solid #46616f;font:inherit;font-size:.86rem;border-radius:0}
+.profiles-list-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0}
+.profiles-list-tools p{margin:0;font-size:.76rem;color:var(--secondary)}
+.profiles-list-tools button,.profile-selection button:not(.button-primary){border:0;border-bottom:1px solid #6b929f;padding:5px 0;background:transparent;color:var(--signal);font-size:.76rem;font-weight:700;cursor:pointer}
+.profiles-page button:disabled{opacity:.45;cursor:default}
+.profile-list{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+.profile-row{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:13px 0;border-bottom:1px solid var(--line);min-width:0}
+.profile-row:hover{background:#0c1922}
+.profile-row.is-selected{background:#102b35}
+.profile-identity{min-width:0;flex:1}
+.profile-identity>label{display:flex;gap:13px;align-items:start;cursor:pointer;min-width:0}
+.profile-row input{flex:none;width:20px;height:20px;margin:3px 0 0;accent-color:var(--signal);cursor:pointer}
+.profile-copy{display:block;min-width:0}
+.profile-title{display:block;font-weight:700;font-size:.95rem;line-height:1.4;overflow-wrap:anywhere}
+/* Hero palette: dark tile colours are lightened for title-text contrast. */
+.profile-title[data-manufacturer="Alpine"]{color:#6ca5ff}
+.profile-title[data-manufacturer="Aston Martin"]{color:#55b5a5}
+.profile-title[data-manufacturer="BMW"]{color:#7fa9ff}
+.profile-title[data-manufacturer="Cadillac"]{color:#f7c511}
+.profile-title[data-manufacturer="Chevrolet"]{color:#face00}
+.profile-title[data-manufacturer="Ferrari"]{color:#ff686d}
+.profile-title[data-manufacturer="Ford"]{color:#8d9af8}
+.profile-title[data-manufacturer="Lamborghini"]{color:#fff}
+.profile-title[data-manufacturer="Lexus"]{color:#babbc4}
+.profile-title[data-manufacturer="McLaren"]{color:#f97f04}
+.profile-title[data-manufacturer="Mercedes-AMG"]{color:#b0adad}
+.profile-title[data-manufacturer="Peugeot"]{color:#b8dc0b}
+.profile-title[data-manufacturer="Porsche"]{color:#fefeff}
+/* Black/near-black and unmapped hero brands retain the readable neutral text. */
+.profile-title[data-class-colour="Hypercar"]{color:#ff686d}
+.profile-title[data-class-colour="LMGT3"]{color:#65d898}
+.profile-title[data-class-colour="LMP2"]{color:#6ca5ff}
+.profile-title[data-class-colour="LMP3"]{color:#c49aff}
+.profile-title[data-class-colour="GTE"]{color:#ffad63}
+.profile-game,.profile-context,.profile-device{font-size:.7rem;line-height:1.5}
+.profile-game{color:var(--signal);font-weight:700}
+.profile-context{color:var(--secondary)}
+.profile-device{color:var(--muted)}
+.profile-context:before,.profile-device:before{content:' · '}
+.profile-row[data-game="AC Evo"] .profile-game{color:#d4c1fc}
+.profile-row[data-game="Class presets"] .profile-game{color:#b7c6cf}
+.profile-note{display:block;font-size:.7rem;line-height:1.5;color:#f0d4ab;margin-top:3px}
+.profile-download{display:flex;flex-direction:column;align-items:end;gap:2px;flex:none}
+.profile-download a{display:flex;align-items:center;min-height:44px;font-size:.75rem;font-weight:700;color:var(--signal);text-underline-offset:4px;white-space:nowrap;padding:0 9px}
+.profile-download span{font-size:.65rem;color:var(--muted);padding-right:9px}
+.profiles-pager{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:22px;font-size:.78rem;color:var(--secondary)}
+.profiles-pager[hidden]{display:none}
+.profiles-pager button{min-height:44px;padding:10px 17px;background:#10232e;color:var(--text);border:1px solid #496978;cursor:pointer}
+.profiles-pager button:hover:not(:disabled){border-color:var(--signal);color:var(--signal)}
+.profile-empty{padding:25px 15px;color:var(--secondary);text-align:center;font-size:.86rem}
+.profile-selection{display:flex;justify-content:space-between;align-items:center;gap:20px;border:1px solid #496978;background:#10232e;padding:12px 16px}
+.profile-selection>div{display:flex;align-items:center;gap:22px}
+.profile-selection strong{font-size:.82rem;white-space:nowrap}
+.profile-selection .button-primary{border:0;cursor:pointer;min-height:44px}
+.download-status{font-size:.75rem;color:var(--secondary);margin:8px 0;min-height:1.5em}
+.download-status:empty{margin:0;min-height:12px}
+.profiles-footer-link{font-size:.73rem;color:var(--secondary);text-underline-offset:4px;margin-left:auto}
+@media(max-width:760px){.profiles-intro{align-items:start;flex-direction:column;gap:14px}.profiles-all{text-align:left}.profiles-heading{align-items:start;flex-direction:column;gap:8px}.profiles-filters{grid-template-columns:1fr;gap:12px}.profile-selection{gap:12px;padding:12px}.profile-selection>div{align-items:start;flex-direction:column;gap:7px}.profile-selection .button-primary{font-size:.75rem;padding:11px 15px}.profile-row{gap:10px}.profile-identity>label{gap:10px}.profile-title{font-size:.86rem}.profile-download a{padding:0 4px;font-size:.7rem}.profiles-page .footer-inner{flex-wrap:wrap}.profiles-footer-link{margin-left:0}}
+@media(max-width:360px){.profile-selection{align-items:stretch;flex-direction:column}.profile-selection>div{flex-direction:row;justify-content:space-between}.profile-title{font-size:.82rem}.profiles-pager{gap:12px}.profiles-pager button{padding:10px 12px}}

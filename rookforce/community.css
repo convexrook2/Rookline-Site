@@ -1,0 +1,46 @@
+/* Discord community link; the mark is the unmodified official brand asset. */
+.discord-link,
+.site-nav .discord-link,
+.footer-meta .discord-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: #fff;
+  color: #23272a;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.discord-link img { flex: none; width: 22px; height: 17px; margin: 0; object-fit: contain; }
+.discord-link:hover,
+.site-nav .discord-link:hover { background: #e0e3ff; color: #23272a; border-color: #5865f2; }
+.discord-link:active,
+.site-nav .discord-link:active { background: #cdd3ff; color: #23272a; }
+.discord-link:focus-visible { outline: 3px solid #9aa5ff; outline-offset: 4px; }
+.site-nav .discord-link { margin-left: 4px; }
+.tour-header nav { flex-wrap: wrap; }
+@media (max-width: 1100px) {
+  .masthead-note { display: none; }
+}
+@media (max-width: 760px) {
+  .masthead { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 16px; }
+  .masthead .wordmark { grid-column: 1; grid-row: 1; width: 100%; max-width: 190px; }
+  .masthead .index-trigger { grid-column: 2; grid-row: 1; justify-self: end; margin-left: 0; }
+  .masthead .welcome-link { grid-column: 1; grid-row: 2; justify-self: start; }
+  .masthead .discord-link { grid-column: 2; grid-row: 2; }
+  .opening { padding-top: 164px; }
+  .site-header .header-inner { position: relative; }
+  .site-header .brand { display: flex; align-items: center; min-height: 44px; }
+  .site-nav .discord-link { position: absolute; top: 18px; right: 0; margin-left: 0; }
+  .hero-content { padding-top: 144px; }
+  .footer-inner { flex-wrap: wrap; }
+}
+@media print { .discord-link { display: none !important; } }

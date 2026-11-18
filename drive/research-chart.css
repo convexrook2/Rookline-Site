@@ -1,0 +1,10 @@
+.research-notes .visual-note--chart { grid-column:1/-1; display:grid; grid-template-columns:minmax(0,1.8fr) minmax(200px,.8fr); gap:clamp(24px,4vw,60px); align-items:center; }
+.research-chart-open { display:block; min-width:0; color:var(--ink); text-decoration:none; }
+.visual-note--chart .research-chart-open img { display:block; width:100%; height:auto; aspect-ratio:1540/1050; object-fit:contain; }
+.research-chart-action { display:block; margin-top:10px; font:12px/1.5 var(--mono); text-decoration:underline; text-underline-offset:4px; }
+.research-chart-open:hover .research-chart-action { text-decoration-thickness:2px; }
+.research-chart-open:active { opacity:.85; }
+.research-chart-open:focus-visible { outline:3px solid #38613a; outline-offset:6px; }
+.research-chart-copy .micro { display:block; color:#566047; line-height:1.6; }
+.research-chart-copy h3 { max-width:13ch; }
+@media(max-width:800px) { .research-notes .visual-note--chart { grid-template-columns:1fr; gap:18px; } .research-chart-copy h3 { max-width:none; } }
