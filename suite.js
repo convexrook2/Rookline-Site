@@ -5,9 +5,9 @@ let snapshot=null,shown=null,paused=false,loading=false;
 const make=(tag,text,cls)=>{const e=document.createElement(tag);if(text!=null)e.textContent=text;if(cls)e.className=cls;return e;};
 function frameHeight(){const h=document.querySelector('#rooksuite-header')?.getBoundingClientRect().height??0;document.body.style.setProperty('--rs-frame-height',`${h+(ticker?.getBoundingClientRect().height??0)+(document.querySelector('.rs-product-status')?.getBoundingClientRect().height??0)}px`);}
 const section=document.body.dataset.suitePage;
-if(['rookline','rookforce','drive'].includes(section)&&/\/(?:index\.html)?$/.test(location.pathname)){
+if(['rookforce','drive'].includes(section)&&/\/(?:index\.html)?$/.test(location.pathname)){
  const box=make('aside',null,'rs-product-status');box.setAttribute('aria-label','Product availability');
- const statuses={rookline:['WORK IN PROGRESS','Rookline is being developed. Follow the project and share your ideas.'],rookforce:['RELEASED / ASETEK FORTE','Full Forte wheelbase support. Other wheelbases have partial support.'],drive:['FREE / AVAILABLE NOW','Built for LMU. VR first: SteamVR, with OpenXR through SteamVR. Desktop HUD included. Website images include earlier captures; new images follow the next release.']};
+ const statuses={rookforce:['RELEASED / ASETEK FORTE','Full Forte wheelbase support. Other wheelbases have partial support.'],drive:['FREE / AVAILABLE NOW','Built for LMU. VR first: SteamVR, with OpenXR through SteamVR. Desktop HUD included.']};
  box.append(make('strong',statuses[section][0]),make('span',statuses[section][1]));ticker?.after(box);
 }
 function tick(){

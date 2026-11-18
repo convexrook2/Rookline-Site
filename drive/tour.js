@@ -6,7 +6,7 @@ const tourBodies=[...document.querySelectorAll('[data-mode]')];
 const tourPrev=document.getElementById('tour-prev');
 const tourNext=document.getElementById('tour-next');
 const tourProgress=document.getElementById('tour-progress');
-let tourIndex=0,tourMode='desktop';
+let tourIndex=0,tourMode='vr';
 function showTourStep(index,focus=false){
  tourIndex=Math.max(0,Math.min(tourSteps.length-1,index));
  tourSteps.forEach((step,i)=>{step.hidden=i!==tourIndex;});
@@ -26,4 +26,4 @@ tourModes.forEach(button=>button.addEventListener('click',()=>setTourMode(button
 tourPrev.addEventListener('click',()=>showTourStep(tourIndex-1,true));
 tourNext.addEventListener('click',()=>showTourStep(tourIndex===tourSteps.length-1?0:tourIndex+1,true));
 for(const id of ['tour-mode','tour-stops','tour-controls'])document.getElementById(id).hidden=false;
-setTourMode('desktop');showTourStep(0);
+setTourMode('vr');showTourStep(0);

@@ -5,12 +5,12 @@
 <title>Rookline Drive — One more lap.</title>
 <meta name="description" content="Explore Rookline Drive’s VR and desktop HUD for Le Mans Ultimate, including custom instruments, race alerts and a circuit map that shows changing track conditions.">
 <link rel="canonical" href="https://convexrook2.github.io/Rookline-Site/drive/">
-<meta property="og:title" content="Rookline Drive — One more lap."><meta property="og:description" content="Your car. Your cockpit. A desktop and VR HUD for Le Mans Ultimate."><meta property="og:type" content="website"><meta property="og:url" content="https://convexrook2.github.io/Rookline-Site/drive/"><meta property="og:image" content="https://convexrook2.github.io/Rookline-Site/drive/assets/portfolio-custom-speedo.jpg">
+<meta property="og:title" content="Rookline Drive — One more lap."><meta property="og:description" content="Your car. Your cockpit. A desktop and VR HUD for Le Mans Ultimate."><meta property="og:type" content="website"><meta property="og:url" content="https://convexrook2.github.io/Rookline-Site/drive/"><meta property="og:image" content="https://convexrook2.github.io/Rookline-Site/drive/assets/speedo-0.6.47.png">
 <meta name="author" content="ConvexRook"><meta name="theme-color" content="#101722"><link rel="icon" href="assets/drive-icon.png">
 <link rel="preload" href="assets/Roboto-Variable.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="release-hud.css"><link rel="stylesheet" href="community.css"><link rel="stylesheet" href="imola-replay.css?v=imola-1"><link rel="stylesheet" href="research-chart.css?v=imola-20261108"><link rel="stylesheet" href="race-replays.css?v=road-r8-20261108"><script src="daytona-embed.js?v=road-r8-20261108" defer></script><script src="app.js?v=imola-20261108" defer></script><script src="imola-replay.js?v=imola-1" defer></script>
 <link rel="stylesheet" href="../suite-v2.css"><script type="module" src="../suite.js"></script></head>
-<body data-suite-page="drive"><header id="rooksuite-header"><a class="rs-brand" href="../index.html" aria-label="Rookline website home"><img src="../brand/rookline-wordmark.png" width="2048" height="402" alt="Rookline"><span>DRIVING SUITE / BY CONVEXROOK</span></a><nav aria-label="Rookline products"><a href="../index.html">Home</a><a href="../rookline/">Rookline</a><a href="../drive/" aria-current="page">Drive</a><a href="../rookforce/">RookForce</a><a href="../planner/">LMU Planner</a></nav><a class="rs-community" href="https://discord.gg/UPVYArKnkH" target="_blank" rel="noopener noreferrer">Feedback &amp; ideas ↗</a></header><aside id="rs-race-ticker" aria-label="Upcoming LMU races"><a class="rs-ticker-label" href="../planner/"><i aria-hidden="true"></i><span>LMU<small>NEXT ON THE GRID</small></span></a><div class="rs-ticker-window"><div class="rs-ticker-rail"><p class="rs-ticker-message">Loading the published race schedule…</p></div></div><button type="button" class="rs-ticker-pause" aria-label="Pause race ticker" aria-pressed="false">Ⅱ</button><a class="rs-ticker-all" href="../planner/">Full forecast ↗</a></aside>
+<body data-suite-page="drive"><header id="rooksuite-header"><a class="rs-brand" href="../index.html" aria-label="Rookline website home"><img src="../brand/rookline-wordmark.png" width="2048" height="402" alt="Rookline"><span>DRIVING SUITE / BY CONVEXROOK</span></a><nav aria-label="Rookline products"><a href="../index.html">Home</a><a href="../drive/" aria-current="page">Drive</a><a href="../rookforce/">RookForce</a><a href="../planner/">LMU Planner</a></nav><a class="rs-community" href="https://discord.gg/UPVYArKnkH" target="_blank" rel="noopener noreferrer">Feedback &amp; ideas ↗</a></header><aside id="rs-race-ticker" aria-label="Upcoming LMU races"><a class="rs-ticker-label" href="../planner/"><i aria-hidden="true"></i><span>LMU<small>NEXT ON THE GRID</small></span></a><div class="rs-ticker-window"><div class="rs-ticker-rail"><p class="rs-ticker-message">Loading the published race schedule…</p></div></div><button type="button" class="rs-ticker-pause" aria-label="Pause race ticker" aria-pressed="false">Ⅱ</button><a class="rs-ticker-all" href="../planner/">Full forecast ↗</a></aside>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="reading-progress" aria-hidden="true"></div>
 <aside class="chapter-rail" aria-label="Chapter navigation">
@@ -34,8 +34,8 @@
 <div class="opening-composition">
 <div class="opening-statement"><p class="micro">FOR THE LOVE OF THE LAP</p><h2>Eyes up.<br>Race on.</h2><p>Your favourite car. Your corner of the grid. A familiar LMU HUD, with a little more you in it.</p><a class="text-arrow" href="#live-hud">Come on in <span>↓</span></a></div>
 <figure class="opening-instrument">
-<img src="assets/speedo-input-feedback.jpg" alt="BMW Speedo with blue angled RPM segments, electronics activity, directional FFB and battery deployment." width="1363" height="936" fetchpriority="high">
-<figcaption><span>BMW M HYBRID V8</span></figcaption>
+<img src="assets/speedo-0.6.47.png" alt="Drive 0.6.47 native instrument with example speed, gear and car data." width="1892" height="1420" fetchpriority="high">
+<figcaption><span>0.6.47 INTERFACE · EXAMPLE DATA</span></figcaption>
 </figure>
 <div class="opening-note"><span class="note-cross" aria-hidden="true">+</span><p>Built for<br>“just one more lap.”</p></div>
 </div>
@@ -51,19 +51,20 @@
 <div class="chapter-heading"><span>THE DRIVING VIEW</span><span>LONG BEACH</span></div>
 <h2 id="live-hud-title" class="display-heading">Welcome to the cockpit.</h2>
 <p>Keep an eye on the weather, the field and that all-important pit stop. Then get back to chasing the next corner.</p>
-<figure><a href="assets/drive-hud-0637.png" aria-label="Open the full-size HUD"><img src="assets/drive-hud-0637.png" width="2304" height="512" alt="Drive HUD with slightly wet conditions, the Long Beach map, yellow flag, pit wrench and pit service card."></a><figcaption>Weather, traffic and pit stops <span class="strip-phone-hint">Scroll the strip to see every panel.</span></figcaption></figure>
+<div class="current-panel-spread"><figure><a href="assets/map-0.6.47.png"><img src="assets/map-0.6.47.png" width="960" height="720" alt="Drive 0.6.47 traffic map with example cars" loading="lazy"></a><figcaption>Traffic · 0.6.47 interface · example data</figcaption></figure><figure><a href="assets/tyres-0.6.47.png"><img src="assets/tyres-0.6.47.png" width="760" height="720" alt="Drive 0.6.47 tyre panel with example readings" loading="lazy"></a><figcaption>Tyres · 0.6.47 interface · example data</figcaption></figure></div>
 
 </section>
 <section class="desktop-story chapter" id="desktop-hud" aria-labelledby="desktop-hud-title">
 <div class="chapter-heading"><span>HEADSET ON. SCREEN UP.</span><span>YOUR CORNER OF THE COCKPIT</span></div>
 <h2 id="desktop-hud-title" class="display-heading">Same drive.<br>New view.</h2>
 <p>A little space for everything. Move it. Size it. Make it yours.</p>
-<figure><a href="assets/desktop-overlay-public.webp" aria-label="View the full-size Drive desktop overlay"><img src="assets/desktop-overlay-public.webp" width="3840" height="2160" loading="lazy" alt="Drive desktop overlay over LMU at Interlagos, with a multi-class tower and car logos at top left, the track map and tyres below, weather across the top, timing at top right and a Lexus Speedo at bottom right."></a><figcaption>Your desktop cockpit · Interlagos</figcaption></figure>
+<div class="current-cockpit-guide"><img src="assets/speedo-0.6.47.png" width="1892" height="1420" alt="Released Drive native instrument" loading="lazy"><div><p class="micro">0.6.47 INTERFACE · EXAMPLE DATA</p><h3>Move it.<br>Make it yours.</h3><a class="drive-tour-link" href="tour.html">See how to place your panels →</a></div></div>
+</details>
 </section>
 <section class="improvements chapter" id="improvements" aria-labelledby="improvements-title">
 <div class="chapter-heading"><span>01 / WHAT DRIVE ADDS</span><span>MADE FOR THE SEAT YOU’RE IN</span></div>
 <div class="feature-opening"><h2 class="display-heading" id="improvements-title">Make it<br>your own.</h2><div><p class="lead">Get comfortable.<br>You might be here a while.</p><p>Give your car its own instruments. Put your panels where they feel right. Keep the race close and the useful stuff closer.</p></div></div>
-<div class="condition-story" id="car-condition">
+<details class="earlier-examples"><summary>Earlier visual examples: car warnings &amp; instrument styles</summary><p class="visual-disclosure">Earlier interface captures. Use the 0.6.47 panels above for the current released appearance.</p><div class="condition-story" id="car-condition">
 <div class="story-heading"><span class="micro">CAR CONDITION / DAMAGE + DETACHMENTS + ENGINE</span><h3>How’s the car?</h3><p>A brush with the wall. A tyre that feels a bit off. Take a quick look at what your car is telling you.</p></div>
 <div class="condition-layout">
 <figure class="condition-figure"><div class="condition-image-wrap"><img id="condition-image" src="assets/damage-corners.jpg" alt="Car diagram showing bodywork and suspension damage at different corners." width="1363" height="936" loading="lazy"></div><figcaption><span>CAR CONDITION</span><button id="open-condition" aria-haspopup="dialog">Inspect full screenshot ↗</button></figcaption></figure>
@@ -94,6 +95,7 @@
 </div>
 
 </div>
+</details>
 <section class="wetness-story" id="track-wetness" aria-labelledby="track-wetness-title">
 <div class="wetness-layout">
 <div class="wetness-copy"><span class="micro">A LITTLE RAIN CHECK</span><h3 id="track-wetness-title">Well, that<br>escalated.</h3><p>A dry start. A passing storm. Then the wait for a drying line. Take a lap through it.</p><a href="#research-wetness-evolution">A peek behind the weather ↗</a></div>
@@ -129,16 +131,16 @@
 <div class="evolution" aria-label="A familiar cockpit">
 <figure><div class="evolution-image reference-image"><img src="assets/lmu-reference-oct7.png" width="375" height="269" alt="LMU HUD showing gear, speed, fuel and energy in the cockpit." loading="lazy"></div><figcaption><span>01 / AT A GLANCE</span><h3>It starts with a good look.</h3><p>Speed, gear and the essentials.</p></figcaption></figure>
 <figure><div class="evolution-image drawing-image"><img src="assets/october-reconstruction.svg" width="375" height="269" alt="Instrument illustration with separate RPM, speed, gear and car-status elements." loading="lazy"></div><figcaption><span>02 / EVERY PIECE IN PLACE</span><h3>A familiar shape.</h3><p>Speed and gear take centre stage.</p></figcaption></figure>
-<figure><div class="evolution-image current-image"><img src="assets/speedo.jpg" width="1363" height="936" alt="Drive Speedo with gear, speed, shift lights and car information." loading="lazy"></div><figcaption><span>03 / YOUR NEXT LAP</span><h3>Make room in the cockpit.</h3><p>Your instruments. Your layout.</p></figcaption></figure>
+<figure><div class="evolution-image current-image"><img src="assets/speedo-0.6.47.png" width="1363" height="936" alt="Drive Speedo with gear, speed, shift lights and car information." loading="lazy"></div><figcaption><span>03 / YOUR NEXT LAP</span><h3>Make room in the cockpit.</h3><p>Your instruments. Your layout.</p></figcaption></figure>
 </div>
 </section>
 
 <section class="instrument-chapter chapter" id="instruments" aria-labelledby="instruments-title">
 <div class="chapter-heading"><span>03 / THE INSTRUMENTS</span><span>SEVEN PANELS / ONE DRIVING EXPERIENCE</span></div>
-<div class="instrument-heading"><h2 class="display-heading" id="instruments-title">Have a<br>look around.</h2><p class="gallery-note">Seven panels. Your way around the cockpit. See the map, weather and pit design in <a href="#live-hud">the HUD strip</a>.</p><p>Seven panels carry the work into the driving view. <br>Explore the core interface, then follow each capability below.</p></div>
+<div class="instrument-heading"><h2 class="display-heading" id="instruments-title">Have a<br>look around.</h2><p class="gallery-note">Current 0.6.47 instruments, tyres, timing and map. Weather, tower and flag examples retain their earlier appearance.</p><p>Seven panels carry the work into the driving view. <br>Explore the core interface, then follow each capability below.</p></div>
 <div class="instrument-stage" aria-live="polite">
 <div class="plate-meta"><span id="plate-number">INSTRUMENT 01 / 07</span><span id="plate-category">CAR STATE</span><button class="plate-expand" id="open-image" aria-label="Enlarge current screenshot">Inspect image <span>↗</span></button></div>
-<div class="plate-image-wrap"><img id="plate-image" src="assets/speedo.jpg" width="1363" height="936" alt="Drive Speedo and electronics." loading="lazy"><span class="plate-corner corner-a" aria-hidden="true"></span><span class="plate-corner corner-b" aria-hidden="true"></span></div>
+<div class="plate-image-wrap"><img id="plate-image" src="assets/speedo-0.6.47.png" width="1363" height="936" alt="Drive Speedo and electronics." loading="lazy"><span class="plate-corner corner-a" aria-hidden="true"></span><span class="plate-corner corner-b" aria-hidden="true"></span></div>
 <div class="plate-caption"><h3 id="plate-title">The driving instrument.</h3><p id="plate-description">Speed, gear and RPM keep the familiar central hierarchy. Fuel, virtual energy, temperatures and electronics bring the surrounding state into the same glance.</p><p id="plate-takeaway">Keep the essentials close.</p></div>
 </div>
 <div class="instrument-navigation">
@@ -166,7 +168,7 @@
 <section class="looks-spread chapter" id="accomplishments" aria-labelledby="accomplishments-title">
 <div class="chapter-heading"><span>05 / MORE LOOKS</span><span>ORIGINAL DRIVE DESIGNS</span></div>
 <h2 class="display-heading" id="accomplishments-title">Pick your<br>personality.</h2>
-<div class="looks-grid">
+<p class="visual-disclosure">Earlier instrument artwork examples; these are retained for design context.</p><div class="looks-grid">
 <figure><a href="assets/custom-speedo-ferrari.jpg" aria-label="Open the Ferrari instrument example"><img src="assets/custom-speedo-ferrari.jpg" width="1363" height="936" loading="lazy" alt="Ferrari-style Speedo with yellow circular shift lights."></a><figcaption><span>Ferrari</span><span>01 / ROUND DOTS</span></figcaption></figure>
 <figure><a href="assets/custom-speedo-porsche.jpg" aria-label="Open the Porsche instrument example"><img src="assets/custom-speedo-porsche.jpg" width="1363" height="936" loading="lazy" alt="Porsche-style Speedo with a white segmented RPM arc."></a><figcaption><span>Porsche</span><span>02 / FINE BLOCKS</span></figcaption></figure>
 <figure><a href="assets/custom-speedo-aston.jpg" aria-label="Open the Aston Martin instrument example"><img src="assets/custom-speedo-aston.jpg" width="1363" height="936" loading="lazy" alt="Aston Martin-style Speedo with its own RPM arc and palette."></a><figcaption><span>Aston Martin</span><span>03 / CONTINUOUS</span></figcaption></figure>
@@ -177,5 +179,5 @@
 </main>
 
 <dialog class="index-dialog" id="index-dialog" aria-labelledby="index-title"><div class="index-top"><span id="index-title" class="micro">TAKE A LOOK AROUND</span><button id="close-index" aria-label="Close chapter index">Close ×</button></div><nav aria-label="Full chapter index"><a href="#overview"><span>00</span>Welcome aboard<i>↗</i></a><a href="#download-drive"><span>0.6.47</span>Download Drive<i>↗</i></a><a href="#desktop-hud"><span>DESKTOP</span>A new view<i>↗</i></a><a href="#track-wetness"><span>MAP</span>Track wetness<i>↗</i></a><a href="#improvements"><span>01</span>What Drive adds<i>↗</i></a><a href="#reference"><span>02</span>Familiar by design<i>↗</i></a><a href="#instruments"><span>03</span>The instruments<i>↗</i></a><a href="#research"><span>04</span>A closer look<i>↗</i></a><a href="#accomplishments"><span>05</span>More looks<i>↗</i></a></nav><p>YOUR CAR. YOUR COCKPIT.</p></dialog>
-<dialog class="image-dialog" id="image-dialog" aria-labelledby="image-title"><div class="image-dialog-top"><span class="micro" id="image-title">THE DRIVING INSTRUMENT</span><button id="close-image" aria-label="Close screenshot">Close ×</button></div><img id="dialog-image" src="assets/speedo.jpg" alt=""><p id="dialog-caption">Speedo</p></dialog>
+<dialog class="image-dialog" id="image-dialog" aria-labelledby="image-title"><div class="image-dialog-top"><span class="micro" id="image-title">THE DRIVING INSTRUMENT</span><button id="close-image" aria-label="Close screenshot">Close ×</button></div><img id="dialog-image" src="assets/speedo-0.6.47.png" alt=""><p id="dialog-caption">Speedo</p></dialog>
 </body></html>

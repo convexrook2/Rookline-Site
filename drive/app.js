@@ -4,7 +4,7 @@ const INSTRUMENTS=[
     "id": "speedo",
     "name": "The driving instrument.",
     "category": "CAR STATE",
-    "image": "assets/speedo.jpg",
+    "image": "assets/speedo-0.6.47.png",
     "alt": "Drive Speedo with gear, speed, fuel, virtual energy, electronics and temperature values.",
     "description": "Speed, gear and RPM up front, with fuel, energy and car information close by.",
     "takeaway": "Keep the essentials close."
@@ -13,7 +13,7 @@ const INSTRUMENTS=[
     "id": "tyres",
     "name": "Four corners, understood.",
     "category": "TYRES + BRAKES",
-    "image": "assets/tyres.jpg",
+    "image": "assets/tyres-0.6.47.png",
     "alt": "Drive tyre panel showing four soft tyres with wear, pressure, estimated rubber temperature and brake temperatures.",
     "description": "Wear, compound, pressure and temperatures, together at all four corners.",
     "takeaway": "Stay on top of your tyres."
@@ -22,7 +22,7 @@ const INSTRUMENTS=[
     "id": "timing",
     "name": "The lap, in context.",
     "category": "TIMING + FEEDBACK",
-    "image": "assets/timing.jpg",
+    "image": "assets/timing-0.6.47.png",
     "alt": "Drive lap timing panel with lap times, sectors and a green negative delta.",
     "description": "Lap times, sectors and delta, ready for a quick glance.",
     "takeaway": "Chase the next tenth."
@@ -40,8 +40,8 @@ const INSTRUMENTS=[
     "id": "map",
     "name": "Traffic and track conditions.",
     "category": "TRACK AWARENESS",
-    "image": "assets/track-map.jpg",
-    "alt": "Long Beach circuit map with traffic and a cyan player marker.",
+    "image": "assets/map-0.6.47.png",
+    "alt": "Released Drive 0.6.47 Le Mans map with numbered traffic markers and example data.",
     "description": "All cars, Your class and Follow your car provide three perspectives. In Follow mode the player points up while the circuit and traffic move together. Choose a player marker style, follow estimated wetting and drying, compare online pace patterns and spot active yellow sectors.",
     "takeaway": "Know what is around the next corner."
   },
@@ -76,7 +76,7 @@ const RESEARCH=[
   {
     "id": "tyre-research",
     "title": "Four little contact patches.",
-    "image": "assets/tyres.jpg",
+    "image": "assets/tyres-0.6.47.png",
     "alt": "Drive tyre panel showing wear and temperatures at all four corners.",
     "copy": "A quick glance at the rubber doing all the hard work."
   },
@@ -104,7 +104,7 @@ function choosePanel(index,focus=false){
   el('plate-category').textContent=item.category;
   el('plate-image').src=item.image;el('plate-image').alt=item.alt;el('plate-image').classList.toggle('compact',!!item.compact);
   el('plate-title').textContent=item.name;el('plate-description').textContent=item.description;
-  el('plate-takeaway').textContent=item.takeaway;
+  el('plate-takeaway').textContent=item.takeaway+' · '+(['speedo','tyres','timing','map'].includes(item.id)?'0.6.47 interface · example data':'Earlier interface example');
   el('open-image').setAttribute('aria-label','Enlarge '+item.name.replace(/\.$/,'')+' screenshot');
 }
 tabs.forEach((tab,index)=>{

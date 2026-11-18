@@ -38,3 +38,16 @@
   .guide-section li { padding-left: 0; }
   .guide-page .site-nav { gap: 0 16px; justify-content: flex-start; }
 }
+
+.visual-topic-nav{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:24px 0;border-bottom:1px solid var(--line)}
+.visual-topic-nav a{display:grid;gap:12px;font-size:14px;text-decoration:none;padding:12px;border:1px solid var(--line)}
+.visual-topic-nav span{color:var(--signal);font-size:12px}.visual-topic-nav a:hover{background:#172936}
+.guide-ready{padding:36px 0;border-bottom:1px solid var(--line)}.guide-ready h2{font-size:32px}
+.guide-ready ol{display:flex;justify-content:space-between;align-items:center;gap:20px;list-style:none;padding:20px 0;margin:0}.guide-ready li{display:grid;gap:8px}.guide-ready li>span{color:var(--signal);font-size:12px}.guide-ready strong{font-size:20px}
+.guide-page details{border-top:1px solid var(--line)}.guide-page summary{cursor:pointer;min-height:48px;padding:18px 0;color:var(--signal)}.guide-page details li{line-height:1.7;color:var(--secondary);margin-bottom:8px}.guide-page details h3{font-size:20px}.guide-page details p{max-width:70ch}
+.guide-content{max-width:none}.visual-guide-section{padding:60px 0 35px}.visual-guide-title h2{font-size:clamp(32px,5vw,60px);margin:14px 0 28px}
+.visual-guide-section figure{margin:0;background:#111c26;border:1px solid #4c6070;overflow:hidden;border-radius:10px}.visual-guide-section figure img{display:block;width:100%;height:auto}.visual-guide-section figcaption{display:flex;justify-content:space-between;gap:12px;padding:14px 18px;font-size:10px;letter-spacing:.07em;color:#c1cdd5;border-top:1px solid var(--line)}
+.visual-guide-section .visual-instruction{font-size:22px;color:var(--text);margin:24px 0;max-width:55ch}
+.guide-quick-help{padding:40px 0}.guide-quick-help h2{font-size:42px;margin:14px 0 25px}.guide-quick-help details{scroll-margin-top:24px}
+.guide-page a:focus-visible,.guide-page summary:focus-visible{outline:3px solid var(--signal);outline-offset:4px}
+@media(max-width:760px){.visual-topic-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.visual-topic-nav a{font-size:13px}.guide-ready ol{gap:10px}.guide-ready strong{font-size:14px}.guide-ready li[aria-hidden]{font-size:15px}.guide-ready h2{font-size:28px}.visual-guide-section{padding:32px 0 20px}.visual-guide-section .visual-instruction{font-size:19px}.visual-guide-section figcaption{font-size:8px;padding:10px}.guide-quick-help h2{font-size:32px}}
