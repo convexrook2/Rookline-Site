@@ -34,7 +34,7 @@ function applyTheme(theme) {
 let savedTheme;try{savedTheme=localStorage.getItem('lmu-theme');}catch{}
 applyTheme(['light','dark'].includes(savedTheme)?savedTheme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
 document.querySelectorAll('[data-theme-choice]').forEach(button=>button.addEventListener('click',()=>{const theme=button.dataset.themeChoice;applyTheme(theme);try{localStorage.setItem('lmu-theme',theme);}catch{}}));
-let snapshot, selectedId, activeSession = 'practice', showAllStarts = false;
+let snapshot, selectedId = new URLSearchParams(location.search).get('race') || undefined, activeSession = 'practice', showAllStarts = false;
 let zone = localStorage.getItem('lmu-timezone') || 'America/Toronto';
 const localZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 if (!['America/Toronto','UTC'].includes(localZone)) $('timezone').add(new Option(localZone,localZone));

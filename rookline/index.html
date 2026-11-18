@@ -262,16 +262,16 @@
     @media (max-width: 430px) { .rating-star { width: 2.25rem; height: 2.25rem; } }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   </style>
-<link rel="stylesheet" href="../suite.css"><link rel="canonical" href="https://convexrook2.github.io/Rookline-Site/rookline/"></head>
-<body data-suite-page="rookline"><header id="rooksuite-header"><a class="rs-brand" href="../index.html" aria-label="Rookline website home"><span class="rs-mark" aria-hidden="true">R/</span><span>ROOKLINE<small>BY CONVEXROOK</small></span></a><nav aria-label="Rookline products"><a href="../index.html">Home</a><a href="../rookline/" aria-current="page">Rookline</a><a href="../drive/">Drive</a><a href="../rookforce/">RookForce</a><a href="../planner/">LMU Planner</a></nav></header>
+<link rel="stylesheet" href="../suite-v2.css"><link rel="canonical" href="https://convexrook2.github.io/Rookline-Site/rookline/"><script type="module" src="../suite.js"></script></head>
+<body data-suite-page="rookline"><header id="rooksuite-header"><a class="rs-brand" href="../index.html" aria-label="Rookline website home"><img src="../brand/rookline-wordmark.png" width="2048" height="402" alt="Rookline"><span>DRIVING SUITE / BY CONVEXROOK</span></a><nav aria-label="Rookline products"><a href="../index.html">Home</a><a href="../rookline/" aria-current="page">Rookline</a><a href="../drive/">Drive</a><a href="../rookforce/">RookForce</a><a href="../planner/">LMU Planner</a></nav><a class="rs-community" href="https://discord.gg/UPVYArKnkH" target="_blank" rel="noopener noreferrer">Feedback &amp; ideas ↗</a></header><aside id="rs-race-ticker" aria-label="Upcoming LMU races"><a class="rs-ticker-label" href="../planner/"><i aria-hidden="true"></i><span>LMU<small>NEXT ON THE GRID</small></span></a><div class="rs-ticker-window"><div class="rs-ticker-rail"><p class="rs-ticker-message">Loading the published race schedule…</p></div></div><button type="button" class="rs-ticker-pause" aria-label="Pause race ticker" aria-pressed="false">Ⅱ</button><a class="rs-ticker-all" href="../planner/">Full forecast ↗</a></aside>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <a class="brand" href="#top" aria-label="Rookline home"><img src="assets/logo-rookline.png" alt="Rookline" /></a>
     <nav class="header-nav" aria-label="Site navigation">
       <a href="#tour">Product tour</a>
       <a href="#feedback">Feedback</a>
-      <a href="#download">Release details</a>
-      <a class="header-download" href="#download">Download</a>
+      <a href="#download">Development</a>
+      <a class="header-download" href="#download">Work in progress</a>
     </nav>
   </header>
 
@@ -284,7 +284,7 @@
       <div class="intro-copy">
         <p>Rookline brings session evidence, engineering priorities, and recorded setup controls into one calm place—so the next run starts with a reason.</p>
         <div class="actions">
-          <a class="button button-primary" id="release-download" href="https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.27/Rookline-Setup.exe">Download Rookline</a>
+          <a class="button button-primary" id="release-download" href="https://discord.gg/UPVYArKnkH">Follow Rookline</a>
           <a class="button button-secondary" href="#tour">View the product tour</a>
         </div>
       </div>
@@ -504,16 +504,16 @@
         <div class="download-grid">
           <div>
             <p class="eyebrow" style="color:#32575c;">Current public release</p>
-            <h2 id="download-title">Get Rookline. It’s not the car.</h2>
+            <h2 id="download-title">The next chapter is in progress.</h2>
           </div>
           <div>
             <div class="download-card">
-              <h3 id="release-version">Download Rookline v0.6.27</h3>
+              <h3 id="release-version">Rookline — work in progress</h3>
               <p>The Windows x64 installer includes Rookline. RookForce is installed separately.</p>
               <div class="actions">
-                <a class="button button-primary" id="release-download-secondary" href="https://github.com/convexrook2/Rookline-Releases/releases/download/v0.6.27/Rookline-Setup.exe">Download installer</a>
+                <a class="button button-primary" id="release-download-secondary" href="https://discord.gg/UPVYArKnkH">Follow development</a>
               </div>
-              <p class="download-note" id="release-download-note">Unsigned Windows installer. Rookline verifies its published SHA-256 before updater launch.</p>
+              <p class="download-note" id="release-download-note">Development is in progress. Follow updates and share ideas in the community.</p>
               <p class="download-note" id="release-core-download-row" hidden>Need telemetry and setup only? <a id="release-download-core" href="#" aria-disabled="true">Download the Core-only installer.</a></p>
               <span hidden><span id="release-version-value">v0.6.27</span></span>
               <span hidden><code id="release-sha">DF934C820566589D74614E2CC8257B3FE0C85AE6454D0918D15EC4E665B0F8EB</code></span>
@@ -553,49 +553,7 @@
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
   <script>
     (function () {
-      var releaseUrl = "assets/release.json";
-      fetch(releaseUrl + "?v=" + Date.now(), { cache: "no-store" })
-        .then(function (response) {
-          if (!response.ok) { throw new Error("Release metadata unavailable"); }
-          return response.json();
-        })
-        .then(function (release) {
-          if (!release || !release.version || !release.installerUrl || !release.sha256) { return; }
-          var releaseText = "v" + String(release.version).replace(/^v/i, "");
-          var titleEl = document.getElementById("release-version");
-          var valueEl = document.getElementById("release-version-value");
-          var downloadEl = document.getElementById("release-download");
-          var secondaryDownloadEl = document.getElementById("release-download-secondary");
-          var coreDownloadEl = document.getElementById("release-download-core");
-          var coreDownloadRowEl = document.getElementById("release-core-download-row");
-          var downloadNoteEl = document.getElementById("release-download-note");
-          var shaEl = document.getElementById("release-sha");
-          var manifestEl = document.getElementById("release-manifest");
-          if (titleEl) { titleEl.textContent = "Download Rookline " + releaseText; }
-          if (valueEl) { valueEl.textContent = releaseText; }
-          if (downloadEl) { downloadEl.href = release.installerUrl; }
-          if (secondaryDownloadEl) { secondaryDownloadEl.href = release.installerUrl; }
-          if (coreDownloadEl) {
-            var coreUrl = typeof release.coreInstallerUrl === "string" ? release.coreInstallerUrl.trim() : "";
-            if (coreUrl) {
-              coreDownloadEl.href = coreUrl;
-              coreDownloadEl.classList.remove("is-disabled");
-              coreDownloadEl.setAttribute("aria-disabled", "false");
-              if (coreDownloadRowEl) { coreDownloadRowEl.removeAttribute("hidden"); }
-              if (downloadNoteEl) { downloadNoteEl.textContent = "Unsigned Windows installer. Rookline verifies its published SHA-256 before updater launch."; }
-            } else {
-              coreDownloadEl.href = "#";
-              coreDownloadEl.classList.add("is-disabled");
-              coreDownloadEl.setAttribute("aria-disabled", "true");
-              if (coreDownloadRowEl) { coreDownloadRowEl.setAttribute("hidden", ""); }
-              if (downloadNoteEl) { downloadNoteEl.textContent = "Unsigned Windows installer. Rookline verifies its published SHA-256 before updater launch."; }
-            }
-          }
-          if (shaEl) { shaEl.textContent = String(release.sha256).toUpperCase(); }
-          if (manifestEl && release.manifestUrl) { manifestEl.href = release.manifestUrl; }
-        })
-        .catch(function () { /* Keep static fallback release values if metadata fetch fails. */ });
-
+      // Rookline is a work in progress; keep feedback and image exploration available.
       var feedbackForm = document.getElementById("feedback-form");
       var feedbackStatus = document.getElementById("feedback-status");
       var feedbackSubmit = document.getElementById("feedback-submit");
