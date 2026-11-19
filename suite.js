@@ -17,11 +17,11 @@ function tick(){
  if(signature!==shown){shown=signature;const group=make('div',null,'rs-ticker-group');
   for(const {race,at} of races){const a=make('a',null,'rs-race'),url=new URL('planner/',base);url.searchParams.set('race',race.id);a.href=url.href;a.append(make('strong',race.track),make('small',race.name));const time=make('time',startLabel(at));time.dateTime=at;a.append(time);group.append(a);}
   if(races.length){const duplicate=group.cloneNode(true);duplicate.setAttribute('aria-hidden','true');duplicate.querySelectorAll('a').forEach(a=>a.tabIndex=-1);rail.replaceChildren(group,duplicate);rail.classList.add('is-ready');}
-  else{rail.replaceChildren(make('p','No dated starts are currently published. Open the Planner for details.','rs-ticker-message'));rail.classList.remove('is-ready');}
+  else{rail.replaceChildren(make('p','No dated starts are currently published. Open Schedules for details.','rs-ticker-message'));rail.classList.remove('is-ready');}
  }
  rail.querySelectorAll('time').forEach(e=>{const t=startLabel(e.dateTime);if(t&&e.textContent!==t)e.textContent=t;});
  ticker.title=snapshot.cached?'Showing the last loaded published schedule.':'Community-published schedule · checked every30seconds';
 }
-async function refresh(){if(loading||!ticker)return;loading=true;try{snapshot=await loadSchedule();tick();}catch{if(!snapshot){rail.replaceChildren(make('p','Race schedule temporarily unavailable. Open the Planner to retry.','rs-ticker-message'));rail.classList.remove('is-ready');}}finally{loading=false;}}
+async function refresh(){if(loading||!ticker)return;loading=true;try{snapshot=await loadSchedule();tick();}catch{if(!snapshot){rail.replaceChildren(make('p','Race schedule temporarily unavailable. Open Schedules to retry.','rs-ticker-message'));rail.classList.remove('is-ready');}}finally{loading=false;}}
 const pause=ticker?.querySelector('.rs-ticker-pause');pause?.addEventListener('click',()=>{paused=!paused;ticker.classList.toggle('is-paused',paused);pause.setAttribute('aria-pressed',String(paused));pause.setAttribute('aria-label',paused?'Resume race ticker':'Pause race ticker');pause.textContent=paused?'▶':'Ⅱ';});
 frameHeight();window.addEventListener('resize',frameHeight);void refresh();setInterval(refresh,30000);setInterval(tick,1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden){tick();void refresh();}});

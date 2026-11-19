@@ -35,11 +35,6 @@ let savedTheme;try{savedTheme=localStorage.getItem('lmu-theme');}catch{}
 applyTheme(['light','dark'].includes(savedTheme)?savedTheme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
 document.querySelectorAll('[data-theme-choice]').forEach(button=>button.addEventListener('click',()=>{const theme=button.dataset.themeChoice;applyTheme(theme);try{localStorage.setItem('lmu-theme',theme);}catch{}}));
 let snapshot, selectedId = new URLSearchParams(location.search).get('race') || undefined, activeSession = 'practice', showAllStarts = false;
-let zone = localStorage.getItem('lmu-timezone') || 'America/Toronto';
-const localZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-if (!['America/Toronto','UTC'].includes(localZone)) $('timezone').add(new Option(localZone,localZone));
-if (![...$('timezone').options].some(o => o.value === zone)) zone = 'America/Toronto';
-$('timezone').value = zone;
 const fmt = (t, opts) => new Intl.DateTimeFormat('en-CA', { timeZone: zone, ...opts }).format(new Date(t));
 const date = t => fmt(t, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' });
 const time = t => fmt(t, { hour: 'numeric', minute: '2-digit' });
@@ -59,67 +54,357 @@ function windText(row) {
 }
 const percent = v => { const n=number(v); return n != null && n>=0 && n<=100 ? `${n}%` : '—'; };
 const temp = v => {const n=number(v);return n==null?'—':`${n}°`;};
+const localZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+let zone = localZone;
+try {
+  const savedZone = localStorage.getItem('lmu-timezone');
+  if (savedZone) {
+    new Intl.DateTimeFormat('en',{timeZone:savedZone});
+    zone = savedZone;
+  }
+} catch {}
+
+const timezoneSelect = $('timezone');
+for (const choice of new Set([localZone,zone])) {
+  if (![...timezoneSelect.options].some(option=>option.value===choice)) {
+    const label = choice.split('/').at(-1).replaceAll('_',' ');
+    timezoneSelect.add(new Option(label,choice));
+  }
+}
+timezoneSelect.value = zone;
+
+function className(raw) {
+  return CLASS_PRESENTATION[raw]?.[1] ?? raw;
+}
+
+function entryRatingFamily(raw) {
+  const grade = typeof raw === 'string' && /^(Bronze|Silver|Gold|Platinum|Alien) \d+ SR$/i.exec(raw);
+  return ratingFamily(grade ? grade[1] : raw);
+}
+
+function entryRating(raw) {
+  const badge = ratingBadge(raw);
+  badge.dataset.rating = entryRatingFamily(raw);
+  if (typeof raw === 'string' && /\bSR\b/i.test(raw)) badge.textContent = raw;
+  return badge;
+}
+
+let followNextRace = !selectedId;
+let showForecastTimings = false;
+document.querySelector('.filter-jump').href = location.pathname + location.search + '#race-filters';
+
 function filteredRaces() {
-  const q=$('search').value.trim().toLowerCase(), now=Date.now();
-  return (snapshot?.races||[]).map(r=>({race:r,next:nextStart(r.starts,now)})).filter(({race:r,next})=>next&&($('type').value==='all'||r.type===$('type').value)&&($('tier').value==='all'||r.tier===$('tier').value)&&[r.name,r.track,r.layout,...r.classes].join(' ').toLowerCase().includes(q))
-    .sort((a,b)=>Date.parse(a.next)-Date.parse(b.next)||a.race.name.localeCompare(b.race.name)).map(x=>x.race);
+  const query = $('search').value.trim().toLowerCase();
+  const type = $('type').value, tier = $('tier').value, car = $('car-class').value;
+  const now = Date.now();
+  return (snapshot?.races || [])
+    .map(race => ({ race, start: nextStart(race.starts, now) }))
+    .filter(({race, start}) => start && (type === 'all' || race.type === type)
+      && (tier === 'all' || race.tier === tier) && (!car || race.classes.some(raw => className(raw) === car))
+      && [race.track, race.name, race.layout, ...race.classes, ...race.classes.map(className)].join(' ').toLowerCase().includes(query))
+    .sort((a,b) => Date.parse(a.start) - Date.parse(b.start) || a.race.name.localeCompare(b.race.name))
+    .map(entry => entry.race);
 }
+
+function chooseRace(id) {
+  followNextRace = false;
+  selectedId = id;
+  activeSession = 'practice';
+  showAllStarts = false;
+  render();
+}
+$('mobile-race').addEventListener('change', e => chooseRace(e.target.value));
+$('car-class').addEventListener('input', render);
+
+function syncClasses() {
+  const select = $('car-class'), selected = select.value;
+  const names = new Set((snapshot?.races ?? []).flatMap(r => r.classes.map(className)));
+  if (selected) names.add(selected);
+  const list = [...names].sort((a,b) => a.localeCompare(b));
+  if (list.length === select.options.length - 1 && list.every((name,i) => name === select.options[i+1].value)) return;
+  select.replaceChildren(new Option('All classes',''), ...list.map(name => new Option(name,name)));
+  select.value = selected;
+}
+
 function renderLineup(items) {
-  $('count').textContent=items.length;
-  const list=document.createDocumentFragment();
+  syncClasses();
+  $('count').textContent = items.length;
+  const cards = document.createDocumentFragment(), options = document.createDocumentFragment();
   for (const race of items) {
-    const next=nextStarts(race)[0], rows=periods(race.sessions.race);
-    const b=el('button',null,`race-option${race.id===selectedId?' selected':''}`); b.type='button'; b.dataset.raceId=race.id;b.dataset.nextStart=next||''; b.dataset.rating=ratingFamily(race.sr);b.setAttribute('aria-pressed',String(race.id===selectedId));
-    const top=el('div',null,'option-top'); top.append(eventTypeBadge(race.type),el('span',next?time(next):'Coming soon','option-start'));
-    const middle=el('div',null,'option-middle'), identity=el('span',null,'option-identity'); identity.append(el('strong',race.track||'Circuit to be announced'),el('span',race.name));middle.append(identity,weatherImage(rows[0]?.sky,'option-weather'));
-    const bottom=el('div',null,'option-bottom'); bottom.append(el('span',duration(race.duration)),ratingBadge(race.sr),el('span',next?relative(next):'Starts not published','option-relative'));
-    b.append(top,middle,classBadges(race.classes),bottom); b.addEventListener('click',()=>{selectedId=race.id;activeSession='practice';showAllStarts=false;render();});list.append(b);
+    const next = nextStart(race.starts), circuit = race.track || 'Circuit to be announced';
+    const day = fmt(next,{month:'short',day:'numeric'});
+    const option = new Option(`${day} · ${time(next)} · ${circuit} · ${race.name}`,race.id);
+    option.selected = race.id === selectedId;
+    options.append(option);
+    const card = el('button',null,'race-option');
+    card.type = 'button';
+    card.dataset.raceId = race.id;
+    card.dataset.rating = entryRatingFamily(race.sr);
+    card.dataset.nextStart = next || '';
+    card.setAttribute('aria-pressed',String(option.selected));
+    const meta = el('span',null,'entry-meta');
+    meta.append(eventTypeBadge(race.type),entryRating(race.sr));
+    const identity = el('span',null,'entry-identity');
+    identity.append(el('strong',circuit),el('span',race.name));
+    const clock = el('span',null,'entry-clock');
+    clock.append(el('strong',time(next)),el('span',relative(next),'option-relative'));
+    const entry = el('span',null,'entry-bottom');
+    entry.append(classBadges(race.classes),el('span',duration(race.duration),'entry-duration'));
+    card.append(meta,identity,clock,entry);
+    card.addEventListener('click',()=>chooseRace(race.id));
+    cards.append(card);
   }
-  if(!items.length) list.append(el('p','No upcoming starts match. Try another circuit or clear your filters.','empty'));
-  $('race-list').replaceChildren(list);
+  if (!items.length) {
+    cards.append(el('p','No events match these filters.','empty'));
+    options.append(new Option('No matching events',''));
+  }
+  $('race-list').replaceChildren(cards);
+  $('mobile-race').replaceChildren(options);
+  $('mobile-race').disabled = !items.length;
 }
+
+function fact(label, value) {
+  const field = el('div',null,'fact');
+  field.append(el('dt',label),el('dd'));
+  field.lastElementChild.append(value);
+  return field;
+}
+
+function raceBrief(race, next, firstRaceId) {
+  const header = el('header',null,'brief-heading');
+  const identity = el('div',null,'brief-identity'), tags = el('div',null,'brief-tags');
+  tags.append(eventTypeBadge(race.type));
+  if (race.tier && race.tier !== race.type) tags.append(el('span',cap(race.tier)));
+  const isNext = race.id === firstRaceId;
+  const designation = el('div',null,'brief-designation');
+  designation.append(el('span',isNext ? 'Next race' : 'Selected race'));
+  if (!isNext) {
+    const button = el('button','Show next race','show-next-race');
+    button.type = 'button';
+    button.id = 'show-next-race';
+    button.addEventListener('click',()=>{
+      followNextRace = true;
+      render();
+      $('race-lead').querySelector('h2')?.focus();
+    });
+    designation.append(button);
+  }
+  const circuit = el('h2',race.track || 'Circuit to be announced','circuit-name');
+  circuit.tabIndex = -1;
+  identity.append(designation,circuit,el('p',race.name,'series-name'),tags);
+  if (race.layout && race.layout.toLowerCase() !== race.track?.toLowerCase()) identity.append(el('p',race.layout.replaceAll('-',' '),'layout-name'));
+  const clock = el('div',null,'brief-clock');
+  const countdown = el('time',relative(next),'start-relative');
+  countdown.dateTime = next;
+  clock.append(el('span','Race starts'),countdown,el('strong',time(next)),
+    el('span',fmt(next,{weekday:'short',month:'short',day:'numeric',timeZoneName:'short'}),'brief-date'));
+  header.append(identity,clock);
+  const facts = el('dl',null,'entry-facts');
+  facts.append(fact('Allowed classes',classBadges(race.classes)),fact('Safety rating',entryRating(race.sr)),
+    fact('Race length',duration(race.duration)),fact('Setup',race.setup ? cap(race.setup) : 'Not published'));
+  const brief = el('article',null,'race-brief');
+  brief.dataset.rating = entryRatingFamily(race.sr);
+  brief.append(header,facts,weatherOverview('Race start forecast',periods(race.sessions.race)[0]));
+  return brief;
+}
+
+function weatherOverview(title,row) {
+  const summary = el('div',null,'weather-overview');
+  summary.append(el('span',title,'weather-overview-label'));
+  if (!row) {
+    summary.append(el('span','Forecast unavailable','weather-overview-empty'));
+    return summary;
+  }
+  const conditions = el('div',null,'weather-overview-conditions'), icon = weatherImage(row.sky);
+  icon.setAttribute('aria-hidden','true');
+  const readings = [number(row.temperature) == null ? null : `${row.temperature} °C`, sky(row.sky).label];
+  const rain = percentValue(row.rain_change);
+  if (rain !== null) readings.push(`${rain} rain chance`);
+  const winds = publishedWind(row);
+  if (winds) readings.push(`Wind ${winds}`);
+  conditions.append(icon,el('span',readings.filter(Boolean).join(' · ')));
+  summary.append(conditions);
+  return summary;
+}
+
+function forecastTime(minutes) {
+  if (minutes == null || minutes === 0 || Number.isInteger(minutes)) return offset(minutes);
+  const seconds = Math.round(minutes * 60);
+  const mins = Math.floor(seconds / 60), rest = seconds % 60;
+  return mins ? `+${mins}m ${rest}s` : `+${rest}s`;
+}
+
+function sessionTabs(race) {
+  const tabs = el('div',null,'session-tabs'), keys = ['practice','qualifying','race'];
+  tabs.setAttribute('role','tablist'); tabs.setAttribute('aria-label','Forecast session');
+  function select(key) {
+    activeSession = key;
+    renderOutlook(race);
+    $(`tab-${key}`).focus();
+  }
+  keys.forEach((key,i) => {
+    const tab = el('button',null);
+    tab.type = 'button'; tab.id = `tab-${key}`; tab.tabIndex = key === activeSession ? 0 : -1;
+    tab.setAttribute('role','tab'); tab.setAttribute('aria-selected',String(key === activeSession)); tab.setAttribute('aria-controls','session-forecast');
+    tab.append(el('strong',cap(key)),el('small',number(race.sessions[key]?.duration) == null ? '—' : duration(race.sessions[key].duration)));
+    tab.addEventListener('click',()=>select(key));
+    tab.addEventListener('keydown',event=>{
+      const dest = {Home:0,End:2,ArrowRight:(i+1)%3,ArrowLeft:(i+2)%3}[event.key];
+      if (dest === undefined) return;
+      event.preventDefault(); select(keys[dest]);
+    });
+    tabs.append(tab);
+  });
+  return tabs;
+}
+
+function publishedWind(row) {
+  const value = wind(row.wind_direction,row.wind_speed);
+  if (value.kph == null && !value.compass) return null;
+  return [value.kph == null ? 'Speed unpublished' : `${value.kph} km/h`,value.compass ?? 'direction unpublished'].join(' ');
+}
+function percentValue(raw) {
+  const value = percent(raw);
+  return value === '—' ? null : value;
+}
+// Summarize only a complete five-point forecast with identical published readings.
+function throughout(values) {
+  return values.length === 5 && values[0] != null && values.every(value => value === values[0]);
+}
+
+function forecast(race) {
+  const session = race.sessions[activeSession] ?? {}, rows = periods(session);
+  const area = el('section',null,'weather-panel'), heading = el('div',null,'forecast-heading');
+  heading.append(el('h3','Session forecast'),sessionTabs(race));
+  const panel = el('div',null); panel.id = 'session-forecast';
+  panel.setAttribute('role','tabpanel'); panel.setAttribute('aria-labelledby',`tab-${activeSession}`);
+  area.append(heading,panel);
+  if (!rows.length) {
+    panel.append(el('p','No forecast published for this session.','weather-unavailable'));
+    return area;
+  }
+  const metrics = [
+    {label:'Rain chance',values:rows.map(r => percentValue(r.rain_change))},
+    {label:'Wind',values:rows.map(publishedWind)},
+    {label:'Humidity',values:rows.map(r => percentValue(r.humidity))}
+  ];
+  const steady = metrics.filter(m=>throughout(m.values) &&
+    (m.label !== 'Wind' || rows.every(row => {
+      const value = wind(row.wind_direction,row.wind_speed);
+      return value.compass != null && value.kph != null;
+    })));
+  const varying = metrics.filter(m=>!steady.includes(m));
+  const uniform = steady.length === metrics.length && throughout(rows.map(r=>number(r.temperature))) &&
+    throughout(rows.map(r=>sky(r.sky).asset));
+  panel.append(weatherOverview(uniform ? 'Same forecast at all five points' : 'At the start',rows[0]));
+  const details = el('details',null,'forecast-timings');
+  const disclosure = el('summary','Forecast timings');
+  disclosure.id = 'forecast-timings';
+  details.open = showForecastTimings;
+  details.append(disclosure);
+  const phases = el('div',null,'forecast-grid');
+  for (const [i,row] of rows.entries()) {
+    const phase = el('article',null,'forecast-period');
+    const label = sky(row.sky).label;
+    const at = forecastTime(timing(session.duration,i));
+    phase.setAttribute('aria-label',`${at} · ${label}`);
+    phase.append(el('span',at,'phase-time'),weatherImage(row.sky),el('strong',number(row.temperature)==null ? '—' : `${row.temperature} °C`,'phase-temp'),el('span',label,'phase-sky'));
+    if (varying.length) {
+      const detail = el('dl',null,'phase-detail');
+      for (const m of varying) detail.append(fact(m.label,m.values[i] ?? 'Unpublished'));
+      phase.append(detail);
+    }
+    phases.append(phase);
+  }
+  details.append(phases);
+  if (steady.length) {
+    const summary = el('div',null,'constant-weather');
+    const facts = el('dl');
+    for (const m of steady) facts.append(fact(m.label,m.values[0]));
+    summary.append(el('span','All five forecast points'),facts);
+    details.append(summary);
+  }
+  const notes = [];
+  if (session.config?.time_of_day) notes.push(`In-game start ${session.config.time_of_day}`);
+  if (session.config?.real_road === 'natural') notes.push('Natural track evolution');
+  notes.push('Forecast times are relative to session start.');
+  details.append(el('p',notes.join(' · '),'session-facts'));
+  panel.append(details);
+  return area;
+}
+
+function renderLead(race, firstRaceId) {
+  const lead = $('race-lead');
+  const next = nextStart(race?.starts);
+  if (!race || !next) {
+    const text = !snapshot ? 'Schedule unavailable' : 'No upcoming race matches these filters.';
+    lead.replaceChildren(el('p',text,'empty-stage'));
+    return;
+  }
+  lead.replaceChildren(raceBrief(race,next,firstRaceId));
+}
+
 function renderOutlook(race) {
-  if(!race){$('outlook').replaceChildren(el('div','No future starts are available for these filters. New published starts will appear automatically.','empty-stage'));return;}
-  const next=nextStarts(race)[0], session=race.sessions[activeSession]||{}, rows=periods(session), first=rows[0], weather=sky(first?.sky), fragment=document.createDocumentFragment();
-  const hero=el('article',null,'forecast-hero');hero.dataset.rating=ratingFamily(race.sr);
-  const info=el('div',null,'hero-info');
-  const tags=el('div',null,'hero-tags');tags.append(eventTypeBadge(race.type),ratingBadge(race.sr));if(race.tier&&race.tier!==race.type)tags.append(el('span',cap(race.tier)));info.append(tags,el('p',race.name,'series-name'),el('h2',race.track||'Circuit to be announced','circuit-name'));
-  if(race.layout&&race.layout.toLowerCase()!==race.track?.toLowerCase()) info.append(el('p',race.layout.replaceAll('-',' '),'layout-name'));
-  const start=el('div',null,'hero-start'); start.append(el('span',next?'NEXT RACE START':'SCHEDULE TO FOLLOW','micro-label'),el('strong',next?time(next):'Coming soon'),el('span',next?date(next):'Dated starts have not been published.','start-date')); if(next)start.append(el('span',relative(next),'start-relative'));info.append(start);
-  const current=el('div',null,'hero-weather');current.append(el('span',`${cap(activeSession)} opening outlook`,'micro-label'),weatherImage(first?.sky,'hero-icon'));
-  const temperature=el('div',null,'hero-temperature');temperature.append(el('strong',temp(first?.temperature)));if(number(first?.temperature)!=null)temperature.append(el('span','C'));current.append(temperature,el('p',weather.label,'hero-condition'),el('p',`Wind ${windText(first)}`,'hero-wind'));
-  hero.append(info,current);fragment.append(hero);
-  const strip=el('div',null,'event-strip');strip.dataset.rating=ratingFamily(race.sr);
-  for(const [label,content] of [['Race length',el('strong',duration(race.duration))],['Car classes',classBadges(race.classes)],['Setup',el('strong',race.setup?cap(race.setup):'Not published')],['Safety rating',ratingBadge(race.sr)]]){const f=el('div');f.append(el('span',label),content);strip.append(f);}fragment.append(strip);
-  if(race.scheduleNote||(race.scheduleStatus&&race.scheduleStatus!=='active'))fragment.append(el('p',race.scheduleNote||race.scheduleStatus,'warning'));
-  const weatherPanel=el('section',null,'weather-panel');weatherPanel.setAttribute('aria-label','Session weather outlook');
-  const panelHead=el('div',null,'panel-heading');const titles=el('div');titles.append(el('p','THE CONDITIONS AHEAD','eyebrow'),el('h3','Your session forecast'));
-  const tabs=el('div',null,'session-tabs');tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','Forecast session');
-  const keys=['practice','qualifying','race'];
-  for(const key of keys){const tab=el('button',null,key===activeSession?'active':'');tab.type='button';tab.id=`tab-${key}`;tab.setAttribute('role','tab');tab.setAttribute('aria-selected',String(key===activeSession));tab.setAttribute('aria-controls','session-forecast');tab.tabIndex=key===activeSession?0:-1;tab.append(el('span',cap(key)),el('small',number(race.sessions[key]?.duration)!=null?duration(race.sessions[key].duration):'—'));tab.addEventListener('click',()=>{activeSession=key;renderOutlook(race);$(`tab-${key}`).focus();});tab.addEventListener('keydown',e=>{if(['ArrowRight','ArrowLeft','Home','End'].includes(e.key)){e.preventDefault();const index=e.key==='Home'?0:e.key==='End'?2:(keys.indexOf(key)+(e.key==='ArrowRight'?1:2))%3;activeSession=keys[index];renderOutlook(race);$(`tab-${activeSession}`).focus();}});tabs.append(tab);}
-  panelHead.append(titles,tabs);weatherPanel.append(panelHead);
-  const panel=el('div');panel.id='session-forecast';panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby',`tab-${activeSession}`);
-  if(!rows.length){panel.append(el('div','The weather for this session hasn’t been published yet. Check back when the event details are updated.','weather-unavailable'));}
-  else {
-    panel.append(el('p',outlookSummary(rows),'forecast-story'));
-    const grid=el('div',null,'forecast-grid');
-    rows.forEach((row,i)=>{const col=el('article',null,'forecast-period');const condition=sky(row.sky);col.setAttribute('aria-label',`${offset(timing(session.duration,i))}: ${condition.label}`);col.append(weatherImage(row.sky),el('p',offset(timing(session.duration,i)),'period-time'),el('strong',temp(row.temperature),'period-temperature'),el('p',condition.label,'period-condition'));
-      const rain=el('p',null,'period-rain');rain.append(el('span','◒','rain-drop'),el('strong',percent(row.rain_change)),el('span',' rain chance'));col.append(rain);
-      const w=wind(row.wind_direction,row.wind_speed), windLine=el('p',windText(row),'period-wind');windLine.title=w.direction?`${w.direction}; configured wind`:'Wind direction not published';col.append(windLine,el('p',`Humidity ${percent(row.humidity)}`,'period-humidity'));grid.append(col);});panel.append(grid);
-    const note=el('div',null,'forecast-note');note.append(el('span','◷','note-icon'),el('p','Planning points use five equal parts of the published session length. Times are measured from the session start.'));panel.append(note);
-    const config=session.config;
-    if(config?.time_of_day){const sessionFacts=el('p',`In-game start ${config.time_of_day}${config.real_road==='natural'?' · Natural track evolution':''}`,'session-facts');panel.append(sessionFacts);}
+  const previousTimings = $('forecast-timings')?.parentElement;
+  if (previousTimings) showForecastTimings = previousTimings.open;
+  if (!race) {
+    $('outlook').replaceChildren(el('p','No upcoming event matches. Change a filter or clear your search.','empty-stage'));
+    return;
   }
-  weatherPanel.append(panel);fragment.append(weatherPanel);
-  const starts=nextStarts(race), startPanel=el('section',null,'starts-panel');const startHead=el('div',null,'starts-heading');startHead.append(el('h3','Find your next start'),el('span','Shown in your selected timezone'));startPanel.append(startHead);
-  if(starts.length){const grid=el('div',null,'start-grid');starts.slice(0,showAllStarts?160:6).forEach((t,i)=>{const item=el('div',null,i===0?'start-time nearest':'start-time');item.append(el('span',fmt(t,{weekday:'short',month:'short',day:'numeric'})),el('strong',time(t)));grid.append(item);});startPanel.append(grid);if(starts.length>6){const b=el('button',showAllStarts?'Show fewer starts':`View all ${starts.length} published starts`,'more-starts');b.type='button';b.setAttribute('aria-expanded',String(showAllStarts));b.addEventListener('click',()=>{showAllStarts=!showAllStarts;renderOutlook(race);$('outlook').querySelector('.more-starts')?.focus();});startPanel.append(b);if(showAllStarts&&starts.length>160)startPanel.append(el('p',`Showing the next 160 of ${starts.length} starts. More are available from LMU Portal.`,'quiet'));}}
-  else startPanel.append(el('p','Dated starts will appear here when they are published.','quiet'));
-  fragment.append(startPanel);
-  const age=race.sourceUpdatedAt?Date.now()-Date.parse(race.sourceUpdatedAt):Infinity;
-  fragment.append(el('p',`Published by LMU Portal${race.sourceUpdatedAt?` · Source updated ${date(race.sourceUpdatedAt)}`:''}${age>86400000?' · Source details may be out of date.':''}`,'provenance'));
-  $('outlook').replaceChildren(fragment);
+  const starts = nextStarts(race);
+  if (!starts.length) { $('outlook').replaceChildren(el('p','No upcoming start.','empty-stage')); return; }
+  const content = document.createDocumentFragment();
+  if (race.scheduleNote || (race.scheduleStatus && race.scheduleStatus !== 'active')) content.append(el('p',race.scheduleNote || race.scheduleStatus,'warning'));
+  content.append(forecast(race));
+  const section = el('section',null,'starts-panel');
+  section.append(el('h3','Upcoming starts'));
+  const grid = el('div',null,'start-grid');
+  for (const start of starts.slice(0,showAllStarts?160:6)) {
+    const item = el('div',null,'start-time');
+    item.append(el('span',fmt(start,{weekday:'short',month:'short',day:'numeric'})),el('strong',time(start)));
+    grid.append(item);
+  }
+  section.append(grid);
+  if (starts.length>6) {
+    const button = el('button',showAllStarts?'Show fewer starts':`Show more starts (${starts.length} published)`,'more-starts');
+    button.type = 'button'; button.setAttribute('aria-expanded',String(showAllStarts));
+    button.addEventListener('click',()=>{showAllStarts=!showAllStarts;renderOutlook(race);$('outlook').querySelector('.more-starts')?.focus();});
+    section.append(button);
+    if (showAllStarts && starts.length>160) section.append(el('p','Showing the next 160 published starts.','provenance'));
+  }
+  content.append(section);
+  const updated = race.sourceUpdatedAt ? ` · Source updated ${date(race.sourceUpdatedAt)}` : '';
+  const old = !race.sourceUpdatedAt || Date.now()-Date.parse(race.sourceUpdatedAt)>86400000;
+  content.append(el('p',`LMU Portal${updated}${old?' · Source details may be out of date.':''}`,'provenance'));
+  $('outlook').replaceChildren(content);
 }
-function render(){const focused=document.activeElement,focusId=focused?.id,focusRace=focused?.dataset?.raceId,listTop=$('race-list').scrollTop,listLeft=$('race-list').scrollLeft;const items=filteredRaces();if(!items.some(r=>r.id===selectedId)){selectedId=items[0]?.id;activeSession='practice';showAllStarts=false;}renderLineup(items);renderOutlook(items.find(r=>r.id===selectedId));$('race-list').scrollTop=listTop;$('race-list').scrollLeft=listLeft;if(focusId&&$(focusId)&&$(focusId)!==focused)$(focusId).focus({preventScroll:true});else if(focusRace){const buttons=[...$('race-list').querySelectorAll('button')];(buttons.find(b=>b.dataset.raceId===focusRace)||buttons.find(b=>b.dataset.raceId===selectedId))?.focus({preventScroll:true});}}
+
+function render() {
+  const focused = document.activeElement, focusId = focused?.id, focusRace = focused?.dataset?.raceId;
+  const list = $('race-list'), {scrollTop,scrollLeft} = list;
+  const items = filteredRaces();
+  const first = items[0];
+  const previous = selectedId;
+  if (!items.some(race=>race.id===selectedId)) followNextRace = true;
+  if (followNextRace) selectedId = first?.id;
+  if (previous !== selectedId) {
+    activeSession = 'practice';
+    showAllStarts = false;
+  }
+  const selected = items.find(race=>race.id===selectedId);
+  renderLead(selected,first?.id);
+  renderLineup(items);
+  renderOutlook(selected);
+  list.scrollTop = scrollTop;
+  list.scrollLeft = scrollLeft;
+  if (focusId && $(focusId) && $(focusId)!==focused) $(focusId).focus({preventScroll:true});
+  else if (focusRace) {
+    const cards = [...list.querySelectorAll('button')];
+    (cards.find(card=>card.dataset.raceId===focusRace) || cards.find(card=>card.dataset.raceId===selectedId))?.focus({preventScroll:true});
+  }
+}
+
+
 async function load(manual=false){
   $('refresh').disabled=true;$('refresh').setAttribute('aria-busy','true');
   try{
@@ -130,7 +415,7 @@ async function load(manual=false){
     $('warning').hidden=!data.error;$('warning').textContent=data.error?`${data.error} Showing the last saved schedule.`:'';
     $('notices').replaceChildren(...(data.notices||[]).filter(n=>!n.includes('Sky, wind-direction')).map(n=>el('li',n)));
     if(changed||manual)render();
-  }catch(error){$('warning').hidden=false;$('warning').textContent=error.message;$('status').textContent=snapshot?'Using the last loaded schedule':'Schedule unavailable';if(!snapshot){$('race-list').replaceChildren(el('p','Couldn’t load the schedule. Use Refresh schedule to try again.','empty'));$('outlook').replaceChildren(el('div','Your outlook will appear when the schedule is available.','empty-stage'));}}
+  }catch(error){$('warning').hidden=false;$('warning').textContent=error.message;$('status').textContent=snapshot?'Using the last loaded schedule':'Schedule unavailable';if(!snapshot){renderLead();$('race-list').replaceChildren(el('p','Couldn’t load the schedule. Use Refresh schedule to try again.','empty'));$('outlook').replaceChildren(el('div','Your outlook will appear when the schedule is available.','empty-stage'));}}
   finally{$('refresh').disabled=false;$('refresh').removeAttribute('aria-busy');}
 }
 let clockMinute;
@@ -145,7 +430,7 @@ function refreshTime(){
     const label=startLabel(next,now),badge=card.querySelector('.option-relative');
     if(badge.textContent!==label)badge.textContent=label;
   }
-  const selected=races.get(selectedId),next=nextStart(selected?.starts,now),badge=$('outlook').querySelector('.start-relative');
+  const selected=races.get(selectedId),next=nextStart(selected?.starts,now),badge=$('race-lead').querySelector('.start-relative');
   if(badge&&next){const label=startLabel(next,now);if(badge.textContent!==label)badge.textContent=label;}
 }
 for(const id of ['search','type','tier'])$(id).addEventListener('input',render);
