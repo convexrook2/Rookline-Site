@@ -1,38 +1,51 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#131716"><title>Cockpit HUD for Le Mans Ultimate · Rookline</title>
-<link rel="canonical" href="https://convexrook2.github.io/Rookline-Site/drive/"><link rel="icon" href="assets/drive-icon.png"><link rel="stylesheet" href="../suite-v2.css"><link rel="stylesheet" href="showcase.css"><link rel="stylesheet" href="imola-replay.css"><link rel="stylesheet" href="race-replays.css"><script defer src="imola-replay.js"></script>
+<meta name="description" content="Free cockpit HUD for Le Mans Ultimate with tyre readings, timing, flags and track wetness. SteamVR and desktop."><meta property="og:type" content="website"><meta property="og:site_name" content="Rookline"><meta property="og:title" content="Rookline Drive | Free LMU cockpit HUD"><meta property="og:description" content="Free cockpit HUD for Le Mans Ultimate with tyre readings, timing, flags and track wetness. SteamVR and desktop."><meta property="og:url" content="https://convexrook2.github.io/Rookline-Site/drive/"><meta property="og:image" content="https://convexrook2.github.io/Rookline-Site/drive/assets/one-sector-cover.jpg"><meta property="og:image:alt" content="Drive HUD in a BMW cockpit"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://convexrook2.github.io/Rookline-Site/drive/"><link rel="icon" href="assets/drive-icon.png"><link rel="stylesheet" href="../suite-v2.css"><link rel="stylesheet" href="showcase.css"><link rel="stylesheet" href="imola-replay.css"><link rel="stylesheet" href="race-replays.css"><script defer src="imola-replay.js"></script>
 <script type="module" src="../suite.js"></script><script defer src="showcase.js"></script></head>
-<body class="edition" data-suite-page="drive"><a class="rl-skip" href="#main">Skip to content</a><header id="rooksuite-header"><a class="rs-brand" href="../index.html" aria-label="Rookline website home"><img src="../brand/rookline-wordmark.png" width="2048" height="402" alt="Rookline"><span>DRIVING SUITE / BY CONVEXROOK</span></a><nav aria-label="Rookline products"><a href="../index.html">Home</a><a href="../drive/" aria-current="page">Drive</a><a href="../rookforce/">RookForce</a><a href="../planner/">Schedules</a></nav><a class="rs-community" href="https://discord.gg/UPVYArKnkH" target="_blank" rel="noopener noreferrer">Feedback &amp; ideas ↗</a></header><aside id="rs-race-ticker" aria-label="Upcoming LMU races"><a class="rs-ticker-label" href="../planner/"><i aria-hidden="true"></i><span>LMU<small>NEXT ON THE GRID</small></span></a><div class="rs-ticker-window"><div class="rs-ticker-rail"><p class="rs-ticker-message">Loading the published race schedule…</p></div></div><button type="button" class="rs-ticker-pause" aria-label="Pause race ticker" aria-pressed="false">Ⅱ</button><a class="rs-ticker-all" href="../planner/">Full forecast ↗</a></aside>
+<body class="edition" data-suite-page="drive"><a class="rl-skip" href="#main">Skip to content</a><header id="rooksuite-header"><a class="rs-brand" href="../index.html" aria-label="Rookline website home"><img src="../brand/rookline-wordmark.png" width="2048" height="402" alt="Rookline"><span>DRIVING SUITE / BY CONVEXROOK</span></a><nav aria-label="Rookline products"><a href="../index.html">Home</a><a href="../drive/" aria-current="page">Drive</a><a href="../rookforce/">RookForce</a><a href="../planner/">Schedules</a></nav><a class="rs-community" href="../index.html#community">Help &amp; support ↗</a></header><aside id="rs-race-ticker" aria-label="Upcoming LMU races"><a class="rs-ticker-label" href="../planner/"><i aria-hidden="true"></i><span>LMU<small>NEXT ON THE GRID</small></span></a><div class="rs-ticker-window"><div class="rs-ticker-rail"><p class="rs-ticker-message">Loading the published race schedule…</p></div></div><button type="button" class="rs-ticker-pause" aria-label="Pause race ticker" aria-pressed="false">Ⅱ</button><a class="rs-ticker-all" href="../planner/">Full forecast ↗</a></aside>
 <main id="main" class="drive-launch">
 <section id="overview" class="campaign drive-hero" aria-labelledby="drive-name">
-<h1 id="drive-name" class="sr-only">Rookline Drive</h1>
-<div class="marquee"><div class="marquee-screen"><video id="campaign-film" width="1920" height="816" controls playsinline muted data-autoplay-muted loop preload="metadata" poster="assets/one-sector-cover.jpg" aria-label="Rookline Drive HUD showcase, recorded in Le Mans Ultimate"><source media="(max-width:700px)" src="assets/drive-hud-continuous-phone.mp4" type="video/mp4"><source src="assets/drive-hud-continuous.mp4" type="video/mp4"></video><div class="film-cover-title"><img src="assets/drive-wordmark.png" alt=""></div><button id="start-campaign" type="button" hidden><span aria-hidden="true">▶</span> Watch Drive in the cockpit <time>1:03</time></button></div></div>
-<div class="drive-download" id="download-drive"><p>Your cockpit HUD for Le Mans Ultimate. <small>SteamVR &amp; desktop · <a href="https://github.com/convexrook2/Rookline-Drive-Releases/releases/tag/v0.6.51">0.6.51 release notes ↗</a></small></p><a class="cta" href="https://github.com/convexrook2/Rookline-Drive-Releases/releases/download/v0.6.51/Rookline-Drive-Setup.exe">Download Drive free</a></div>
+<div class="drive-download" id="download-drive">
+  <div><h1 id="drive-name">Rookline Drive</h1><p>Le Mans Ultimate HUD for SteamVR and desktop.</p></div>
+  <a class="cta" href="https://github.com/convexrook2/Rookline-Drive-Releases/releases/download/v0.6.51/Rookline-Drive-Setup.exe">Download free</a>
+</div>
+<div class="marquee" id="cockpit-demo"><div class="marquee-screen"><video id="campaign-film" width="1920" height="816" controls playsinline muted data-autoplay-muted loop preload="none" poster="assets/one-sector-cover.jpg" aria-label="Rookline Drive HUD showcase, recorded in Le Mans Ultimate"><source media="(max-width:700px)" data-src="assets/drive-hud-continuous-phone.mp4" type="video/mp4"><source data-src="assets/drive-hud-continuous.mp4" type="video/mp4"></video><div class="film-cover-title"><img src="assets/drive-wordmark.png" alt=""></div><button id="start-campaign" type="button" hidden><span aria-hidden="true">▶</span> Watch the cockpit demo <time>1:03</time></button></div></div>
+
 </section>
-<section class="track-story" id="imola-drying" aria-labelledby="imola-title">
+<section class="track-story" id="track-wetness" aria-labelledby="drying-title">
+  <div class="track-story-copy">
+    <p class="story-circuit">Road Atlanta</p>
+    <h2 id="drying-title">See the drying line</h2>
+  </div>
   <figure class="track-evidence">
-    <div class="track-visual imola-visual">
-      <img class="track-overview" loading="lazy" width="960" height="720" src="assets/drive-0648-imola-surface.png" alt="Full circuit view of Imola’s estimated surface wetness">
-      <div class="road-comparison">
-        <div><a class="road-crop" href="assets/drive-0648-imola-early.png"><img loading="lazy" width="960" height="720" src="assets/drive-0648-imola-early.png" alt="Open the earlier Imola checkpoint, showing an evenly damp strip of road"></a><time datetime="PT8M43S">8:43</time></div>
-        <div><a class="road-crop" href="assets/drive-0648-imola-late.png"><img loading="lazy" width="960" height="720" src="assets/drive-0648-imola-late.png" alt="Open the later view of the same strip, with a dark drying line inside the teal road edges"></a><time datetime="PT20M7S">20:07</time></div>
+    <div class="road-comparison">
+      <div>
+        <p class="road-label">Previous map</p>
+        <a class="road-crop" href="assets/road-atlanta-drying-before.png"><img loading="lazy" width="960" height="720" src="assets/road-atlanta-drying-before.png" alt="Open the previous Road Atlanta map showing near-uniform wetness across the road"></a>
+      </div>
+      <div>
+        <p class="road-label">30-second forecast</p>
+        <a class="road-crop" href="assets/road-atlanta-drying-after.png"><img loading="lazy" width="960" height="720" src="assets/road-atlanta-drying-after.png" alt="Open the forecast for the same stretch showing a distinct drier line inside the wet road edges"></a>
       </div>
     </div>
-    <figcaption>Imola · Elapsed session time · Estimated surface wetness</figcaption>
+    <figcaption>Same stretch, saved practice session · Estimated surface wetness</figcaption>
   </figure>
-  <div class="track-story-copy"><h2 id="imola-title">Where’s the drying line?</h2><p>At Imola, Drive shows a drier line forming while the rest of the road stays damp.</p><a href="index.html#imola-after-fix-v1">Explore the Imola surface ↗</a></div>
 </section>
 <section class="track-story yellow-story" id="interlagos-yellow" aria-labelledby="interlagos-title">
+  <div class="track-story-copy">
+    <p class="story-circuit">Interlagos</p>
+    <h2 id="interlagos-title">See where the yellow starts</h2>
+    <a href="features.html#map">Explore the track map ↗</a>
+  </div>
   <figure class="track-evidence">
     <div class="track-visual yellow-visual">
       <img class="track-overview" loading="lazy" width="960" height="720" src="assets/drive-0648-interlagos-incident.png" alt="Interlagos overview with a yellow sector and an outlined incident marker">
       <a class="incident-crop" href="assets/drive-0648-interlagos-yellow-local.png"><img loading="lazy" width="960" height="720" src="assets/drive-0648-interlagos-yellow-local.png" alt="Open the head-up detail showing one car marked as the incident while traffic passes on the yellow stretch"></a>
     </div>
-    <figcaption>Interlagos · Drive 0.6.48 · Controlled traffic example</figcaption>
+    <figcaption>Controlled traffic example · Drive 0.6.48</figcaption>
   </figure>
-  <div class="track-story-copy"><h2 id="interlagos-title">See where the yellow starts.</h2><p>The map highlights the affected road and marks the slow car while other traffic passes.</p><a href="features.html#map">Read the track map ↗</a></div>
 </section>
-<section class="first-invite" id="first-lap"><h2>Set up your cockpit.</h2><div class="drive-guide-links"><a href="tour.html">Your first lap ↗</a><a id="instruments" href="features.html">Instrument guide ↗</a></div></section><details class="drive-replay-browser" id="track-wetness"><summary>Recorded weather replays</summary><div class="wetness-story">
+<details class="drive-replay-browser" id="historical-weather-replays"><summary>Historical weather replays</summary><div class="wetness-story">
 <div class="wetness-layout">
 <p class="wetness-copy">Imola, Daytona and Interlagos · Recorded conditions and estimated surface wetness.</p>
 <div class="wetness-example">
@@ -55,5 +68,14 @@
 <iframe src="previews/interlagos-road.html?v=frame-clean-20261118" title="Interlagos road evolution preview" loading="lazy" referrerpolicy="no-referrer" height="460"></iframe>
 <p class="replay-caption">Recorded weather. Estimated surface.</p>
 </div></div>
-</div></details></main>
-<footer class="rl-footer"><span>Rookline Drive · by ConvexRook</span><nav aria-label="Drive resources"><a href="index.html">Drive</a><a href="features.html">Instrument guide</a><a href="tour.html">First lap</a><a href="../research/">Research</a><a href="notices.html">Credits</a></nav></footer></body></html>
+</div></details>
+<section class="first-invite" id="first-lap" aria-labelledby="first-lap-title">
+  <h2 id="first-lap-title">Set up your cockpit</h2>
+  <nav class="drive-guide-links" id="help" aria-label="Drive guides and support">
+    <a href="tour.html">Setup guide ↗</a>
+    <a id="instruments" href="features.html">Instrument guide ↗</a>
+    <a href="https://github.com/convexrook2/Rookline-Drive-Releases/releases/tag/v0.6.51">Release notes ↗</a>
+    <a href="https://discord.gg/UPVYArKnkH">Discord support ↗</a>
+  </nav>
+</section></main>
+<footer class="rl-footer"><span>Rookline Drive · by ConvexRook</span><nav aria-label="Drive resources"><a href="../research/">Research</a><a href="notices.html">Credits</a></nav></footer></body></html>

@@ -26,12 +26,17 @@ if (featureFind) {
 const campaignFilm = document.getElementById('campaign-film');
 if (campaignFilm) {
   const start = document.getElementById('start-campaign');
+  const phone = matchMedia('(max-width:700px)');
   function showPoster() {
     campaignFilm.poster = 'assets/one-sector-cover' + (matchMedia('(max-width:700px)').matches ? '-portrait' : '') + '.jpg';
     campaignFilm.controls = false;
     start.hidden = false;
   }
   async function playFilm(focusPlayer) {
+    if (!campaignFilm.querySelector('source[src]')) {
+      for (const source of campaignFilm.querySelectorAll('source[data-src]')) source.src = source.dataset.src;
+      campaignFilm.load();
+    }
     campaignFilm.controls = true;
     start.hidden = true;
     try {
@@ -46,5 +51,5 @@ if (campaignFilm) {
   if (!campaignFilm.loop) {
     campaignFilm.addEventListener('ended', () => { campaignFilm.load(); showPoster(); });
   }
-  if (campaignFilm.hasAttribute('data-autoplay-muted') && !reduceMotion.matches) playFilm(false);
+  if (campaignFilm.hasAttribute('data-autoplay-muted') && !reduceMotion.matches && !phone.matches) playFilm(false);
 }

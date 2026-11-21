@@ -35,29 +35,34 @@
 .driver-resources nav{display:flex;flex-wrap:wrap;gap:14px 30px;padding-block:14px}
 .marquee-screen:has(#start-campaign:not([hidden]))::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#06100ff5,transparent 67%),linear-gradient(90deg,#03100d68,transparent 66%);pointer-events:none}
 .drive-hero .film-cover-title img{width:clamp(220px,31vw,490px)}
-.drive-download{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px var(--gutter);background:#101614;color:#fff}
-.drive-download p{margin:0}.drive-download small{margin-left:10px;color:#c5cec9}.drive-download .cta{flex:none}
+.drive-download{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:clamp(18px,2vw,32px) var(--gutter);background:#101614;color:#fff}
+.drive-download p{margin:0;color:#dee3df;font-size:clamp(14px,1.13vw,18px)}
+.drive-download .cta{flex:none}
 .track-story a,.first-invite a{font-weight:600;text-underline-offset:5px}
-.track-story{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);align-items:center;gap:clamp(24px,5vw,90px);padding:clamp(30px,5vw,84px) var(--gutter);scroll-margin-top:16px}
+.track-story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.15fr);align-items:center;gap:clamp(24px,5vw,90px);padding:clamp(34px,5.5vw,90px) var(--gutter);scroll-margin-top:16px}
+.track-story:not(.yellow-story){background:linear-gradient(#090d0c,#111817 60%);color:#f8f6ef}
+.story-circuit{margin:0 0 12px;font-size:14px;font-weight:680}
+.track-story-copy>a{display:inline-block;margin-top:18px}
 .track-evidence{min-width:0;margin:0}
 .track-evidence figcaption{margin-top:9px;color:#54605a;font-size:13px}
+.track-story:not(.yellow-story) figcaption{color:#afbcb7}
 .track-visual{display:grid;align-items:center;min-width:0;background:#0b1316}
 .track-overview{display:block;width:100%;height:auto;max-height:330px;object-fit:contain}
-.imola-visual{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}
-.road-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:12px 12px 8px 0;text-align:center;color:#dce9eb;font-size:13px;font-variant-numeric:tabular-nums}
-.road-comparison time{display:block;margin-top:6px}
+.road-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,2vw,30px)}
+.road-label{margin:0 0 9px;color:#f8f6ef;font-size:clamp(13px,1.3vw,18px);font-weight:650;text-align:center}
 .road-crop,.incident-crop{position:relative;display:block;overflow:hidden}
-.road-crop{height:clamp(116px,19vw,270px);border:1px solid #304247;background:#0b1316}
+.road-crop{height:clamp(140px,20vw,290px)}
 .road-crop img,.incident-crop img{position:absolute;display:block;width:auto;max-width:none;left:50%;top:50%;transform:translate(-50%,-50%)}
-.road-crop img{height:186%}
-.yellow-story{border-top:1px solid #dcddd4;background:#eef0e9}
+.road-crop img{height:295%;mask-image:linear-gradient(transparent 33%,#000 36%,#000 64%,transparent 67%)}
+.yellow-story{background:linear-gradient(#111817,var(--ivory)) top / 100% clamp(22px,3.5vw,48px) no-repeat,var(--ivory)}
 .yellow-visual{grid-template-columns:1fr 1fr}
 .incident-crop{height:clamp(130px,20vw,306px);border-left:1px solid #314046}
 .incident-crop img{height:153%;left:27%;top:31%}
 .track-story h2,.first-invite h2,.film-invite h2{font-size:clamp(32px,4vw,72px);line-height:1.03;letter-spacing:-.055em;font-weight:620;margin:0;text-wrap:balance}
-.track-story p,.film-invite p{max-width:37ch;line-height:1.5}
+.film-invite p{max-width:37ch;line-height:1.5}
 .drive-guide-links{display:flex;flex-wrap:wrap;gap:14px 28px}
 .first-invite,.film-invite{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:clamp(34px,4.5vw,82px) var(--gutter);border-top:1px solid #c4c9c2}
+.drive-launch .first-invite h2{font-size:clamp(26px,3vw,44px)}
 .campaign .marquee{padding:0;background:#090d0c}.campaign .marquee-screen{max-width:none}
 .film-cover-title{position:absolute;z-index:1;bottom:16%;left:var(--gutter);color:#fff;pointer-events:none;display:none}
 .marquee-screen:has(#start-campaign:not([hidden])) .film-cover-title{display:block}
@@ -113,3 +118,10 @@
 .drive-replay-browser iframe{background:#101722}
 .rl-footer nav{display:flex;flex-wrap:wrap;gap:10px 22px}
 .edition .cta{background:#db172b}.edition .cta:hover{background:#b81728}
+.drive-download h1{margin:0 0 5px;font-size:clamp(28px,3.2vw,52px);line-height:1.1;letter-spacing:-.045em}
+#download-drive,#cockpit-demo{scroll-margin-top:var(--rs-frame-height,95px)}
+@media(max-width:700px){
+  .drive-download{gap:12px}
+  .campaign.drive-hero #start-campaign{bottom:13%}
+  .drive-hero .marquee-screen:has(#start-campaign:not([hidden])) .film-cover-title{display:none}
+}
