@@ -426,9 +426,9 @@ function refreshTime(){
   for(const card of $('race-list').querySelectorAll('.race-option')){
     const race=races.get(card.dataset.raceId),next=nextStart(race?.starts,now);
     // Rebuild only when a start expires/advances, not on every clock tick.
-    if(next!==card.dataset.nextStart){render();return;}
+    if((next || '')!==card.dataset.nextStart){render();return;}
     const label=startLabel(next,now),badge=card.querySelector('.option-relative');
-    if(badge.textContent!==label)badge.textContent=label;
+    if(badge&&badge.textContent!==label)badge.textContent=label;
   }
   const selected=races.get(selectedId),next=nextStart(selected?.starts,now),badge=$('race-lead').querySelector('.start-relative');
   if(badge&&next){const label=startLabel(next,now);if(badge.textContent!==label)badge.textContent=label;}

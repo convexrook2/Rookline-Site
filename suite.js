@@ -11,7 +11,7 @@ function tick(){
  if(signature!==shown){shown=signature;const group=make('div',null,'rs-ticker-group');
   for(const {race,at} of races){const a=make('a',null,'rs-race'),url=new URL('planner/',base);url.searchParams.set('race',race.id);a.href=url.href;a.append(make('strong',race.track),make('small',race.name));const time=make('time',startLabel(at));time.dateTime=at;a.append(time);group.append(a);}
   if(races.length){const duplicate=group.cloneNode(true);duplicate.setAttribute('aria-hidden','true');duplicate.querySelectorAll('a').forEach(a=>a.tabIndex=-1);rail.replaceChildren(group,duplicate);rail.classList.add('is-ready');}
-  else{rail.replaceChildren(make('p','No dated starts are currently published. Open Schedules for details.','rs-ticker-message'));rail.classList.remove('is-ready');}
+  else{rail.replaceChildren(make('p','No upcoming starts are currently published. Open Schedules for details.','rs-ticker-message'));rail.classList.remove('is-ready');}
  }
  rail.querySelectorAll('time').forEach(e=>{const t=startLabel(e.dateTime);if(t&&e.textContent!==t)e.textContent=t;});
  ticker.title=snapshot.cached?'Showing the last loaded published schedule.':'Community-published schedule · checked every 30 seconds';
