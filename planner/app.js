@@ -90,7 +90,7 @@ function entryRating(raw) {
 }
 
 let followNextRace = !selectedId;
-let showForecastTimings = false;
+let showForecastTimings = true;
 document.querySelector('.filter-jump').href = location.pathname + location.search + '#race-filters';
 
 function filteredRaces() {

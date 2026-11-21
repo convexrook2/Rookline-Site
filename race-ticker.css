@@ -1,0 +1,69 @@
+@font-face {
+  font-family: "Barlow Condensed";
+  src: url("rookforce/assets/barlow-condensed-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url("brand/InterVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+body #rs-race-ticker {
+  background: #171e28;
+  color: #f2f1e9;
+  font: 500 13px/1.35 Inter, Arial, sans-serif;
+  min-height: 43px;
+}
+
+body #rs-race-ticker :is(.rs-ticker-label, .ticker-label) {
+  background: #d71912;
+  color: #fff;
+  padding: 6px clamp(14px, 2.2vw, 36px);
+  font: 700 17px/1 "Barlow Condensed", Inter, sans-serif;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+body #rs-race-ticker .rs-ticker-label small {
+  display: block;
+  font: 650 9px/1.2 Inter, sans-serif;
+  letter-spacing: .055em;
+}
+
+body #rs-race-ticker .rs-race {
+  align-items: center;
+  gap: 12px;
+  padding: 6px 20px;
+  border-right-color: #394451;
+}
+
+body #rs-race-ticker .rs-race strong { font: 700 19px/1 "Barlow Condensed", Inter, sans-serif; }
+body #rs-race-ticker .rs-race small { color: #bdc8d4; font: 500 12px/1.35 Inter, sans-serif; }
+body #rs-race-ticker .rs-race time {
+  display: block;
+  flex: 0 0 14ch;
+  inline-size: 14ch;
+  font: 650 13px/1.35 Inter, sans-serif;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: #f6f3ed;
+  text-align: left;
+  white-space: nowrap;
+}
+
+body #rs-race-ticker :is(.rs-ticker-pause, .rs-ticker-all) { color: #e4e9ee; background: #171e28; }
+body #rs-race-ticker .rs-ticker-all { font-size: 12px; }
+body #rs-race-ticker :is(a, button):focus-visible { outline: 2px solid #f2f1e9; outline-offset: -3px; }
+
+@media (max-width: 720px) {
+  body #rs-race-ticker { min-height: 37px; }
+  body #rs-race-ticker :is(.rs-ticker-label, .ticker-label) { font-size: 15px; }
+  body #rs-race-ticker .rs-race { gap: 9px; padding-inline: 13px; }
+  body #rs-race-ticker .rs-race strong { font-size: 17px; }
+  body #rs-race-ticker .rs-race small { display: none; }
+  body #rs-race-ticker .rs-race time { font-size: 12px; }
+}

@@ -1,0 +1,118 @@
+/* Blend the section backgrounds in their padding so text stays on a solid surface. */
+.p-main .p-drive {
+  --chapter-fade: clamp(38px, 6.5vw, 100px);
+  padding-block: clamp(58px, 8vw, 120px);
+  background: linear-gradient(to bottom, var(--ink), var(--paper) var(--chapter-fade),
+    var(--paper) calc(100% - var(--chapter-fade)), var(--ink));
+}
+
+@supports (color: color-mix(in oklab, black, white)) {
+  .p-main .p-drive {
+    --chapter-shadow: color-mix(in oklab, var(--ink), var(--paper) 8%);
+    --chapter-mid: color-mix(in oklab, var(--ink), var(--paper) 50%);
+    --chapter-highlight: color-mix(in oklab, var(--ink), var(--paper) 92%);
+    background: linear-gradient(to bottom, var(--ink),
+      var(--chapter-shadow) calc(var(--chapter-fade) * .17),
+      var(--chapter-mid) calc(var(--chapter-fade) * .5),
+      var(--chapter-highlight) calc(var(--chapter-fade) * .83),
+      var(--paper) var(--chapter-fade), var(--paper) calc(100% - var(--chapter-fade)),
+      var(--chapter-highlight) calc(100% - var(--chapter-fade) * .83),
+      var(--chapter-mid) calc(100% - var(--chapter-fade) * .5),
+      var(--chapter-shadow) calc(100% - var(--chapter-fade) * .17), var(--ink));
+  }
+}
+
+/* Fade the preview pixels. Links, controls, captions and full-size images stay outside the mask. */
+:where(.p-drive-poster img, .p-weather-visual img, .p-force-shot img,
+       .p-research-case > figure img, .p-instrument-gallery img,
+       .track-visual, .guide-shots img, .setup-shot img, .topic header img,
+       .shot-open img, .visual-guide-section figure img) {
+  --photo-feather: 3.5%;
+  --photo-edge: transparent, #0004 calc(var(--photo-feather) * .25),
+    #000c calc(var(--photo-feather) * .625), #000 var(--photo-feather),
+    #000 calc(100% - var(--photo-feather)), #000c calc(100% - var(--photo-feather) * .625),
+    #0004 calc(100% - var(--photo-feather) * .25), transparent;
+  mask-image: linear-gradient(to right, var(--photo-edge)),
+    linear-gradient(to bottom, var(--photo-edge));
+  mask-composite: intersect;
+}
+
+.p-drive-poster img { --photo-feather: 8%; }
+:is(.p-weather-visual img, .p-force-shot img) { --photo-feather: 5%; }
+.track-visual { --photo-feather: 2.5%; }
+.track-visual:has(:focus-visible) { mask-image: none; }
+
+/* Fit to the image itself so the feather follows its perimeter. */
+.p-weather-visual img {
+  width: auto;
+  max-width: 100%;
+  max-height: clamp(220px, 31vw, 460px);
+  aspect-ratio: auto;
+  margin-inline: auto;
+}
+
+body[data-suite-page="rookforce"] :is(.shot-card, .shot-open) {
+  border-color: transparent;
+  background: transparent;
+}
+
+body[data-suite-page="rookforce"] .shot-open img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+body[data-suite-page="rookforce"] .visual-guide-section figure {
+  border-color: transparent;
+  background: transparent;
+}
+
+.p-main .p-force {
+  background:
+    linear-gradient(var(--ink), #151c25) top / 100% 44px no-repeat,
+    linear-gradient(#151c25, var(--ink)) bottom / 100% 44px no-repeat,
+    #151c25;
+  border-top: 0;
+}
+
+.drive-launch .drive-replay-browser {
+  padding-block-start: clamp(48px, 6vw, 96px);
+  background:
+    linear-gradient(var(--ivory), #111817) top / 100% clamp(30px, 4vw, 64px) no-repeat,
+    #111817;
+}
+
+body[data-suite-page="rookforce"] .switcher-section {
+  border-top: 0;
+  background: linear-gradient(#050a0e, #091218) top / 100% 52px no-repeat, #091218;
+}
+
+body[data-suite-page="rookforce"] .workspace-section {
+  background: linear-gradient(#091218, #0d171e) top / 100% 52px no-repeat, #0d171e;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body[data-suite-page] > main {
+    animation: enter-page 200ms ease-out;
+  }
+
+  @keyframes enter-page {
+    from { opacity: .68; }
+    to { opacity: 1; }
+  }
+
+  @supports (animation-timeline: view()) and (animation-range: entry 0% entry 62%) {
+    :is(.p-drive-poster, .p-weather-visual, .p-force-shot, .p-research-case > figure,
+        .drive-launch .track-evidence, .workspace-section .screenshot-rail):not(:focus-within) {
+      animation: enter-scene 1ms linear both;
+      animation-timeline: view(block);
+      animation-range: entry 0% entry 62%;
+    }
+
+    @keyframes enter-scene {
+      from { opacity: .3; translate: 0 10px; }
+      to { opacity: 1; translate: 0 0; }
+    }
+  }
+}

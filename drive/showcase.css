@@ -40,6 +40,7 @@
 .drive-download .cta{flex:none}
 .track-story a,.first-invite a{font-weight:600;text-underline-offset:5px}
 .track-story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.15fr);align-items:center;gap:clamp(24px,5vw,90px);padding:clamp(34px,5.5vw,90px) var(--gutter);scroll-margin-top:16px}
+.track-story.imola-story{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)}
 .track-story:not(.yellow-story){background:linear-gradient(#090d0c,#111817 60%);color:#f8f6ef}
 .story-circuit{margin:0 0 12px;font-size:14px;font-weight:680}
 .track-story-copy>a{display:inline-block;margin-top:18px}
@@ -48,12 +49,13 @@
 .track-story:not(.yellow-story) figcaption{color:#afbcb7}
 .track-visual{display:grid;align-items:center;min-width:0;background:#0b1316}
 .track-overview{display:block;width:100%;height:auto;max-height:330px;object-fit:contain}
-.road-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,2vw,30px)}
-.road-label{margin:0 0 9px;color:#f8f6ef;font-size:clamp(13px,1.3vw,18px);font-weight:650;text-align:center}
+.imola-visual{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}
+.road-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:12px 12px 8px 0}
+.road-label{margin:7px 0 2px;color:#f8f6ef;font-size:13px;font-weight:650;text-align:center}
 .road-crop,.incident-crop{position:relative;display:block;overflow:hidden}
-.road-crop{height:clamp(140px,20vw,290px)}
+.road-crop{height:clamp(116px,19vw,270px);border:1px solid #304247;background:#0b1316}
 .road-crop img,.incident-crop img{position:absolute;display:block;width:auto;max-width:none;left:50%;top:50%;transform:translate(-50%,-50%)}
-.road-crop img{height:295%;mask-image:linear-gradient(transparent 33%,#000 36%,#000 64%,transparent 67%)}
+.road-crop img{height:186%}
 .yellow-story{background:linear-gradient(#111817,var(--ivory)) top / 100% clamp(22px,3.5vw,48px) no-repeat,var(--ivory)}
 .yellow-visual{grid-template-columns:1fr 1fr}
 .incident-crop{height:clamp(130px,20vw,306px);border-left:1px solid #314046}
@@ -118,10 +120,12 @@
 .drive-replay-browser iframe{background:#101722}
 .rl-footer nav{display:flex;flex-wrap:wrap;gap:10px 22px}
 .edition .cta{background:#db172b}.edition .cta:hover{background:#b81728}
-.drive-download h1{margin:0 0 5px;font-size:clamp(28px,3.2vw,52px);line-height:1.1;letter-spacing:-.045em}
 #download-drive,#cockpit-demo{scroll-margin-top:var(--rs-frame-height,95px)}
 @media(max-width:700px){
   .drive-download{gap:12px}
+  .track-story.imola-story{grid-template-columns:minmax(0,1fr)}
+  .imola-story .track-story-copy{order:-1}
+  .road-comparison{padding-right:8px}
   .campaign.drive-hero #start-campaign{bottom:13%}
   .drive-hero .marquee-screen:has(#start-campaign:not([hidden])) .film-cover-title{display:none}
 }

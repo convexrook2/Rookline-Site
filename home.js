@@ -1,5 +1,30 @@
 import {loadSchedule} from './planner/hosted-client.mjs';import {nextStart,startLabel} from './planner/weather.mjs';
 const list=document.querySelector('#home-races');let snapshot=null,signature=null;
-function render(){if(!snapshot||!list)return;const races=snapshot.races.map(r=>({r,t:nextStart(r.starts)})).filter(x=>x.t).sort((a,b)=>Date.parse(a.t)-Date.parse(b.t)).slice(0,4),sig=races.map(x=>x.r.id+'@'+x.t).join('|');if(sig!==signature){signature=sig;const fragment=document.createDocumentFragment();races.forEach(({r,t},i)=>{const a=document.createElement('a');a.className='p-board-race';const url=new URL('planner/',location.href);url.searchParams.set('race',r.id);a.href=url.href;const n=document.createElement('span');n.textContent=String(i+1).padStart(2,'0');const text=document.createElement('div'),title=document.createElement('strong'),note=document.createElement('small'),time=document.createElement('time');title.textContent=r.track;note.textContent=r.name+' / '+r.classes.join(' + ');time.dateTime=t;time.textContent=startLabel(t);text.append(title,note);a.append(n,text,time);fragment.append(a);});if(!races.length){const p=document.createElement('p');p.className='p-board-note';p.textContent='No dated starts are currently published.';fragment.append(p);}list.replaceChildren(fragment);}list.querySelectorAll('time').forEach(e=>{e.textContent=startLabel(e.dateTime)??'';});}
-async function refresh(){try{snapshot=await loadSchedule();render();}catch{if(!snapshot)list.textContent='Schedule temporarily unavailable. Open LMU Planner to retry.';}}
+function render(){if(!snapshot||!list)return;const races=snapshot.races.map(r=>({r,t:nextStart(r.starts)})).filter(x=>x.t).sort((a,b)=>Date.parse(a.t)-Date.parse(b.t)).slice(0,4),sig=races.map(x=>x.r.id+'@'+x.t).join('|');if(sig!==signature){signature=sig;const fragment=document.createDocumentFragment();races.forEach(({r,t},i)=>{const a=document.createElement('a');a.className='p-board-race';const url=new URL('planner/',location.href);url.searchParams.set('race',r.id);a.href=url.href;const n=document.createElement('span');n.textContent=String(i+1).padStart(2,'0');const text=document.createElement('div'),title=document.createElement('strong'),note=document.createElement('small'),time=document.createElement('time');title.textContent=r.track;note.textContent=r.name+' / '+r.classes.map(carClass=>carClass==='LMP2_ELMS'?'LMP2 (ELMS)':carClass).join(' + ');time.dateTime=t;time.textContent=startLabel(t);text.append(title,note);a.append(n,text,time);fragment.append(a);});if(!races.length){const p=document.createElement('p');p.className='p-board-note';p.textContent='No dated starts are currently published.';fragment.append(p);}list.replaceChildren(fragment);}list.querySelectorAll('time').forEach(e=>{e.textContent=startLabel(e.dateTime)??'';});}
+async function refresh(){try{snapshot=await loadSchedule();render();}catch{if(!snapshot)list.textContent='Schedule temporarily unavailable. Open Schedules to retry.';}}
 void refresh();setInterval(refresh,30000);setInterval(render,1000);
+
+const homeFilm = document.querySelector('#home-film');
+const motionToggle = document.querySelector('#home-film-toggle');
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+async function playHomeFilm() {
+  if (!homeFilm.hasAttribute('src')) homeFilm.src = homeFilm.dataset.src;
+  try {
+    await homeFilm.play();
+  } catch {
+    // Keep the poster and let the visitor retry if autoplay was blocked.
+  }
+}
+
+homeFilm.addEventListener('play', () => { motionToggle.textContent = 'Pause motion'; });
+homeFilm.addEventListener('pause', () => { motionToggle.textContent = 'Play motion'; });
+motionToggle.addEventListener('click', () => {
+  if (homeFilm.paused) void playHomeFilm();
+  else homeFilm.pause();
+});
+reducedMotion.addEventListener('change', event => {
+  if (event.matches) homeFilm.pause();
+});
+motionToggle.hidden = false;
+if (!reducedMotion.matches && !navigator.connection?.saveData) void playHomeFilm();

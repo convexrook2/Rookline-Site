@@ -3,13 +3,7 @@ import {nextStart,startLabel} from './planner/weather.mjs';
 const ticker=document.querySelector('#rs-race-ticker'),rail=ticker?.querySelector('.rs-ticker-rail'),base=new URL('./',import.meta.url);
 let snapshot=null,shown=null,paused=false,loading=false;
 const make=(tag,text,cls)=>{const e=document.createElement(tag);if(text!=null)e.textContent=text;if(cls)e.className=cls;return e;};
-function frameHeight(){const h=document.querySelector('#rooksuite-header')?.getBoundingClientRect().height??0;document.body.style.setProperty('--rs-frame-height',`${h+(ticker?.getBoundingClientRect().height??0)+(document.querySelector('.rs-product-status')?.getBoundingClientRect().height??0)}px`);}
-const section=document.body.dataset.suitePage;
-if(['rookforce','drive'].includes(section)&&/\/(?:index\.html)?$/.test(location.pathname)){
- const box=make('aside',null,'rs-product-status');box.setAttribute('aria-label','Product availability');
- const statuses={rookforce:['RELEASED / ASETEK FORTE','Full Forte wheelbase support. Other wheelbases have partial support.'],drive:['FREE / AVAILABLE NOW','Built for LMU. VR first: SteamVR, with OpenXR through SteamVR. Desktop HUD included.']};
- box.append(make('strong',statuses[section][0]),make('span',statuses[section][1]));ticker?.after(box);
-}
+function frameHeight(){const h=document.querySelector('#rooksuite-header')?.getBoundingClientRect().height??0;document.body.style.setProperty('--rs-frame-height',`${h+(ticker?.getBoundingClientRect().height??0)}px`);}
 function tick(){
  if(!snapshot||!rail)return;
  const races=snapshot.races.map(r=>({race:r,at:nextStart(r.starts)})).filter(x=>x.at).sort((a,b)=>Date.parse(a.at)-Date.parse(b.at)).slice(0,6);
@@ -20,8 +14,14 @@ function tick(){
   else{rail.replaceChildren(make('p','No dated starts are currently published. Open Schedules for details.','rs-ticker-message'));rail.classList.remove('is-ready');}
  }
  rail.querySelectorAll('time').forEach(e=>{const t=startLabel(e.dateTime);if(t&&e.textContent!==t)e.textContent=t;});
- ticker.title=snapshot.cached?'Showing the last loaded published schedule.':'Community-published schedule · checked every30seconds';
+ ticker.title=snapshot.cached?'Showing the last loaded published schedule.':'Community-published schedule · checked every 30 seconds';
 }
 async function refresh(){if(loading||!ticker)return;loading=true;try{snapshot=await loadSchedule();tick();}catch{if(!snapshot){rail.replaceChildren(make('p','Race schedule temporarily unavailable. Open Schedules to retry.','rs-ticker-message'));rail.classList.remove('is-ready');}}finally{loading=false;}}
 const pause=ticker?.querySelector('.rs-ticker-pause');pause?.addEventListener('click',()=>{paused=!paused;ticker.classList.toggle('is-paused',paused);pause.setAttribute('aria-pressed',String(paused));pause.setAttribute('aria-label',paused?'Resume race ticker':'Pause race ticker');pause.textContent=paused?'▶':'Ⅱ';});
-frameHeight();window.addEventListener('resize',frameHeight);void refresh();setInterval(refresh,30000);setInterval(tick,1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden){tick();void refresh();}});
+frameHeight();window.addEventListener('resize',frameHeight);
+if(ticker){
+ void refresh();
+ setInterval(refresh,30000);
+ setInterval(tick,1000);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden){tick();void refresh();}});
+}

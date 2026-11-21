@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#050a0e">
   <meta name="description" content="RookForce follows your car in LMU and AC Evo, switches to the RaceHub profile you saved when eligible, and checks what is active.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Rookline">
+  <meta property="og:title" content="RookForce | RaceHub profile switching">
+  <meta property="og:description" content="Use your saved RaceHub profiles when you load a car in Le Mans Ultimate or Assetto Corsa EVO.">
+  <meta property="og:url" content="https://convexrook2.github.io/Rookline-Site/rookforce/">
+  <meta property="og:image" content="https://convexrook2.github.io/Rookline-Site/rookforce/assets/wheel-response-poster.jpg">
+  <meta property="og:image:alt" content="Asetek wheel and Forte wheelbase on a sim racing rig">
+  <meta name="twitter:card" content="summary_large_image">
   <title>RookForce — change cars, keep the feel</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
@@ -12,7 +20,7 @@
   <script src="story.js" defer></script>
   <link rel="stylesheet" href="community.css">
 <link rel="stylesheet" href="../suite-v2.css"><link rel="canonical" href="https://convexrook2.github.io/Rookline-Site/rookforce/"><script type="module" src="../suite.js"></script></head>
-<body data-suite-page="rookforce"><header id="rooksuite-header"><a class="rs-brand" href="../index.html" aria-label="Rookline website home"><img src="../brand/rookline-wordmark.png" width="2048" height="402" alt="Rookline"><span>DRIVING SUITE / BY CONVEXROOK</span></a><nav aria-label="Rookline products"><a href="../index.html">Home</a><a href="../drive/">Drive</a><a href="../rookforce/" aria-current="page">RookForce</a><a href="../planner/">Schedules</a></nav><a class="rs-community" href="https://discord.gg/UPVYArKnkH" target="_blank" rel="noopener noreferrer">Feedback &amp; ideas ↗</a></header><aside id="rs-race-ticker" aria-label="Upcoming LMU races"><a class="rs-ticker-label" href="../planner/"><i aria-hidden="true"></i><span>LMU<small>NEXT ON THE GRID</small></span></a><div class="rs-ticker-window"><div class="rs-ticker-rail"><p class="rs-ticker-message">Loading the published race schedule…</p></div></div><button type="button" class="rs-ticker-pause" aria-label="Pause race ticker" aria-pressed="false">Ⅱ</button><a class="rs-ticker-all" href="../planner/">Full forecast ↗</a></aside>
+<body data-suite-page="rookforce"><header id="rooksuite-header"><a class="rs-brand" href="../index.html" aria-label="Rookline website home"><img src="../brand/rookline-wordmark.png" width="2048" height="402" alt="Rookline"><span>DRIVING SUITE / BY CONVEXROOK</span></a><nav aria-label="Rookline products"><a href="../index.html">Home</a><a href="../drive/">Drive</a><a href="../rookforce/" aria-current="page">RookForce</a><a href="../planner/">Schedules</a></nav><a class="rs-community" href="../index.html#community">Help &amp; support ↗</a></header><aside id="rs-race-ticker" aria-label="Upcoming LMU races"><a class="rs-ticker-label" href="../planner/"><i aria-hidden="true"></i><span>LMU<small>NEXT ON THE GRID</small></span></a><div class="rs-ticker-window"><div class="rs-ticker-rail"><p class="rs-ticker-message">Loading the published race schedule…</p></div></div><button type="button" class="rs-ticker-pause" aria-label="Pause race ticker" aria-pressed="false">Ⅱ</button><a class="rs-ticker-all" href="../planner/">Full forecast ↗</a></aside>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="wrap header-inner">
@@ -35,7 +43,7 @@
           <h1 id="hero-title">Change cars.<br><em>Keep the feel.</em></h1>
           <p class="hero-summary">When your car changes in LMU or AC Evo, RookForce can switch to the RaceHub profile you saved and show which one is actually active.</p>
           <div class="hero-actions">
-            <a class="button-primary" href="#download">Download for Windows</a>
+            <a class="button-primary" href="#compatibility">Check compatibility &amp; download</a>
             <a class="button-quiet" href="#workspace">See the app</a>
           </div>
         </div>
@@ -82,13 +90,18 @@
       </div>
     </section>
 
+    <section class="wrap rf-compatibility" id="compatibility" aria-labelledby="compatibility-title">
+  <h2 id="compatibility-title">Wheelbase compatibility</h2><p>RookForce uses RaceHub on Windows x64. Automatic car-based profile switching supports Le Mans Ultimate and Assetto Corsa EVO.</p>
+  <table><thead><tr><th scope="col">Wheelbase</th><th scope="col">What to expect</th></tr></thead><tbody><tr><th scope="row">Asetek Forte</th><td>Supported for saved RaceHub profile switching and active-profile readback.</td></tr><tr><th scope="row">Other Asetek models</th><td>Support varies by model and feature. Use the Hardware screen to check detection and readback for your device.</td></tr><tr><th scope="row">Other brands</th><td>Compatibility is unverified.</td></tr></tbody></table>
+  <a href="guide.html#hardware">Hardware guide ↗</a>
+</section>
     <section class="download-section" id="download" aria-labelledby="download-title">
       <div class="wrap download-inner">
-        <div><span class="download-eyebrow">Windows x64 · v2.0.8</span><h2 id="download-title">Ready for the next car?</h2></div>
+        <div><span class="download-eyebrow">Windows x64 with RaceHub · v2.0.8</span><h2 id="download-title">Get RookForce</h2></div>
         <div class="download-action">
           <a class="download-primary" href="https://github.com/convexrook2/RookForce-Releases/releases/download/v2.0.8/RookForce-Setup-2.0.8.exe">Download RookForce</a>
           <a class="release-link" href="https://github.com/convexrook2/RookForce-Releases/releases/tag/v2.0.8">Release notes</a>
-          <p>Download the installer above or use Update in RookForce.</p>
+          <p>Already using RookForce? Open Update in the app.</p>
         </div>
       </div>
     </section>

@@ -19,14 +19,19 @@ button{font:inherit}
 h1,h2,h3,p{margin-top:0}
 h1,h2,h3{font-family:'Barlow Condensed','Arial Narrow',Impact,sans-serif;line-height:.9;text-transform:uppercase}
 h1 em{color:var(--signal);font-style:normal}
-.site-header{position:absolute;inset:0 0 auto;z-index:10}
+.site-header{position:relative;z-index:10;background:#071016;border-bottom:1px solid var(--line)}
 .header-inner{display:flex;align-items:center;min-height:100px}
 .brand{display:block;width:195px;flex:none}
 .brand img,.footer-brand img{display:block;width:100%;height:auto}
 .release-link:hover{color:#0a6874}
 
 .hero{position:relative;isolation:isolate;overflow:hidden;background:#050a0e}
-.hero-content{position:relative;z-index:2;display:flex;align-items:center;min-height:min(770px,95vh);padding-top:155px;padding-bottom:100px;pointer-events:none}
+.hero-content{position:relative;z-index:2;display:flex;align-items:center;min-height:min(640px,86vh);padding-top:75px;padding-bottom:90px;pointer-events:none}
+.rf-compatibility{padding-block:clamp(32px,6vw,80px)}
+.rf-compatibility h2{font-size:clamp(38px,6vw,74px);margin-bottom:18px}
+.rf-compatibility table{width:100%;margin-block:18px;border-collapse:collapse;text-align:left}
+.rf-compatibility th,.rf-compatibility td{vertical-align:top;border-block-end:1px solid var(--line);padding:12px 6px}
+.rf-compatibility th[scope="row"]{width:28%}
 .hero-copy{max-width:970px;pointer-events:auto}
 .hero h1{margin:0 0 30px;font-size:clamp(6.2rem,9.3vw,10.7rem);font-weight:800;letter-spacing:-.035em;line-height:.84;text-shadow:0 5px 35px #02070bcc}
 .hero-summary{max-width:570px;margin-bottom:32px;color:#e1ebee;font-size:clamp(1.05rem,1.45vw,1.35rem);line-height:1.55;text-shadow:0 2px 14px #02070b}
